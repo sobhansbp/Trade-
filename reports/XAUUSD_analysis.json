@@ -6,13 +6,13 @@
   "data_source": "GC=F",
   "decision": "WAIT",
   "bias": "BEARISH",
-  "composite": 0.068,
-  "threshold": 0.172,
+  "composite": 0.03,
+  "threshold": 0.17,
   "agreement": 0.61,
-  "confidence": 0.12,
-  "meta_p_win": 0.757,
-  "ml_p_long": 0.55,
-  "ml_p_short": 0.267,
+  "confidence": 0.053,
+  "meta_p_win": 0.808,
+  "ml_p_long": 0.501,
+  "ml_p_short": 0.323,
   "strategic": {
    "bias": -0.25,
    "components": {
@@ -203,9 +203,9 @@
    {
     "name": "ml",
     "title_fa": "یادگیری ماشین (LightGBM)",
-    "score": 0.7090663387772617,
+    "score": 0.44490945063176524,
     "reasons": [
-     "walk-forward ML: P(long wins) 55%, P(short wins) 27%"
+     "walk-forward ML: P(long wins) 50%, P(short wins) 32%"
     ]
    }
   ],
@@ -353,9 +353,7 @@
     "s2": 4114.87,
     "poc": 4146.92,
     "vah": 4158.16,
-    "val": 4140.87,
-    "eqh": 5626.8,
-    "eql": 2304.2
+    "val": 4140.87
    },
    "fibonacci_last_leg": {
     "0.236": 4209.04,
@@ -460,28 +458,28 @@
   "news_blackout": false,
   "backtest": {
    "production_oos": {
-    "trades": 303,
+    "trades": 302,
     "years": 1.43,
-    "trades_per_month": 17.7,
-    "win_rate": 0.521,
-    "avg_r": 0.046,
+    "trades_per_month": 17.6,
+    "win_rate": 0.52,
+    "avg_r": 0.049,
     "median_r": 0.501,
     "profit_factor": 1.1,
-    "total_return": 0.0486,
-    "cagr": 0.0337,
-    "sharpe": 0.39,
-    "sortino": 0.46,
-    "max_drawdown": -0.0681,
-    "calmar": 0.5,
-    "psr": 0.767,
-    "max_losing_streak": 6,
-    "long_trades": 303,
+    "total_return": 0.0668,
+    "cagr": 0.0463,
+    "sharpe": 0.51,
+    "sortino": 0.67,
+    "max_drawdown": -0.0683,
+    "calmar": 0.68,
+    "psr": 0.78,
+    "max_losing_streak": 8,
+    "long_trades": 302,
     "short_trades": 0,
     "exit_reasons": {
-     "stop": 144,
-     "breakeven": 96,
-     "target": 62,
-     "time": 1
+     "stop": 145,
+     "breakeven": 91,
+     "target": 63,
+     "time": 3
     }
    },
    "production_dev": {
@@ -489,73 +487,73 @@
     "years": 1.43,
     "trades_per_month": 14.9,
     "win_rate": 0.533,
-    "avg_r": 0.097,
+    "avg_r": 0.102,
     "median_r": 0.501,
-    "profit_factor": 1.21,
-    "total_return": 0.1145,
-    "cagr": 0.0788,
-    "sharpe": 1.13,
-    "sortino": 1.66,
-    "max_drawdown": -0.0613,
-    "calmar": 1.29,
-    "psr": 0.917,
-    "max_losing_streak": 6,
+    "profit_factor": 1.22,
+    "total_return": 0.1347,
+    "cagr": 0.0924,
+    "sharpe": 1.28,
+    "sortino": 1.95,
+    "max_drawdown": -0.0563,
+    "calmar": 1.64,
+    "psr": 0.927,
+    "max_losing_streak": 7,
     "long_trades": 255,
     "short_trades": 0,
     "exit_reasons": {
-     "stop": 118,
-     "breakeven": 78,
-     "target": 58,
-     "time": 1
+     "stop": 119,
+     "breakeven": 74,
+     "target": 59,
+     "time": 3
     }
    },
    "production_holdout": {
-    "trades": 48,
+    "trades": 47,
     "years": 0.59,
-    "trades_per_month": 6.8,
-    "win_rate": 0.458,
-    "avg_r": -0.225,
+    "trades_per_month": 6.7,
+    "win_rate": 0.447,
+    "avg_r": -0.238,
     "median_r": -1.002,
-    "profit_factor": 0.59,
-    "total_return": -0.0569,
-    "cagr": -0.095,
-    "sharpe": -1.8,
-    "sortino": -1.13,
+    "profit_factor": 0.58,
+    "total_return": -0.0588,
+    "cagr": -0.0981,
+    "sharpe": -2.18,
+    "sortino": -2.08,
     "max_drawdown": -0.0643,
-    "calmar": -1.48,
-    "psr": 0.064,
-    "max_losing_streak": 5,
-    "long_trades": 48,
+    "calmar": -1.53,
+    "psr": 0.058,
+    "max_losing_streak": 8,
+    "long_trades": 47,
     "short_trades": 0,
     "exit_reasons": {
      "stop": 26,
-     "breakeven": 18,
+     "breakeven": 17,
      "target": 4
     }
    },
    "with_meta_filter": {
-    "trades": 104,
+    "trades": 97,
     "years": 0.96,
-    "trades_per_month": 9.0,
-    "win_rate": 0.49,
-    "avg_r": -0.05,
-    "median_r": -1.001,
-    "profit_factor": 0.9,
-    "total_return": -0.0248,
-    "cagr": -0.0257,
-    "sharpe": -0.29,
-    "sortino": -0.29,
-    "max_drawdown": -0.0627,
-    "calmar": -0.41,
-    "psr": 0.319,
-    "max_losing_streak": 8,
-    "long_trades": 104,
+    "trades_per_month": 8.4,
+    "win_rate": 0.536,
+    "avg_r": 0.04,
+    "median_r": 0.501,
+    "profit_factor": 1.08,
+    "total_return": 0.0194,
+    "cagr": 0.0202,
+    "sharpe": 0.28,
+    "sortino": 0.26,
+    "max_drawdown": -0.0588,
+    "calmar": 0.34,
+    "psr": 0.642,
+    "max_losing_streak": 7,
+    "long_trades": 97,
     "short_trades": 0,
     "exit_reasons": {
-     "stop": 53,
-     "breakeven": 32,
+     "stop": 45,
+     "breakeven": 31,
      "target": 18,
-     "time": 1
+     "time": 3
     }
    },
    "daily_bias_only": {
@@ -584,28 +582,28 @@
     }
    },
    "desk_only_v1": {
-    "trades": 247,
+    "trades": 263,
     "years": 1.43,
-    "trades_per_month": 14.4,
-    "win_rate": 0.502,
-    "avg_r": 0.011,
-    "median_r": 0.27,
-    "profit_factor": 1.02,
-    "total_return": 0.0036,
-    "cagr": 0.0025,
-    "sharpe": 0.11,
-    "sortino": 0.13,
-    "max_drawdown": -0.0838,
-    "calmar": 0.03,
-    "psr": 0.562,
+    "trades_per_month": 15.3,
+    "win_rate": 0.483,
+    "avg_r": -0.042,
+    "median_r": -1.002,
+    "profit_factor": 0.92,
+    "total_return": -0.0509,
+    "cagr": -0.0358,
+    "sharpe": -0.39,
+    "sortino": -0.5,
+    "max_drawdown": -0.0985,
+    "calmar": -0.36,
+    "psr": 0.27,
     "max_losing_streak": 6,
-    "long_trades": 202,
-    "short_trades": 45,
+    "long_trades": 216,
+    "short_trades": 47,
     "exit_reasons": {
-     "stop": 122,
-     "breakeven": 72,
+     "stop": 136,
+     "breakeven": 75,
      "target": 50,
-     "time": 3
+     "time": 2
     }
    },
    "random_entries": {
@@ -639,91 +637,91 @@
    "direction": {
     "long": {
      "folds": 11,
-     "mean_auc": 0.5452828532633456,
-     "min_auc": 0.46453852775663235,
-     "mean_brier": 0.27093735891374515
+     "mean_auc": 0.5472368731769877,
+     "min_auc": 0.468728879276613,
+     "mean_brier": 0.27040081815427347
     },
     "short": {
      "folds": 11,
-     "mean_auc": 0.5270029749268139,
-     "min_auc": 0.4555844155844156,
-     "mean_brier": 0.2776679655948299
+     "mean_auc": 0.5275633182509648,
+     "min_auc": 0.4457195121079822,
+     "mean_brier": 0.277736084471206
     }
    },
    "meta": {
     "folds": 8,
-    "mean_auc": 0.518761268735534,
-    "min_auc": 0.44090909090909103,
-    "mean_brier": 0.2692863366144178
+    "mean_auc": 0.505917805349201,
+    "min_auc": 0.39894067796610166,
+    "mean_brier": 0.27184471069854754
    }
   },
   "feature_importance": [
    [
     "dist_bull_ob",
-    275.0
+    284.0
    ],
    [
     "mac_us2y_chg5",
-    233.0
+    228.0
    ],
    [
     "res_str",
-    227.0
+    220.0
    ],
    [
     "peer_corr",
-    212.0
+    211.0
+   ],
+   [
+    "d1_macd_hist",
+    192.0
    ],
    [
     "dist_bull_fvg",
     185.0
    ],
    [
-    "d1_macd_hist",
-    185.0
+    "h4_adx",
+    167.0
    ],
    [
     "hurst",
-    170.0
-   ],
-   [
-    "adx",
-    166.0
+    163.0
    ],
    [
     "mac_us2y_chg20",
-    161.0
-   ],
-   [
-    "h4_adx",
-    158.0
-   ],
-   [
-    "d1_range_pos",
-    150.0
+    160.0
    ],
    [
     "mac_real10y_chg5",
-    148.0
+    157.0
    ],
    [
-    "mac_vix_chg5",
-    142.0
+    "d1_range_pos",
+    155.0
+   ],
+   [
+    "adx",
+    154.0
+   ],
+   [
+    "mac_vix_z",
+    150.0
+   ],
+   [
+    "mac_spx_ret20",
+    145.0
    ],
    [
     "d_week_open",
-    142.0
-   ],
-   [
-    "mac_breakeven10y_chg5",
-    140.0
+    139.0
    ]
   ]
  },
  "ai": {
   "mode": "offline",
-  "summary_fa": "تحلیل XAUUSD در قیمت 4216.0 (UTC 2026-10-09 16:00):\nسوگیری راهبردی روزانه -0.25 (نزولی) و برآیند میز تحلیل ساعتی +0.068؛ رژیم بازار: trending.\nتصمیم سیستم: صبر / بدون معامله.\nدلیل عدم ورود: daily strategic bias -0.25 is not strong enough (needs |bias| >= 0.5)\nشواهد صعودی: یادگیری ماشین (LightGBM) (+0.71)، اسمارت‌مانی / ساختار (+0.24)، روند چندزمانی (+0.22)\nشواهد نزولی: بین‌بازاری / کلان (-0.46)، سطوح حمایت/مقاومت و پروفایل (-0.40)، موقعیت‌گیری COT (-0.17)، بازگشت به میانگین (-0.15)\nپلن مشروط (فروش): ورود حدود 4216.0، حد ضرر 4236.43، تارگت اول 4195.57 و تارگت نهایی 4164.92 (ریسک 0.50٪ سرمایه).",
-  "summary_en": "XAUUSD @ 4216.0: strategic bias -0.25, desk composite +0.068, regime trending. Decision: WAIT. Blocked because: daily strategic bias -0.25 is not strong enough (needs |bias| >= 0.5). Bull evidence: ml +0.71, smc +0.24, trend +0.22. Bear evidence: macro -0.46, levels -0.40, positioning -0.17, mean_reversion -0.15.",
+  "summary_fa": "تحلیل XAUUSD در قیمت 4216.0 (UTC 2026-10-09 16:00):\nسوگیری راهبردی روزانه -0.25 (نزولی) و برآیند میز تحلیل ساعتی +0.030؛ رژیم بازار: trending.\nتصمیم سیستم: صبر / بدون معامله.\nدلیل عدم ورود: daily strategic bias -0.25 is not strong enough (needs |bias| >= 0.5)\nشواهد صعودی: یادگیری ماشین (LightGBM) (+0.44)، اسمارت‌مانی / ساختار (+0.24)، روند چندزمانی (+0.22)\nشواهد نزولی: بین‌بازاری / کلان (-0.46)، سطوح حمایت/مقاومت و پروفایل (-0.40)، موقعیت‌گیری COT (-0.17)، بازگشت به میانگین (-0.15)\nپلن مشروط (فروش): ورود حدود 4216.0، حد ضرر 4236.43، تارگت اول 4195.57 و تارگت نهایی 4164.92 (ریسک 0.50٪ سرمایه).",
+  "summary_en": "XAUUSD @ 4216.0: strategic bias -0.25, desk composite +0.030, regime trending. Decision: WAIT. Blocked because: daily strategic bias -0.25 is not strong enough (needs |bias| >= 0.5). Bull evidence: ml +0.44, smc +0.24, trend +0.22. Bear evidence: macro -0.46, levels -0.40, positioning -0.17, mean_reversion -0.15.",
   "final_decision": "WAIT"
  }
 }

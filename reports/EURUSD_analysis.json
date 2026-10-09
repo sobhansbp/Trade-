@@ -6,13 +6,13 @@
   "data_source": "EURUSD=X",
   "decision": "WAIT",
   "bias": "BEARISH",
-  "composite": 0.128,
-  "threshold": 0.174,
+  "composite": 0.126,
+  "threshold": 0.177,
   "agreement": 0.674,
-  "confidence": 0.249,
-  "meta_p_win": 0.707,
-  "ml_p_long": 0.631,
-  "ml_p_short": 0.281,
+  "confidence": 0.241,
+  "meta_p_win": 0.776,
+  "ml_p_long": 0.643,
+  "ml_p_short": 0.299,
   "strategic": {
    "bias": -1.0,
    "components": {
@@ -39,33 +39,33 @@
   },
   "swing_backtest": {
    "2005_2023": {
-    "sharpe": 0.96,
-    "ann_return": 0.0663,
-    "max_drawdown": -0.1085,
+    "sharpe": 0.37,
+    "ann_return": 0.026,
+    "max_drawdown": -0.1901,
     "years": 19.6
    },
    "2024_now": {
-    "sharpe": 0.51,
-    "ann_return": 0.0376,
-    "max_drawdown": -0.0729,
+    "sharpe": 0.14,
+    "ann_return": 0.0103,
+    "max_drawdown": -0.0906,
     "years": 2.9
    },
    "2005_2011": {
-    "sharpe": 0.64,
-    "ann_return": 0.0448,
-    "max_drawdown": -0.1085,
+    "sharpe": 0.42,
+    "ann_return": 0.0303,
+    "max_drawdown": -0.111,
     "years": 7.2
    },
    "2012_2017": {
-    "sharpe": 1.2,
-    "ann_return": 0.0804,
-    "max_drawdown": -0.0731,
+    "sharpe": 0.42,
+    "ann_return": 0.029,
+    "max_drawdown": -0.1559,
     "years": 6.2
    },
    "2018_2023": {
-    "sharpe": 1.11,
-    "ann_return": 0.0769,
-    "max_drawdown": -0.0769,
+    "sharpe": 0.26,
+    "ann_return": 0.0182,
+    "max_drawdown": -0.1558,
     "years": 6.2
    }
   },
@@ -76,7 +76,7 @@
   "vol_state": "normal-vol",
   "atr": 0.00098,
   "why_not": [
-   "H1 desk composite +0.128 does not confirm the daily bias -1.00"
+   "H1 desk composite +0.126 does not confirm the daily bias -1.00"
   ],
   "plan": {
    "side": "SHORT",
@@ -203,9 +203,9 @@
    {
     "name": "ml",
     "title_fa": "یادگیری ماشین (LightGBM)",
-    "score": 0.875064428454687,
+    "score": 0.8606160701811814,
     "reasons": [
-     "walk-forward ML: P(long wins) 63%, P(short wins) 28%"
+     "walk-forward ML: P(long wins) 64%, P(short wins) 30%"
     ]
    }
   ],
@@ -246,21 +246,21 @@
    ],
    "zones": [
     {
+     "kind": "bear_ob",
+     "top": 1.13908,
+     "bottom": 1.13675,
+     "start": "2026-09-28 16:00:00+00:00",
+     "created": "2026-09-29 16:00:00+00:00",
+     "strength": 2.0,
+     "touched": 3
+    },
+    {
      "kind": "bear_fvg",
      "top": 1.13469,
      "bottom": 1.13443,
      "start": "2026-09-30 16:00:00+00:00",
      "created": "2026-09-30 17:00:00+00:00",
      "strength": 0.22,
-     "touched": 0
-    },
-    {
-     "kind": "bear_ob",
-     "top": 1.13817,
-     "bottom": 1.13533,
-     "start": "2026-09-30 12:00:00+00:00",
-     "created": "2026-09-30 19:00:00+00:00",
-     "strength": 1.65,
      "touched": 0
     },
     {
@@ -353,9 +353,7 @@
     "s2": 1.11539,
     "poc": 1.12136,
     "vah": 1.12191,
-    "val": 1.11971,
-    "eqh": 1.19303,
-    "eql": 1.02155
+    "val": 1.11971
    },
    "fibonacci_last_leg": {
     "0.236": 1.12295,
@@ -460,152 +458,151 @@
   "news_blackout": false,
   "backtest": {
    "production_oos": {
-    "trades": 302,
+    "trades": 315,
     "years": 1.67,
-    "trades_per_month": 15.0,
-    "win_rate": 0.533,
-    "avg_r": 0.084,
-    "median_r": 0.505,
-    "profit_factor": 1.18,
-    "total_return": 0.1296,
-    "cagr": 0.0755,
-    "sharpe": 0.77,
-    "sortino": 0.88,
-    "max_drawdown": -0.049,
-    "calmar": 1.54,
-    "psr": 0.902,
+    "trades_per_month": 15.7,
+    "win_rate": 0.524,
+    "avg_r": 0.074,
+    "median_r": 0.503,
+    "profit_factor": 1.15,
+    "total_return": 0.0996,
+    "cagr": 0.0583,
+    "sharpe": 0.64,
+    "sortino": 0.78,
+    "max_drawdown": -0.0647,
+    "calmar": 0.9,
+    "psr": 0.875,
     "max_losing_streak": 6,
-    "long_trades": 215,
-    "short_trades": 87,
+    "long_trades": 216,
+    "short_trades": 99,
     "exit_reasons": {
-     "stop": 141,
+     "stop": 150,
      "breakeven": 91,
-     "target": 68,
-     "time": 2
+     "target": 73,
+     "time": 1
     }
    },
    "production_dev": {
-    "trades": 187,
+    "trades": 190,
     "years": 1.67,
-    "trades_per_month": 9.3,
-    "win_rate": 0.551,
-    "avg_r": 0.088,
-    "median_r": 0.505,
-    "profit_factor": 1.19,
-    "total_return": 0.0826,
-    "cagr": 0.0485,
-    "sharpe": 0.87,
-    "sortino": 1.06,
-    "max_drawdown": -0.049,
-    "calmar": 0.99,
-    "psr": 0.865,
+    "trades_per_month": 9.5,
+    "win_rate": 0.526,
+    "avg_r": 0.068,
+    "median_r": 0.504,
+    "profit_factor": 1.14,
+    "total_return": 0.0638,
+    "cagr": 0.0377,
+    "sharpe": 0.71,
+    "sortino": 1.03,
+    "max_drawdown": -0.0501,
+    "calmar": 0.75,
+    "psr": 0.8,
     "max_losing_streak": 6,
-    "long_trades": 187,
-    "short_trades": 0,
+    "long_trades": 188,
+    "short_trades": 2,
     "exit_reasons": {
-     "stop": 84,
-     "breakeven": 64,
-     "target": 38,
+     "stop": 90,
+     "breakeven": 58,
+     "target": 41,
      "time": 1
     }
    },
    "production_holdout": {
-    "trades": 115,
+    "trades": 125,
     "years": 0.7,
-    "trades_per_month": 13.7,
-    "win_rate": 0.513,
-    "avg_r": 0.091,
+    "trades_per_month": 14.9,
+    "win_rate": 0.528,
+    "avg_r": 0.094,
     "median_r": 0.505,
-    "profit_factor": 1.18,
-    "total_return": 0.0514,
-    "cagr": 0.0746,
-    "sharpe": 0.91,
-    "sortino": 0.97,
-    "max_drawdown": -0.0398,
-    "calmar": 1.88,
-    "psr": 0.792,
+    "profit_factor": 1.19,
+    "total_return": 0.0584,
+    "cagr": 0.0848,
+    "sharpe": 1.04,
+    "sortino": 1.08,
+    "max_drawdown": -0.0422,
+    "calmar": 2.01,
+    "psr": 0.816,
     "max_losing_streak": 5,
     "long_trades": 28,
-    "short_trades": 87,
+    "short_trades": 97,
     "exit_reasons": {
-     "stop": 56,
-     "target": 30,
-     "breakeven": 28,
-     "time": 1
+     "stop": 59,
+     "breakeven": 34,
+     "target": 32
     }
    },
    "with_meta_filter": {
-    "trades": 106,
+    "trades": 131,
     "years": 1.12,
-    "trades_per_month": 7.9,
-    "win_rate": 0.538,
-    "avg_r": 0.132,
-    "median_r": 0.508,
-    "profit_factor": 1.28,
-    "total_return": 0.0702,
-    "cagr": 0.0625,
-    "sharpe": 0.64,
-    "sortino": 0.64,
-    "max_drawdown": -0.0488,
-    "calmar": 1.28,
-    "psr": 0.881,
-    "max_losing_streak": 5,
-    "long_trades": 52,
-    "short_trades": 54,
+    "trades_per_month": 9.8,
+    "win_rate": 0.527,
+    "avg_r": 0.078,
+    "median_r": 0.507,
+    "profit_factor": 1.16,
+    "total_return": 0.0526,
+    "cagr": 0.0468,
+    "sharpe": 0.45,
+    "sortino": 0.43,
+    "max_drawdown": -0.0621,
+    "calmar": 0.75,
+    "psr": 0.785,
+    "max_losing_streak": 6,
+    "long_trades": 70,
+    "short_trades": 61,
     "exit_reasons": {
-     "stop": 49,
-     "breakeven": 29,
-     "target": 26,
+     "stop": 62,
+     "breakeven": 38,
+     "target": 29,
      "time": 2
     }
    },
    "daily_bias_only": {
-    "trades": 409,
+    "trades": 405,
     "years": 1.67,
-    "trades_per_month": 20.4,
+    "trades_per_month": 20.2,
     "win_rate": 0.501,
     "avg_r": 0.013,
     "median_r": 0.254,
     "profit_factor": 1.02,
-    "total_return": -0.004,
-    "cagr": -0.0024,
-    "sharpe": 0.0,
-    "sortino": 0.0,
-    "max_drawdown": -0.0908,
-    "calmar": -0.03,
+    "total_return": 0.0062,
+    "cagr": 0.0037,
+    "sharpe": 0.11,
+    "sortino": 0.1,
+    "max_drawdown": -0.088,
+    "calmar": 0.04,
     "psr": 0.589,
     "max_losing_streak": 8,
-    "long_trades": 283,
-    "short_trades": 126,
+    "long_trades": 278,
+    "short_trades": 127,
     "exit_reasons": {
-     "stop": 203,
-     "breakeven": 118,
-     "target": 84,
+     "stop": 201,
+     "breakeven": 117,
+     "target": 83,
      "time": 4
     }
    },
    "desk_only_v1": {
-    "trades": 359,
+    "trades": 364,
     "years": 1.67,
-    "trades_per_month": 17.9,
-    "win_rate": 0.474,
-    "avg_r": -0.06,
-    "median_r": -1.006,
-    "profit_factor": 0.89,
-    "total_return": -0.0785,
-    "cagr": -0.0477,
-    "sharpe": -0.55,
-    "sortino": -0.79,
-    "max_drawdown": -0.1059,
-    "calmar": -0.45,
-    "psr": 0.159,
-    "max_losing_streak": 8,
-    "long_trades": 228,
-    "short_trades": 131,
+    "trades_per_month": 18.1,
+    "win_rate": 0.481,
+    "avg_r": -0.009,
+    "median_r": -1.004,
+    "profit_factor": 0.98,
+    "total_return": -0.0261,
+    "cagr": -0.0157,
+    "sharpe": -0.12,
+    "sortino": -0.17,
+    "max_drawdown": -0.0857,
+    "calmar": -0.18,
+    "psr": 0.439,
+    "max_losing_streak": 7,
+    "long_trades": 237,
+    "short_trades": 127,
     "exit_reasons": {
-     "stop": 186,
-     "breakeven": 105,
-     "target": 64,
+     "stop": 185,
+     "breakeven": 100,
+     "target": 75,
      "time": 4
     }
    },
@@ -640,91 +637,91 @@
    "direction": {
     "long": {
      "folds": 14,
-     "mean_auc": 0.5263230035475676,
-     "min_auc": 0.4561191626409018,
-     "mean_brier": 0.26581124593235367
+     "mean_auc": 0.5304358980001223,
+     "min_auc": 0.4549473775017253,
+     "mean_brier": 0.2643032104361342
     },
     "short": {
      "folds": 14,
-     "mean_auc": 0.5257661434052887,
-     "min_auc": 0.4291963094312157,
-     "mean_brier": 0.26784996836396435
+     "mean_auc": 0.5296237804048413,
+     "min_auc": 0.44832601380254367,
+     "mean_brier": 0.2668968677210831
     }
    },
    "meta": {
     "folds": 10,
-    "mean_auc": 0.5078751713828545,
-    "min_auc": 0.4173669467787115,
-    "mean_brier": 0.2679162741492983
+    "mean_auc": 0.517590562962374,
+    "min_auc": 0.4406489675516224,
+    "mean_brier": 0.26549680390535874
    }
   },
   "feature_importance": [
    [
-    "peer_corr",
-    194.0
+    "hurst",
+    193.0
    ],
    [
-    "hurst",
-    191.0
+    "peer_corr",
+    188.0
    ],
    [
     "mac_silver_ret20",
-    182.0
+    188.0
    ],
    [
     "mac_gold_ret20",
-    182.0
-   ],
-   [
-    "mac_spx_ret5",
-    177.0
-   ],
-   [
-    "sb_leverage",
-    171.0
+    175.0
    ],
    [
     "d1_adx",
     170.0
    ],
    [
-    "mac_us2y_chg20",
+    "h4_adx",
+    168.0
+   ],
+   [
+    "sb_leverage",
     166.0
    ],
    [
-    "h4_adx",
-    163.0
+    "sup_str",
+    159.0
    ],
    [
-    "sup_str",
-    162.0
+    "mac_spx_ret5",
+    157.0
    ],
    [
     "d1_macd_hist",
-    160.0
+    155.0
+   ],
+   [
+    "mac_us2y_chg20",
+    151.0
+   ],
+   [
+    "cot_spec_net_chg4",
+    150.0
    ],
    [
     "mac_breakeven10y_chg5",
-    156.0
-   ],
-   [
-    "mac_eurusd_ret20",
-    152.0
+    150.0
    ],
    [
     "mac_us10y_chg5",
-    148.0
+    147.0
    ],
    [
     "mac_silver_ret5",
-    145.0
+    144.0
    ]
   ]
  },
  "ai": {
   "mode": "offline",
-  "summary_fa": "تحلیل EURUSD در قیمت 1.1197 (UTC 2026-10-09 17:00):\nسوگیری راهبردی روزانه -1.00 (نزولی) و برآیند میز تحلیل ساعتی +0.128؛ رژیم بازار: transition.\nتصمیم سیستم: صبر / بدون معامله.\nدلیل عدم ورود: H1 desk composite +0.128 does not confirm the daily bias -1.00\nشواهد صعودی: یادگیری ماشین (LightGBM) (+0.88)، اسمارت‌مانی / ساختار (+0.48)، سطوح حمایت/مقاومت و پروفایل (+0.33)، نقدینگی / استاپ‌هانت (+0.28)\nشواهد نزولی: مومنتوم (-0.72)، بین‌بازاری / کلان (-0.44)، روند چندزمانی (-0.34)\nپلن مشروط (فروش): ورود حدود 1.1197، حد ضرر 1.12117، تارگت اول 1.11822 و تارگت نهایی 1.11601 (ریسک 0.50٪ سرمایه).",
-  "summary_en": "EURUSD @ 1.1197: strategic bias -1.00, desk composite +0.128, regime transition. Decision: WAIT. Blocked because: H1 desk composite +0.128 does not confirm the daily bias -1.00. Bull evidence: ml +0.88, smc +0.48, levels +0.33, liquidity +0.28. Bear evidence: momentum -0.72, macro -0.44, trend -0.34.",
+  "summary_fa": "تحلیل EURUSD در قیمت 1.1197 (UTC 2026-10-09 17:00):\nسوگیری راهبردی روزانه -1.00 (نزولی) و برآیند میز تحلیل ساعتی +0.126؛ رژیم بازار: transition.\nتصمیم سیستم: صبر / بدون معامله.\nدلیل عدم ورود: H1 desk composite +0.126 does not confirm the daily bias -1.00\nشواهد صعودی: یادگیری ماشین (LightGBM) (+0.86)، اسمارت‌مانی / ساختار (+0.48)، سطوح حمایت/مقاومت و پروفایل (+0.33)، نقدینگی / استاپ‌هانت (+0.28)\nشواهد نزولی: مومنتوم (-0.72)، بین‌بازاری / کلان (-0.44)، روند چندزمانی (-0.34)\nپلن مشروط (فروش): ورود حدود 1.1197، حد ضرر 1.12117، تارگت اول 1.11822 و تارگت نهایی 1.11601 (ریسک 0.50٪ سرمایه).",
+  "summary_en": "EURUSD @ 1.1197: strategic bias -1.00, desk composite +0.126, regime transition. Decision: WAIT. Blocked because: H1 desk composite +0.126 does not confirm the daily bias -1.00. Bull evidence: ml +0.86, smc +0.48, levels +0.33, liquidity +0.28. Bear evidence: momentum -0.72, macro -0.44, trend -0.34.",
   "final_decision": "WAIT"
  }
 }

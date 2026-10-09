@@ -53,10 +53,12 @@ def cmd_analyze(args):
         p = live["plan"]
         print(f"  plan ({p['side']}): entry {p['entry_ref']} stop {p['stop']} tp1 {p['tp1_partial']} tp2 {p['tp2_final']}")
         print("  " + (ai.get("summary_fa") or ai.get("decision", {}).get("summary_fa", "")).replace("\n", "\n  "))
-    html = build_dashboard(items, FINDINGS, standalone=True)
+    notes = json.loads(open(args.notes, encoding="utf-8").read()) if args.notes else None
+    html = build_dashboard(items, FINDINGS, standalone=True, ai_commentary=notes)
     out = REPORT_DIR / "dashboard.html"
     out.write_text(html, encoding="utf-8")
-    (REPORT_DIR / "dashboard_fragment.html").write_text(build_dashboard(items, FINDINGS, standalone=False),
+    (REPORT_DIR / "dashboard_fragment.html").write_text(build_dashboard(items, FINDINGS, standalone=False,
+                                                                        ai_commentary=notes),
                                                        encoding="utf-8")
     print(f"\ndashboard -> {out}")
 
@@ -100,6 +102,8 @@ def main(argv=None):
         p.add_argument("--csv", action="append", help="SYMBOL=path/to/broker_export.csv (H1 or lower)")
         p.add_argument("--equity", type=float, default=10_000.0)
         p.add_argument("--ai", action="store_true", help="run the Claude bull/bear/head-trader desk")
+        if name == "analyze":
+            p.add_argument("--notes", help="JSON file {SYMBOL: analyst commentary} added to the dashboard")
         if name == "live":
             p.add_argument("--execute", action="store_true", help="route orders to MetaTrader 5")
             p.add_argument("--once", action="store_true")

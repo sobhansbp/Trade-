@@ -112,24 +112,36 @@ def run_loop(symbols: list[str], use_ai: bool, execute: bool, once: bool = False
     from ..ai.claude_desk import run_desk
     from ..report.charts import render_png
 
+    from ..news.analyst import apply_news_filter, news_context
+
     while True:
+        results = {}
         for sym in symbols:
             try:
-                res = analyze_live(sym, equity=equity, use_cache=False)
+                results[sym] = analyze_live(sym, equity=equity, use_cache=False)
+            except Exception as e:
+                print(f"[{sym}] analysis error: {e}")
+        news = news_context(results) if results else None
+        for sym, res in results.items():
+            try:
                 live = res["live"]
                 b = res["_bundle"]
+                if news:
+                    apply_news_filter(live, news["symbols"].get(sym))
                 png = render_png(b.f, live, JOURNAL_DIR / f"{sym}_latest.png")
                 ai = run_desk(live, png) if use_ai else None
                 final = live["decision"]
-                if ai and ai.get("mode") == "claude":
+                if ai and ai.get("mode") == "llm":
                     final = ai["decision"]["final_decision"]
                 journal_signal(live, {"final_decision": final})
                 last = b.f.iloc[-1]
                 msgs = update_paper(live, float(last["high"]), float(last["low"]), final)
                 if final in ("LONG", "SHORT"):
                     msgs.append(mt5_send(live, execute))
+                nv = live.get("news_view")
                 head = f"[{sym}] {live['time_utc'][:16]} UTC price {live['price']} -> {final} " \
-                       f"(bias {live['strategic']['bias']:+.2f}, desk {live['composite']:+.3f})"
+                       f"(bias {live['strategic']['bias']:+.2f}, desk {live['composite']:+.3f}" \
+                       + (f", news {nv['score']:+.2f}" if nv else "") + ")"
                 print(head)
                 for m in msgs:
                     print("   ", m)

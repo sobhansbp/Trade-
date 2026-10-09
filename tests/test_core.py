@@ -169,13 +169,28 @@ def test_claude_desk_with_mock(monkeypatch):
                                    content=[SimpleNamespace(type="text", text=text)])
 
     fake = SimpleNamespace(beta=SimpleNamespace(messages=FakeMessages()), messages=FakeMessages())
-    monkeypatch.setattr(claude_desk, "have_credentials", lambda: True)
+    from aitrader.ai import llm
+    monkeypatch.setattr(llm, "provider", lambda: "claude")
     monkeypatch.setattr(claude_desk, "_client", lambda: fake)
     live = {"symbol": "EURUSD", "decision": "SHORT", "price": 1.1, "time_utc": "2026-01-01",
             "plan": {"entry_ref": 1.1, "stop": 1.102, "stop_distance": 0.002}, "analysts": [],
             "levels": {}, "backtest": {}}
     out = claude_desk.run_desk(live)
-    assert out["mode"] == "claude" and out["decision"]["final_decision"] == "SHORT"
+    assert out["mode"] == "llm" and out["decision"]["final_decision"] == "SHORT"
     assert len(calls) == 3
     assert all(c["model"] == claude_desk.MODEL and c["fallbacks"] == "default" for c in calls)
     assert calls[-1]["output_config"]["format"]["type"] == "json_schema"
+
+
+def test_news_filter_only_blocks_or_shrinks():
+    from aitrader.news.analyst import apply_news_filter
+    base = {"decision": "LONG", "why_not": [], "analysts": [],
+            "plan": {"risk_fraction": 0.005, "lots_for_equity": 1.0}}
+    v = {"score": -0.6, "headline_score": -0.5, "model_score": -0.7, "event_risk": False, "n": 5}
+    out = apply_news_filter({**base, "why_not": [], "analysts": []}, v)
+    assert out["decision"] == "WAIT"
+    v2 = {**v, "score": 0.3, "event_risk": True}
+    out2 = apply_news_filter({**base, "why_not": [], "analysts": [], "plan": dict(base["plan"])}, v2)
+    assert out2["decision"] == "LONG" and out2["plan"]["risk_fraction"] == 0.0025
+    w = {"decision": "WAIT", "why_not": [], "analysts": [], "plan": {"risk_fraction": 0.005, "lots_for_equity": 1}}
+    assert apply_news_filter(w, {**v, "score": 0.9})["decision"] == "WAIT"   # news never opens a trade

@@ -92,11 +92,12 @@ def build_dossier(live: dict) -> dict:
                    "session": lv.get("session"), "fibonacci_last_leg": lv.get("fibonacci_last_leg"),
                    "harmonic_prz": lv.get("harmonic_prz")}
     bt = live.get("backtest", {})
+    keys = ("trades", "win_rate", "avg_r", "profit_factor", "sharpe", "max_drawdown", "total_return")
     d["evidence"] = {
-        "production_holdout": bt.get("production_holdout"), "production_dev": bt.get("production_dev"),
-        "random_entries": bt.get("random_entries"), "swing_mode_20y": live.get("swing_backtest"),
-        "holdout_start": live.get("holdout_start"), "buy_and_hold_holdout": live.get("buy_and_hold_holdout"),
-    }
+        k: {kk: (bt.get(k) or {}).get(kk) for kk in keys}
+        for k in ("production_holdout", "production_dev", "random_entries")}
+    d["evidence"]["swing_mode_20y"] = (live.get("swing_backtest") or {}).get("2005_2023")
+    d["evidence"]["note"] = "hourly technical signals alone had ~zero edge; daily bias + desk agreement is the tested rule"
     return json.loads(json.dumps(d, default=lambda o: float(o) if isinstance(o, (np.floating, np.integer)) else str(o)))
 
 
@@ -110,10 +111,10 @@ def _content(dossier: dict, chart_png: str | None, instruction: str) -> list:
     return blocks
 
 
-def _call(client, content, effort="high", schema=None, max_tokens=16000):
+def _call(client, content, effort="high", schema=None, max_tokens=16000, system=SYSTEM):
     import anthropic
 
-    kwargs = dict(model=MODEL, max_tokens=max_tokens, system=SYSTEM,
+    kwargs = dict(model=MODEL, max_tokens=max_tokens, system=system,
                   thinking={"type": "adaptive"},
                   messages=[{"role": "user", "content": content}])
     output_config = {"effort": effort}
@@ -131,35 +132,43 @@ def _call(client, content, effort="high", schema=None, max_tokens=16000):
 
 
 def run_desk(live: dict, chart_png: str | None = None) -> dict:
-    """Bull/bear debate + head-trader decision. Falls back to offline brief."""
-    client = _client() if have_credentials() else None
-    if client is None:
-        return {"mode": "offline", **offline_brief(live)}
-    import anthropic
+    """Bull/bear debate + head-trader decision on the configured LLM provider
+    (Groq or Claude). Falls back to the offline brief."""
+    from . import llm
 
+    prov = llm.provider()
+    if prov is None:
+        return {"mode": "offline", **offline_brief(live)}
     dossier = build_dossier(live)
+    if live.get("news_view"):
+        dossier["news"] = {"view": live["news_view"], "headlines": live.get("news_headlines", [])[:15]}
+    img = None
+    # vision models on Groq misread chart numbers in testing; send the image only to Claude
+    # unless explicitly enabled
+    if chart_png and Path(chart_png).exists() and (prov == "claude" or os.environ.get("AITRADER_GROQ_VISION") == "1"):
+        img = base64.standard_b64encode(Path(chart_png).read_bytes()).decode()
+    base = "DOSSIER (JSON):\n" + json.dumps(dossier, ensure_ascii=False) + "\n\n"
     try:
-        bull = _call(client, _content(dossier, chart_png,
-                     "Role: BULL researcher. In <= 220 words, make the strongest evidence-based case for a "
-                     "LONG over the next 1-3 days. Cite specific analyst readings, levels and the chart. "
-                     "End with the single condition that would prove you wrong."), effort="medium", max_tokens=6000)
-        bear = _call(client, _content(dossier, chart_png,
-                     "Role: BEAR researcher. In <= 220 words, make the strongest evidence-based case for a "
-                     "SHORT over the next 1-3 days. Cite specific analyst readings, levels and the chart. "
-                     "End with the single condition that would prove you wrong."), effort="medium", max_tokens=6000)
-        final_txt = _call(client, _content(dossier, chart_png,
-                          "Role: HEAD TRADER + RISK MANAGER. Bull case:\n" + bull + "\n\nBear case:\n" + bear +
-                          "\n\nWeigh both against the dossier. Rules: you may only choose the quant decision "
-                          f"('{live['decision']}') or WAIT; prefer WAIT when evidence conflicts, news is imminent "
-                          "or the setup is late. Fill every field. conviction is 0-100. If WAIT, describe the exact "
-                          "conditions/levels that would trigger a trade in the scenario fields and still give the "
-                          "conditional entry zone/stop/targets for the strategic bias direction. summary_fa must be "
-                          "fluent Persian (Farsi) for a trader, 4-7 sentences."),
-                          effort="high", schema=DECISION_SCHEMA)
-        decision = json.loads(final_txt)
-    except (anthropic.APIError, RuntimeError, json.JSONDecodeError) as e:
+        bull = llm.chat(SYSTEM, base + "Role: BULL researcher. In <= 220 words, make the strongest evidence-based "
+                        "case for a LONG over the next 1-3 days. Cite specific analyst readings, levels and news. "
+                        "End with the single condition that would prove you wrong.",
+                        effort="low", max_tokens=1800, image_png_b64=img)
+        bear = llm.chat(SYSTEM, base + "Role: BEAR researcher. In <= 220 words, make the strongest evidence-based "
+                        "case for a SHORT over the next 1-3 days. Cite specific analyst readings, levels and news. "
+                        "End with the single condition that would prove you wrong.",
+                        effort="low", max_tokens=1800, image_png_b64=img)
+        decision = llm.chat_json(
+            SYSTEM, base + "Role: HEAD TRADER + RISK MANAGER. Bull case:\n" + bull + "\n\nBear case:\n" + bear +
+            "\n\nWeigh both against the dossier. Rules: you may only choose the quant decision "
+            f"('{live['decision']}') or WAIT; prefer WAIT when evidence conflicts, news is imminent "
+            "or the setup is late. Fill every field. conviction is 0-100. If WAIT, describe the exact "
+            "conditions/levels that would trigger a trade in the scenario fields and still give the "
+            "conditional entry zone/stop/targets for the strategic bias direction. summary_fa must be "
+            "fluent Persian (Farsi) for a trader, 4-7 sentences.",
+            DECISION_SCHEMA, effort="medium", max_tokens=5000 if prov == "groq" else 16000, image_png_b64=img)
+    except (llm.LLMError, json.JSONDecodeError, KeyError) as e:
         return {"mode": "offline", "error": str(e), **offline_brief(live)}
-    return {"mode": "claude", "model": MODEL, "bull_case": bull, "bear_case": bear,
+    return {"mode": "llm", "provider": prov, "model": llm.model_name(), "bull_case": bull, "bear_case": bear,
             "decision": enforce_guardrails(live, decision)}
 
 

@@ -6,13 +6,13 @@
   "data_source": "EURUSD=X",
   "decision": "WAIT",
   "bias": "BEARISH",
-  "composite": 0.126,
+  "composite": 0.127,
   "threshold": 0.177,
-  "agreement": 0.674,
-  "confidence": 0.241,
-  "meta_p_win": 0.776,
-  "ml_p_long": 0.643,
-  "ml_p_short": 0.299,
+  "agreement": 0.675,
+  "confidence": 0.243,
+  "meta_p_win": 0.763,
+  "ml_p_long": 0.644,
+  "ml_p_short": 0.302,
   "strategic": {
    "bias": -1.0,
    "components": {
@@ -72,21 +72,21 @@
   "holdout_start": "2026-01-28 03:00:00+00:00",
   "buy_and_hold_holdout": -0.067,
   "regime": "transition",
-  "trend_strength": 0.526,
+  "trend_strength": 0.523,
   "vol_state": "normal-vol",
-  "atr": 0.00098,
+  "atr": 0.00101,
   "why_not": [
-   "H1 desk composite +0.126 does not confirm the daily bias -1.00"
+   "H1 desk composite +0.127 does not confirm the daily bias -1.00"
   ],
   "plan": {
    "side": "SHORT",
    "entry_ref": 1.1197,
-   "stop": 1.12117,
-   "tp1_partial": 1.11822,
-   "tp2_final": 1.11601,
+   "stop": 1.12121,
+   "tp1_partial": 1.11818,
+   "tp2_final": 1.11591,
    "risk_reward_final": 2.5,
-   "stop_distance": 0.00147,
-   "stop_distance_pips": 14.7,
+   "stop_distance": 0.00151,
+   "stop_distance_pips": 15.1,
    "liquidity_targets": [
     [
      "sup",
@@ -102,7 +102,7 @@
     ]
    ],
    "risk_fraction": 0.005,
-   "lots_for_equity": 0.34,
+   "lots_for_equity": 0.33,
    "equity_assumed": 10000.0,
    "management": "close 50% at TP1 (+1.0R), move stop to breakeven, hold rest to TP2 (+2.5R) or 72h time stop"
   },
@@ -110,28 +110,28 @@
    {
     "name": "trend",
     "title_fa": "روند چندزمانی",
-    "score": -0.33899102166731954,
+    "score": -0.3340766761031682,
     "reasons": [
      "H1 EMA stack bearish, Supertrend bullish, Ichimoku below cloud",
      "H4 structure bearish, D1 structure bearish",
-     "ADX 22.9 (+DI-−DI -6.4)"
+     "ADX 22.4 (+DI-−DI -3.5)"
     ]
    },
    {
     "name": "momentum",
     "title_fa": "مومنتوم",
-    "score": -0.723178232081682,
+    "score": -0.7217380460245875,
     "reasons": [
-     "RSI14 40.1, MACD hist -0.38 ATR, Stoch 5/7",
+     "RSI14 40.1, MACD hist -0.37 ATR, Stoch 5/7",
      "time-series momentum 5d -0.69σ, 20d -2.25σ"
     ]
    },
    {
     "name": "mean_reversion",
     "title_fa": "بازگشت به میانگین",
-    "score": 0.20661953963244792,
+    "score": 0.20575354366813436,
     "reasons": [
-     "Bollinger z -1.35, RSI3 42, distance to VWAP -2.01 ATR, Hurst 0.38"
+     "Bollinger z -1.35, RSI3 42, distance to VWAP -1.96 ATR, Hurst 0.38"
     ]
    },
    {
@@ -168,17 +168,17 @@
    {
     "name": "levels",
     "title_fa": "سطوح حمایت/مقاومت و پروفایل",
-    "score": 0.32759725720851485,
+    "score": 0.3287591449731808,
     "reasons": [
-     "nearest support 1.1189 (0.83 ATR away, strength 3.8)",
-     "nearest resistance 1.1206 (0.96 ATR away, strength 3.8)",
+     "nearest support 1.1189 (0.81 ATR away, strength 3.8)",
+     "nearest resistance 1.1206 (0.93 ATR away, strength 3.8)",
      "price below prior-day value area"
     ]
    },
    {
     "name": "macro",
     "title_fa": "بین‌بازاری / کلان",
-    "score": -0.43571255979190815,
+    "score": -0.431548068324999,
     "reasons": [
      "DXY 20d +2.13σ, 5d +0.05σ",
      "US 2y yield 20d change +1.02σ (rate-differential proxy)"
@@ -203,7 +203,7 @@
    {
     "name": "ml",
     "title_fa": "یادگیری ماشین (LightGBM)",
-    "score": 0.8606160701811814,
+    "score": 0.8566155796149764,
     "reasons": [
      "walk-forward ML: P(long wins) 64%, P(short wins) 30%"
     ]
@@ -719,9 +719,46 @@
   ]
  },
  "ai": {
-  "mode": "offline",
-  "summary_fa": "تحلیل EURUSD در قیمت 1.1197 (UTC 2026-10-09 17:00):\nسوگیری راهبردی روزانه -1.00 (نزولی) و برآیند میز تحلیل ساعتی +0.126؛ رژیم بازار: transition.\nتصمیم سیستم: صبر / بدون معامله.\nدلیل عدم ورود: H1 desk composite +0.126 does not confirm the daily bias -1.00\nشواهد صعودی: یادگیری ماشین (LightGBM) (+0.86)، اسمارت‌مانی / ساختار (+0.48)، سطوح حمایت/مقاومت و پروفایل (+0.33)، نقدینگی / استاپ‌هانت (+0.28)\nشواهد نزولی: مومنتوم (-0.72)، بین‌بازاری / کلان (-0.44)، روند چندزمانی (-0.34)\nپلن مشروط (فروش): ورود حدود 1.1197، حد ضرر 1.12117، تارگت اول 1.11822 و تارگت نهایی 1.11601 (ریسک 0.50٪ سرمایه).",
-  "summary_en": "EURUSD @ 1.1197: strategic bias -1.00, desk composite +0.126, regime transition. Decision: WAIT. Blocked because: H1 desk composite +0.126 does not confirm the daily bias -1.00. Bull evidence: ml +0.86, smc +0.48, levels +0.33, liquidity +0.28. Bear evidence: momentum -0.72, macro -0.44, trend -0.34.",
-  "final_decision": "WAIT"
+  "mode": "llm",
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "bull_case": "**Long case (1‑3 days)**  \n\n- **Machine‑learning edge:** the ML analyst scores 0.857 and its walk‑forward test shows a 64 % win‑rate for long entries versus only 30 % for shorts. This is the strongest single signal in the dossier.  \n\n- **H1 timing bias:** the hour‑ahead composite is **+0.127**, explicitly noted in *why_not* as “does not confirm the daily bias –1.00”. The short‑term signal is therefore bullish, suggesting a near‑term bounce even while the longer‑term bias stays bearish.  \n\n- **Smart‑money structure:** the SMC score is +0.476. It flags a bullish market‑structure on H1 (higher highs/lower lows) and a recent CHoCH (change of character) that typically precedes a move upward.  \n\n- **Liquidity & divergence:** the liquidity analyst gives a +0.281 score, citing a recent liquidity‑sweep echo and a bullish SMT divergence versus correlated markets – both classic short‑term buying‑pressure cues.  \n\n- **Mean‑reversion & oversold RSI:** mean‑reversion is mildly bullish (+0.206) and the 3‑period RSI sits at **42**, while the 14‑period RSI is **40.1**. These values are near the lower‑bound of the typical range, indicating the pair may be oversold and primed for a corrective rise.  \n\n- **Key price zone:** current price **1.11970** sits just above the nearest support **1.11888** (0.81 ATR away, strength 3.8). The ascending‑channel geometry also points upward. A bounce to the first target **1.11818** (partial) and then to **1.11591** (final) would be consistent with a short‑term rally before the broader bearish regime reasserts.  \n\n- **No news drag:** the news block is empty and there is no blackout, so no macro surprise is expected to suppress the short‑term upside.  \n\n**Risk management:** place a stop just above the recent low **1.11757** (≈ 15 pips) and target the first resistance **1.12064** (≈ 10 pips) for a ~1:1‑1.5R payoff.  \n\n**Single falsifier:** a decisive break below **1.11757** (the session low) with price closing under it would invalidate the bullish short‑term bias.",
+  "bear_case": "**Short case (1‑3 days)**  \n\n- **Strategic bias:** The 20‑yr strategic engine rates EURUSD **‑1.0** (bearish) on four high‑conviction components – time‑series momentum, EMA20/100 cross, US‑2‑yr yield spread, and the 20‑day DXY trend – all at –1.0.  \n- **Higher‑timeframe confirmation:** H4 and D1 trends are both **‑1.0**; D1 RSI is **24.2** (deeply oversold) and H4 RSI **41.5**, indicating a still‑weak market.  \n- **Technical edge:** The H1 desk composite (+0.127) is the only outlier; the plan therefore follows the higher‑timeframe bias. The price sits **15 pips** (0.0015) above the nearest support **1.11888** (0.81 ATR) and **15 pips** below the next resistance **1.12064** (0.93 ATR). A break below the support would trigger the planned entry at **1.1197** with a tight stop at **1.12121** (15 pips) and TP1 at **1.11818** (≈1 R) and TP2 at **1.11591** (≈2.5 R).  \n- **Macro pressure:** DXY is +2.13 σ on the 20‑day horizon and US 2‑yr yields are +1.02 σ, both pulling EURUSD lower (macro analyst score –0.432).  \n- **Out‑of‑sample performance:** In the production‑holdout set, **97 short trades vs 28 long** produced a 52.8 % win‑rate, 1.19 profit factor and 2.01 Calmar – the strongest evidence that the model’s short edge survives real‑time noise.  \n- **Liquidity & structure:** The “ascending channel” geometry is already broken; recent liquidity sweep echo is modest (‑0.12) and the market is in a bearish order‑block (top 1.13908, bottom 1.13675).  \n\n**Fail‑condition:** If EURUSD **closes above 1.1206** with RSI > 50 and the H1 composite flips to ≥ 0.5, the short thesis collapses.",
+  "decision": {
+   "agrees_with_quant": true,
+   "alternative_scenario": "Long bias – the H1 hour‑ahead composite is +0.127 and the ML analyst scores 0.857, indicating a 64 % win‑rate for long entries. SMC shows a bullish H1 market structure with a recent change of character, and liquidity analysis notes a bullish SMT divergence. RSI values (14‑period 40.1, 3‑period 42) suggest the pair is near oversold, while the ascending‑channel geometry points upward. A potential long entry could be taken if price breaks above the nearest resistance at 1.12064 and holds, targeting the day high around 1.12158.",
+   "conviction": 45,
+   "decision": "WAIT",
+   "entry_zone_high": 1.1199,
+   "entry_zone_low": 1.1195,
+   "invalidation": "Close above 1.12064 with RSI > 50 and H1 composite ≥ 0.5",
+   "key_risks": [
+    "H1 composite could flip bullish, eroding short edge",
+    "Unexpected macro news or surprise data could shift EURUSD",
+    "Liquidity sweep may cause rapid price spikes and hit stop",
+    "Break below 1.11757 would confirm deeper downtrend and invalidate long bias",
+    "Model’s short‑term bullish signal may be a false breakout"
+   ],
+   "levels_to_watch": [
+    "1.12064 (nearest resistance)",
+    "1.1197 (entry reference)",
+    "1.11888 (nearest support)",
+    "1.11757 (session low)",
+    "1.12121 (stop level for short entry)",
+    "1.11818 (TP1)",
+    "1.11591 (TP2)",
+    "1.12158 (day high / potential long target)"
+   ],
+   "primary_scenario": "Short bias – the strategic engine rates EURUSD bearish (‑1.0) on four high‑conviction components (time‑series momentum, EMA20/100 cross, US‑2‑yr yield spread, DXY 20‑day trend). Both H4 and D1 trends are –1.0, and macro pressure from a strong DXY (+2.13σ) and US 2‑yr yields (+1.02σ) supports further downside. Production‑holdout back‑test shows a 52.8 % win‑rate on short trades with a profit factor of 1.19. The plan is to enter short near 1.1197, set a stop at 1.12121, and target 1.11818 (partial) and 1.11591 (final).",
+   "stop": 1.12121,
+   "summary_en": "The strategic engine rates EURUSD bearish (‑1.0) on four high‑conviction components and both H4 and D1 trends are down, while the production‑holdout back‑test shows a modest edge for short trades (52.8 % win‑rate, profit factor 1.19). At the same time, the H1 hour‑ahead composite is +0.127 and the ML analyst gives a strong long bias (score 0.857, 64 % win‑rate for longs), creating a short‑term bullish signal. Because these signals conflict, the prudent recommendation is to wait for a clear trigger before taking a position. A short entry would be considered near 1.1197 with a stop at 1.12121 and targets at 1.11818 and 1.11591, but this is invalidated if price closes above 1.12064 with RSI > 50 and H1 composite ≥ 0.5. Conversely, a long entry could be taken if price breaks above 1.12064 and the H1 composite remains positive, aiming for the day high around 1.12158.",
+   "summary_fa": "موتور استراتژیک EURUSD را به‑صورت نزولی (‑1.0) بر پایه چهار مؤلفه با اطمینان بالا ارزیابی می‌کند و روندهای H4 و D1 نیز منفی هستند؛ در تست hold‑out مدل، معاملات کوتاه با نرخ برد 52.8 % و فاکتور سود 1.19 عملکرد مثبت دارد. در عین حال، ترکیب ساعتی H1 مقدار +0.127 دارد و نمره ML برای سمت طولانی 0.857 (احتمال برد 64 %) نشان‌دهنده سیگنال کوتاه‌مدت صعودی است. به‌دلیل این تضاد، توصیهٔ محتاطانه «صبر» است تا یک سیگنال واضح ظاهر شود. اگر قیمت به‌نزدیک 1.1197 برسد و زیر 1.12121 بسته نشود، می‌توان موقعیت کوتاه با هدف 1.11818 و 1.11591 باز کرد؛ این موقعیت در صورتی که قیمت بالای 1.12064 بسته شود و RSI > 50 و ترکیب H1 ≥ 0.5 باشد، باطل می‌شود. در مقابل، اگر قیمت بالای 1.12064 بماند و ترکیب H1 مثبت بماند، می‌توان موقعیت طولانی با هدف نزدیک 1.12158 در نظر گرفت.",
+   "targets": [
+    1.11818,
+    1.11591
+   ],
+   "final_decision": "WAIT",
+   "guardrail_notes": []
+  }
  }
 }

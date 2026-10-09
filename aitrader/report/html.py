@@ -208,6 +208,24 @@ def _news_table(L: dict) -> str:
             f"</tr></thead><tbody>{rows}</tbody></table></div>")
 
 
+def _news_ai(L: dict) -> str:
+    v = L.get("news_view")
+    if not v:
+        return ""
+    rows = "".join(
+        f"<tr><td class='num'>{_e(h['time'][11:16])}</td><td style='direction:ltr;text-align:left'>{_e(h['title'])}"
+        f" <span class='tag'>{_e(h['source'])}</span></td><td class='num {'good' if h['impact'] > 0 else 'bad'}'>"
+        f"{h['impact']:+d}</td></tr>" for h in L.get("news_headlines", []))
+    risk = " · <b class='bad'>ریسک رویداد</b>" if v.get("event_risk") else ""
+    return (f"<div class='card ai'><div class='eyebrow'>تحلیلگر اخبار (هوش مصنوعی) · امتیاز "
+            f"<span class='num'>{v['score']:+.2f}</span> از {v['n']} خبر مرتبط{risk}</div>"
+            f"<p class='lead'>{_e(v.get('rationale_fa', ''))}</p>"
+            f"<p class='muted'>{_e(L.get('news_theme_fa', ''))}</p>"
+            "<p class='muted'>اخبار فقط می‌تواند معامله را متوقف کند (وتو)؛ اثرش روی سود هنوز به‌صورت رو به جلو در حال سنجش است.</p>"
+            f"<details><summary>اخبار اثرگذار</summary><div class='scroll'><table><thead><tr><th>UTC</th><th>تیتر</th>"
+            f"<th>اثر</th></tr></thead><tbody>{rows}</tbody></table></div></details></div>")
+
+
 def _bt_table(L: dict) -> str:
     rows = []
     for k, label in RUN_FA.items():
@@ -235,12 +253,12 @@ def _bt_table(L: dict) -> str:
 def _ai_block(ai: dict | None) -> str:
     if not ai:
         return ""
-    if ai.get("mode") == "claude":
+    if ai.get("mode") == "llm":
         d = ai["decision"]
         notes = "".join(f"<li>{_e(n)}</li>" for n in d.get("guardrail_notes", []))
         risks = "".join(f"<li>{_e(r)}</li>" for r in d.get("key_risks", []))
         watch = "".join(f"<li>{_e(r)}</li>" for r in d.get("levels_to_watch", []))
-        return f"""<div class="card ai"><div class="eyebrow">میز هوش مصنوعی Claude ({_e(ai.get('model'))}) - مناظره خریدار/فروشنده</div>
+        return f"""<div class="card ai"><div class="eyebrow">میز هوش مصنوعی ({_e(ai.get('provider'))}: {_e(ai.get('model'))}) - مناظره خریدار/فروشنده</div>
 <p class="lead">{_e(d.get('summary_fa', ''))}</p>
 <p class="muted">اطمینان: <span class="num">{d.get('conviction')}</span>/100 · سناریوی اصلی: {_e(d.get('primary_scenario'))}</p>
 <p class="muted">سناریوی جایگزین: {_e(d.get('alternative_scenario'))} · ابطال: {_e(d.get('invalidation'))}</p>
@@ -269,6 +287,7 @@ def build_dashboard(items: list[dict], findings: list[tuple[str, str]], standalo
   <header><h2>میز {_e(L['symbol'])}</h2><span class="muted">منبع داده: <span class="mono">{_e(L['data_source'])}</span> · ATR(H1) <span class="num">{L['atr']}</span> · {FA.get(L['vol_state'], '')}</span></header>
   {extra}
   {_ai_block(it.get('ai'))}
+  {_news_ai(L)}
   <div class="grid2">
     <div class="card"><h3>لایه راهبردی روزانه</h3>{_strategic_table(L)}</div>
     <div class="card"><h3>اخبار پراهمیت پیش‌رو</h3>{_news_table(L)}</div>

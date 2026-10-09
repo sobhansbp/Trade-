@@ -1,18 +1,18 @@
 {
  "live": {
   "symbol": "XAUUSD",
-  "time_utc": "2026-10-09 16:00:00+00:00",
-  "price": 4216.0,
+  "time_utc": "2026-10-09 17:00:00+00:00",
+  "price": 4218.6,
   "data_source": "GC=F",
   "decision": "WAIT",
   "bias": "BEARISH",
-  "composite": 0.03,
-  "threshold": 0.17,
-  "agreement": 0.61,
-  "confidence": 0.053,
-  "meta_p_win": 0.808,
-  "ml_p_long": 0.501,
-  "ml_p_short": 0.323,
+  "composite": 0.031,
+  "threshold": 0.171,
+  "agreement": 0.614,
+  "confidence": 0.055,
+  "meta_p_win": 0.696,
+  "ml_p_long": 0.538,
+  "ml_p_short": 0.349,
   "strategic": {
    "bias": -0.25,
    "components": {
@@ -69,28 +69,32 @@
     "years": 6.0
    }
   },
-  "holdout_start": "2026-03-09 07:00:00+00:00",
-  "buy_and_hold_holdout": -0.1744,
+  "holdout_start": "2026-03-09 08:00:00+00:00",
+  "buy_and_hold_holdout": -0.1735,
   "regime": "trending",
-  "trend_strength": 0.572,
+  "trend_strength": 0.56,
   "vol_state": "low-vol",
-  "atr": 13.67,
+  "atr": 13.3,
   "why_not": [
    "daily strategic bias -0.25 is not strong enough (needs |bias| >= 0.5)"
   ],
   "plan": {
    "side": "SHORT",
-   "entry_ref": 4216.0,
-   "stop": 4236.43,
-   "tp1_partial": 4195.57,
-   "tp2_final": 4164.92,
+   "entry_ref": 4218.6,
+   "stop": 4236.36,
+   "tp1_partial": 4200.84,
+   "tp2_final": 4174.2,
    "risk_reward_final": 2.5,
-   "stop_distance": 20.43,
-   "stop_distance_pips": 204.3,
+   "stop_distance": 17.76,
+   "stop_distance_pips": 177.6,
    "liquidity_targets": [
     [
      "sup",
      4210.21
+    ],
+    [
+     "last_sl",
+     4193.2
     ],
     [
      "asia_low",
@@ -99,14 +103,10 @@
     [
      "pwl",
      4143.1
-    ],
-    [
-     "pdl",
-     4129.2
     ]
    ],
    "risk_fraction": 0.005,
-   "lots_for_equity": 0.02,
+   "lots_for_equity": 0.03,
    "equity_assumed": 10000.0,
    "management": "close 50% at TP1 (+1.0R), move stop to breakeven, hold rest to TP2 (+2.5R) or 72h time stop"
   },
@@ -114,37 +114,38 @@
    {
     "name": "trend",
     "title_fa": "روند چندزمانی",
-    "score": 0.22088828708664887,
+    "score": 0.22462055341150677,
     "reasons": [
      "H1 EMA stack flat, Supertrend bullish, Ichimoku above cloud",
      "H4 structure bullish, D1 structure bearish",
-     "ADX 38.5 (+DI-−DI +13.6)"
+     "ADX 38.6 (+DI-−DI +13.9)"
     ]
    },
    {
     "name": "momentum",
     "title_fa": "مومنتوم",
-    "score": -0.05152498254650853,
+    "score": -0.003585579527081606,
     "reasons": [
-     "RSI14 63.8, MACD hist -0.06 ATR, Stoch 56/60",
-     "time-series momentum 5d -0.24σ, 20d -0.53σ"
+     "RSI14 64.9, MACD hist -0.05 ATR, Stoch 57/58",
+     "time-series momentum 5d -0.01σ, 20d -0.51σ"
     ]
    },
    {
     "name": "mean_reversion",
     "title_fa": "بازگشت به میانگین",
-    "score": -0.15227368131357347,
+    "score": -0.18045809641030913,
     "reasons": [
-     "Bollinger z +0.80, RSI3 66, distance to VWAP +0.56 ATR, Hurst 0.37"
+     "Bollinger z +0.88, RSI3 72, distance to VWAP +0.73 ATR, Hurst 0.37"
     ]
    },
    {
     "name": "smc",
     "title_fa": "اسمارت‌مانی / ساختار",
-    "score": 0.2396349972623442,
+    "score": -0.0004855685763889214,
     "reasons": [
-     "H1 market structure bullish (HH/HL); dealing-range position 83% (premium)",
-     "recent bullish BOS (continuation)"
+     "H1 market structure bullish (HH/HL); dealing-range position 63% (premium)",
+     "recent bullish BOS (continuation)",
+     "in the OTE zone (retracement 63% of last leg)"
     ]
    },
    {
@@ -156,8 +157,11 @@
    {
     "name": "patterns",
     "title_fa": "الگوها (کندل/کلاسیک/هارمونیک/الیوت)",
-    "score": 0.0,
-    "reasons": []
+    "score": 0.31699999999999995,
+    "reasons": [
+     "candle: three white soldiers",
+     "Elliott count: bullish implication"
+    ]
    },
    {
     "name": "breakout",
@@ -168,17 +172,17 @@
    {
     "name": "levels",
     "title_fa": "سطوح حمایت/مقاومت و پروفایل",
-    "score": -0.39702428150180097,
+    "score": -0.5924906820865515,
     "reasons": [
-     "nearest support 4210.2 (0.42 ATR away, strength 3.8)",
-     "nearest resistance 4220.1 (0.30 ATR away, strength 5.4)",
+     "nearest support 4210.2 (0.63 ATR away, strength 3.8)",
+     "nearest resistance 4220.1 (0.11 ATR away, strength 5.4)",
      "price above prior-day value area"
     ]
    },
    {
     "name": "macro",
     "title_fa": "بین‌بازاری / کلان",
-    "score": -0.46211220926155894,
+    "score": -0.46772172694897396,
     "reasons": [
      "10y real yield 20d change +2.40σ (rising real yields weigh on gold)",
      "DXY 20d +2.13σ, silver 5d -0.29σ, VIX z -0.80"
@@ -187,9 +191,9 @@
    {
     "name": "seasonality",
     "title_fa": "فصلی‌بودن ساعتی/روزانه",
-    "score": -0.11522918005713945,
+    "score": 0.16890120252238902,
     "reasons": [
-     "next-6h hour-of-day drift t-stat -0.52, day-of-week t +0.30"
+     "next-6h hour-of-day drift t-stat +0.50, day-of-week t +0.30"
     ]
    },
    {
@@ -203,21 +207,25 @@
    {
     "name": "ml",
     "title_fa": "یادگیری ماشین (LightGBM)",
-    "score": 0.44490945063176524,
+    "score": 0.4708389818753786,
     "reasons": [
-     "walk-forward ML: P(long wins) 50%, P(short wins) 32%"
+     "walk-forward ML: P(long wins) 54%, P(short wins) 35%"
     ]
    }
   ],
   "levels": {
    "support_resistance": [
     [
-     4216.52,
-     5.5
+     4220.1,
+     5.4
     ],
     [
-     4224.82,
-     3.6
+     4212.4,
+     1.9
+    ],
+    [
+     4226.8,
+     1.8
     ],
     [
      4206.01,
@@ -228,16 +236,12 @@
      2.0
     ],
     [
-     4198.27,
-     3.6
+     4196.47,
+     5.6
     ],
     [
      4251.1,
      1.8
-    ],
-    [
-     4178.06,
-     9.0
     ],
     [
      4259.0,
@@ -356,23 +360,17 @@
     "val": 4140.87
    },
    "fibonacci_last_leg": {
-    "0.236": 4209.04,
-    "0.382": 4193.78,
-    "0.500": 4181.45,
-    "0.618": 4169.12,
-    "0.705": 4160.03,
-    "0.786": 4151.56,
-    "ext_1.272": 4262.12,
-    "ext_1.618": 4298.28
+    "0.236": 4202.76,
+    "0.382": 4208.67,
+    "0.500": 4213.45,
+    "0.618": 4218.23,
+    "0.705": 4221.75,
+    "0.786": 4225.03,
+    "ext_1.272": 4182.18,
+    "ext_1.618": 4168.17
    },
    "harmonic_prz": {},
    "swings": [
-    [
-     "2026-10-06 01:00:00+00:00",
-     "H",
-     4179.6,
-     "LH"
-    ],
     [
      "2026-10-06 02:00:00+00:00",
      "L",
@@ -438,14 +436,20 @@
      "H",
      4233.7,
      "HH"
+    ],
+    [
+     "2026-10-09 12:00:00+00:00",
+     "L",
+     4193.2,
+     "HL"
     ]
    ]
   },
   "patterns": {
-   "elliott": "",
+   "elliott": "wave-4 low in place -> wave 5 up",
    "harmonic_recent": "",
    "geometry": [
-    "ascending channel"
+    "rising wedge - bearish reversal risk"
    ]
   },
   "htf": {
@@ -466,7 +470,7 @@
     "median_r": 0.501,
     "profit_factor": 1.1,
     "total_return": 0.0668,
-    "cagr": 0.0463,
+    "cagr": 0.0462,
     "sharpe": 0.51,
     "sortino": 0.67,
     "max_drawdown": -0.0683,
@@ -532,27 +536,27 @@
     }
    },
    "with_meta_filter": {
-    "trades": 97,
+    "trades": 101,
     "years": 0.96,
-    "trades_per_month": 8.4,
-    "win_rate": 0.536,
-    "avg_r": 0.04,
-    "median_r": 0.501,
-    "profit_factor": 1.08,
-    "total_return": 0.0194,
-    "cagr": 0.0202,
-    "sharpe": 0.28,
-    "sortino": 0.26,
-    "max_drawdown": -0.0588,
-    "calmar": 0.34,
-    "psr": 0.642,
+    "trades_per_month": 8.7,
+    "win_rate": 0.505,
+    "avg_r": -0.029,
+    "median_r": 0.4,
+    "profit_factor": 0.94,
+    "total_return": -0.0189,
+    "cagr": -0.0196,
+    "sharpe": -0.23,
+    "sortino": -0.21,
+    "max_drawdown": -0.0781,
+    "calmar": -0.25,
+    "psr": 0.392,
     "max_losing_streak": 7,
-    "long_trades": 97,
+    "long_trades": 101,
     "short_trades": 0,
     "exit_reasons": {
-     "stop": 45,
+     "stop": 50,
      "breakeven": 31,
-     "target": 18,
+     "target": 17,
      "time": 3
     }
    },
@@ -589,13 +593,13 @@
     "avg_r": -0.042,
     "median_r": -1.002,
     "profit_factor": 0.92,
-    "total_return": -0.0509,
-    "cagr": -0.0358,
+    "total_return": -0.0507,
+    "cagr": -0.0357,
     "sharpe": -0.39,
     "sortino": -0.5,
     "max_drawdown": -0.0985,
     "calmar": -0.36,
-    "psr": 0.27,
+    "psr": 0.272,
     "max_losing_streak": 6,
     "long_trades": 216,
     "short_trades": 47,
@@ -632,49 +636,49 @@
     }
    }
   },
-  "buy_and_hold_return": 0.2812,
+  "buy_and_hold_return": 0.282,
   "ml_reports": {
    "direction": {
     "long": {
      "folds": 11,
-     "mean_auc": 0.5472368731769877,
+     "mean_auc": 0.5473144563346393,
      "min_auc": 0.468728879276613,
-     "mean_brier": 0.27040081815427347
+     "mean_brier": 0.27037912653223406
     },
     "short": {
      "folds": 11,
-     "mean_auc": 0.5275633182509648,
+     "mean_auc": 0.5276439062574295,
      "min_auc": 0.4457195121079822,
-     "mean_brier": 0.277736084471206
+     "mean_brier": 0.2777151095836889
     }
    },
    "meta": {
     "folds": 8,
-    "mean_auc": 0.505917805349201,
-    "min_auc": 0.39894067796610166,
-    "mean_brier": 0.27184471069854754
+    "mean_auc": 0.5071895680020726,
+    "min_auc": 0.4101123595505618,
+    "mean_brier": 0.27179427863663674
    }
   },
   "feature_importance": [
    [
     "dist_bull_ob",
-    284.0
-   ],
-   [
-    "mac_us2y_chg5",
-    228.0
+    240.0
    ],
    [
     "res_str",
-    220.0
+    221.0
+   ],
+   [
+    "mac_us2y_chg5",
+    212.0
    ],
    [
     "peer_corr",
-    211.0
+    201.0
    ],
    [
     "d1_macd_hist",
-    192.0
+    195.0
    ],
    [
     "dist_bull_fvg",
@@ -682,46 +686,47 @@
    ],
    [
     "h4_adx",
-    167.0
-   ],
-   [
-    "hurst",
-    163.0
-   ],
-   [
-    "mac_us2y_chg20",
-    160.0
-   ],
-   [
-    "mac_real10y_chg5",
-    157.0
-   ],
-   [
-    "d1_range_pos",
-    155.0
+    172.0
    ],
    [
     "adx",
-    154.0
+    166.0
    ],
    [
-    "mac_vix_z",
-    150.0
+    "mac_us2y_chg20",
+    164.0
    ],
    [
-    "mac_spx_ret20",
-    145.0
+    "d1_range_pos",
+    164.0
+   ],
+   [
+    "hurst",
+    148.0
+   ],
+   [
+    "dist_bear_ob",
+    146.0
+   ],
+   [
+    "mac_gold_ret20",
+    144.0
    ],
    [
     "d_week_open",
-    139.0
+    142.0
+   ],
+   [
+    "mac_spx_ret20",
+    142.0
    ]
   ]
  },
  "ai": {
   "mode": "offline",
-  "summary_fa": "تحلیل XAUUSD در قیمت 4216.0 (UTC 2026-10-09 16:00):\nسوگیری راهبردی روزانه -0.25 (نزولی) و برآیند میز تحلیل ساعتی +0.030؛ رژیم بازار: trending.\nتصمیم سیستم: صبر / بدون معامله.\nدلیل عدم ورود: daily strategic bias -0.25 is not strong enough (needs |bias| >= 0.5)\nشواهد صعودی: یادگیری ماشین (LightGBM) (+0.44)، اسمارت‌مانی / ساختار (+0.24)، روند چندزمانی (+0.22)\nشواهد نزولی: بین‌بازاری / کلان (-0.46)، سطوح حمایت/مقاومت و پروفایل (-0.40)، موقعیت‌گیری COT (-0.17)، بازگشت به میانگین (-0.15)\nپلن مشروط (فروش): ورود حدود 4216.0، حد ضرر 4236.43، تارگت اول 4195.57 و تارگت نهایی 4164.92 (ریسک 0.50٪ سرمایه).",
-  "summary_en": "XAUUSD @ 4216.0: strategic bias -0.25, desk composite +0.030, regime trending. Decision: WAIT. Blocked because: daily strategic bias -0.25 is not strong enough (needs |bias| >= 0.5). Bull evidence: ml +0.44, smc +0.24, trend +0.22. Bear evidence: macro -0.46, levels -0.40, positioning -0.17, mean_reversion -0.15.",
+  "error": "groq 413: {\"error\":{\"message\":\"Request too large for model `openai/gpt-oss-120b` in organization `org_01m4gx2tbke10s8j6j8defhgya` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Requested 9099, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https",
+  "summary_fa": "تحلیل XAUUSD در قیمت 4218.6 (UTC 2026-10-09 17:00):\nسوگیری راهبردی روزانه -0.25 (نزولی) و برآیند میز تحلیل ساعتی +0.031؛ رژیم بازار: trending.\nتصمیم سیستم: صبر / بدون معامله.\nدلیل عدم ورود: daily strategic bias -0.25 is not strong enough (needs |bias| >= 0.5)\nشواهد صعودی: یادگیری ماشین (LightGBM) (+0.47)، الگوها (کندل/کلاسیک/هارمونیک/الیوت) (+0.32)، روند چندزمانی (+0.22)، فصلی‌بودن ساعتی/روزانه (+0.17)\nشواهد نزولی: سطوح حمایت/مقاومت و پروفایل (-0.59)، بین‌بازاری / کلان (-0.47)، بازگشت به میانگین (-0.18)، موقعیت‌گیری COT (-0.17)\nپلن مشروط (فروش): ورود حدود 4218.6، حد ضرر 4236.36، تارگت اول 4200.84 و تارگت نهایی 4174.2 (ریسک 0.50٪ سرمایه).",
+  "summary_en": "XAUUSD @ 4218.6: strategic bias -0.25, desk composite +0.031, regime trending. Decision: WAIT. Blocked because: daily strategic bias -0.25 is not strong enough (needs |bias| >= 0.5). Bull evidence: ml +0.47, patterns +0.32, trend +0.22, seasonality +0.17. Bear evidence: levels -0.59, macro -0.47, mean_reversion -0.18, positioning -0.17.",
   "final_decision": "WAIT"
  }
 }

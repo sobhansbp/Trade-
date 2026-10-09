@@ -30,10 +30,19 @@ def cmd_analyze(args):
 
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     csvs = _csv_map(args.csv)
+    results = {sym: analyze_live(sym, csv=csvs.get(sym), equity=args.equity) for sym in args.symbols}
+    from .news.analyst import news_context
+    news = news_context(results) if not args.no_news else None
     items = []
-    for sym in args.symbols:
-        res = analyze_live(sym, csv=csvs.get(sym), equity=args.equity)
+    for sym, res in results.items():
         live, b = res["live"], res["_bundle"]
+        if news:
+            from .news.analyst import apply_news_filter
+            apply_news_filter(live, news["symbols"].get(sym))
+            live["news_headlines"] = [{"title": h["title"], "source": h["source"], "time": h["time"],
+                                       "impact": h["impact"].get(sym, 0), "confidence": h["confidence"]}
+                                      for h in news["items"] if h["impact"].get(sym, 0)][:12]
+            live["news_theme_fa"] = news.get("theme_fa", "")
         png = render_png(b.f, live, REPORT_DIR / f"{sym}_h1.png")
         ai = run_desk(live, png) if args.ai else None
         if ai is None:
@@ -47,12 +56,14 @@ def cmd_analyze(args):
         (REPORT_DIR / f"{sym}_analysis.json").write_text(to_json({"live": live, "ai": ai}))
         print(f"\n=== {sym} @ {live['price']} ({live['time_utc'][:16]} UTC)")
         print(f"decision: {live['decision']} | daily bias {live['strategic']['bias']:+.2f} | "
-              f"desk {live['composite']:+.3f} | regime {live['regime']}")
+              f"desk {live['composite']:+.3f} | regime {live['regime']}"
+              + (f" | news {live['news_view']['score']:+.2f}" if live.get("news_view") else ""))
         for w in live["why_not"]:
             print("  why not:", w)
         p = live["plan"]
         print(f"  plan ({p['side']}): entry {p['entry_ref']} stop {p['stop']} tp1 {p['tp1_partial']} tp2 {p['tp2_final']}")
-        print("  " + (ai.get("summary_fa") or ai.get("decision", {}).get("summary_fa", "")).replace("\n", "\n  "))
+        txt = ai.get("summary_fa") or ai.get("decision", {}).get("summary_fa", "")
+        print("  " + txt.replace("\n", "\n  "))
     notes = json.loads(open(args.notes, encoding="utf-8").read()) if args.notes else None
     html = build_dashboard(items, FINDINGS, standalone=True, ai_commentary=notes)
     out = REPORT_DIR / "dashboard.html"
@@ -101,9 +112,10 @@ def main(argv=None):
         p.add_argument("symbols", nargs="*", default=["EURUSD", "XAUUSD"])
         p.add_argument("--csv", action="append", help="SYMBOL=path/to/broker_export.csv (H1 or lower)")
         p.add_argument("--equity", type=float, default=10_000.0)
-        p.add_argument("--ai", action="store_true", help="run the Claude bull/bear/head-trader desk")
+        p.add_argument("--ai", action="store_true", help="run the LLM bull/bear/head-trader desk (Groq or Claude)")
         if name == "analyze":
             p.add_argument("--notes", help="JSON file {SYMBOL: analyst commentary} added to the dashboard")
+            p.add_argument("--no-news", action="store_true", help="skip the LLM news analyst")
         if name == "live":
             p.add_argument("--execute", action="store_true", help="route orders to MetaTrader 5")
             p.add_argument("--once", action="store_true")

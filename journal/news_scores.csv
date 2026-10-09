@@ -1,0 +1,6 @@
+scored_at,headline_time,source,title,category,confidence,horizon_h,impact_json,prices_json
+2026-10-09T18:50:59.516960+00:00,2026-10-09T18:04:49+00:00,FXStreet,"Gold reclaims $4,200 as weak US sentiment revives bullion demand",risk_sentiment,70,24,"{""EURUSD"": 1, ""XAUUSD"": 1}","{""EURUSD"": 1.12045, ""XAUUSD"": 4220.0}"
+2026-10-09T18:50:59.516960+00:00,2026-10-09T18:00:04+00:00,RBC,September CPI is just the tip of the inflation iceberg,inflation,80,24,"{""EURUSD"": -1, ""XAUUSD"": -1}","{""EURUSD"": 1.12045, ""XAUUSD"": 4220.0}"
+2026-10-09T18:50:59.516960+00:00,2026-10-09T17:54:37+00:00,FXEmpire,"Gold (XAUUSD), Silver, Platinum – Gold Tests $4200 Amid Broad Rally In Precious Metals Markets",central_bank_gold,70,24,"{""EURUSD"": 0, ""XAUUSD"": 1}","{""EURUSD"": 1.12045, ""XAUUSD"": 4220.0}"
+2026-10-09T18:50:59.516960+00:00,2026-10-09T17:51:41+00:00,Investing.com commodities,"Gold prices hit one-week high, investors eye Fed rate trajectory",central_bank_gold,75,24,"{""EURUSD"": -1, ""XAUUSD"": 1}","{""EURUSD"": 1.12045, ""XAUUSD"": 4220.0}"
+2026-10-09T18:50:59.516960+00:00,2026-10-09T16:47:21+00:00,FXEmpire,"U.S. Dollar Gains Ground As Bond Sell-Off Resumes: Analysis For EUR/USD, GBP/USD, USD/CAD, USD/JPY",monetary_policy,75,24,"{""EURUSD"": -1, ""XAUUSD"": -1}","{""EURUSD"": 1.12045, ""XAUUSD"": 4220.0}"

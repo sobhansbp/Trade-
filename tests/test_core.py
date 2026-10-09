@@ -194,3 +194,40 @@ def test_news_filter_only_blocks_or_shrinks():
     assert out2["decision"] == "LONG" and out2["plan"]["risk_fraction"] == 0.0025
     w = {"decision": "WAIT", "why_not": [], "analysts": [], "plan": {"risk_fraction": 0.005, "lots_for_equity": 1}}
     assert apply_news_filter(w, {**v, "score": 0.9})["decision"] == "WAIT"   # news never opens a trade
+
+
+def test_paper_account_lifecycle(tmp_path, monkeypatch):
+    from aitrader.live import paper
+    monkeypatch.setattr(paper, "TRADES", tmp_path / "t.csv")
+    monkeypatch.setattr(paper, "EQUITY", tmp_path / "e.csv")
+    cfg = StrategyConfig()
+    monkeypatch.setattr(paper, "STATE", tmp_path / "s.json")
+    st = paper.load_state(10_000)
+    idx = pd.date_range("2026-01-05 08:00", periods=4, freq="1h", tz="UTC")
+    bars = pd.DataFrame({"open": [1.1000] * 4, "high": [1.1005] * 4, "low": [1.0995] * 4,
+                         "close": [1.1000] * 4, "volume": 0.0}, index=idx)
+    live = {"symbol": "EURUSD", "time_utc": str(idx[-1]),
+            "plan": {"stop_distance": 0.0020, "risk_fraction": 0.005}}
+    msgs = paper.tactical_step(st, live, bars, "LONG", cfg)
+    assert "EURUSD" in st["tactical"]["positions"] and any("opened" in m for m in msgs)
+    p = st["tactical"]["positions"]["EURUSD"]
+    assert abs(p["risk_usd"] - 50.0) < 1e-6
+    # same bar again -> no duplicate entry
+    paper.tactical_step(st, live, bars, "LONG", cfg)
+    assert len(st["tactical"]["positions"]) == 1
+    # next bars: TP1 hit, then back to breakeven
+    idx2 = pd.date_range(idx[-1] + pd.Timedelta("1h"), periods=2, freq="1h", tz="UTC")
+    b2 = pd.DataFrame({"open": [1.1001, 1.1015], "high": [1.1025, 1.1016], "low": [1.0999, 1.0990],
+                       "close": [1.1020, 1.0995], "volume": 0.0}, index=idx2)
+    live2 = {**live, "time_utc": str(idx2[-1])}
+    msgs = paper.tactical_step(st, live2, pd.concat([bars, b2]), "WAIT", cfg)
+    assert "EURUSD" not in st["tactical"]["positions"]
+    t = pd.read_csv(tmp_path / "t.csv")
+    assert t["reason"].iloc[0] == "breakeven" and 0.3 < t["r_multiple"].iloc[0] < 0.6
+    assert st["tactical"]["equity"] > 10_000
+    # swing book marks to market and rebalances
+    paper.swing_step(st, "XAUUSD", 4000.0, 1.0, 1.0, 2)
+    paper.swing_step(st, "XAUUSD", 4040.0, 1.0, 1.0, 2)
+    assert st["swing"]["equity"] > 10_000 + 40   # +1% on 50% notional = ~+50 minus costs
+    md = paper.status_markdown(st, {}, None)
+    assert "حساب دمو" in md

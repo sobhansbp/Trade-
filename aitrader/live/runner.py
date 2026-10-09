@@ -19,7 +19,8 @@ from ..config import JOURNAL_DIR
 
 JOURNAL_DIR.mkdir(parents=True, exist_ok=True)
 SIGNALS = JOURNAL_DIR / "signals.csv"
-POSITIONS = JOURNAL_DIR / "paper_positions.json"
+NEWS_CACHE = JOURNAL_DIR / "news_view.json"
+STATUS = JOURNAL_DIR / "STATUS.md"
 
 
 def notify_telegram(text: str) -> bool:
@@ -47,43 +48,6 @@ def journal_signal(live: dict, ai: dict | None) -> None:
                     p.get("stop"), p.get("tp1_partial"), p.get("tp2_final"), p.get("risk_fraction"), live["regime"]])
 
 
-def _load_positions() -> dict:
-    try:
-        return json.loads(POSITIONS.read_text())
-    except Exception:
-        return {}
-
-
-def update_paper(live: dict, high: float, low: float, decision: str) -> list[str]:
-    """Very small paper broker mirroring the backtest management rules."""
-    pos = _load_positions()
-    sym = live["symbol"]
-    msgs = []
-    p = pos.get(sym)
-    if p:
-        side = 1 if p["side"] == "LONG" else -1
-        hit_stop = (low <= p["stop"]) if side > 0 else (high >= p["stop"])
-        hit_tp1 = (high >= p["tp1"]) if side > 0 else (low <= p["tp1"])
-        hit_tp2 = (high >= p["tp2"]) if side > 0 else (low <= p["tp2"])
-        if hit_stop:
-            msgs.append(f"{sym} paper {p['side']} closed at stop {p['stop']}")
-            pos.pop(sym)
-        elif hit_tp2:
-            msgs.append(f"{sym} paper {p['side']} hit final target {p['tp2']}")
-            pos.pop(sym)
-        elif hit_tp1 and not p.get("partial"):
-            p["partial"] = True
-            p["stop"] = p["entry"]
-            msgs.append(f"{sym} paper {p['side']}: TP1 reached, 50% closed, stop -> breakeven")
-    if sym not in pos and decision in ("LONG", "SHORT"):
-        pl = live["plan"]
-        pos[sym] = {"side": decision, "entry": pl["entry_ref"], "stop": pl["stop"], "tp1": pl["tp1_partial"],
-                    "tp2": pl["tp2_final"], "opened": live["time_utc"], "partial": False}
-        msgs.append(f"{sym} paper {decision} opened @ {pl['entry_ref']} SL {pl['stop']} TP {pl['tp1_partial']}/{pl['tp2_final']}")
-    POSITIONS.write_text(json.dumps(pos, indent=1))
-    return msgs
-
-
 def mt5_send(live: dict, execute: bool = False) -> str:
     if not execute:
         return "dry-run (pass --execute to route to MetaTrader 5)"
@@ -107,48 +71,90 @@ def mt5_send(live: dict, execute: bool = False) -> str:
     return f"MT5 order_send retcode={getattr(res, 'retcode', None)}"
 
 
-def run_loop(symbols: list[str], use_ai: bool, execute: bool, once: bool = False, equity: float = 10_000.0):
-    from ..pipeline import analyze_live
+def _cached_news(results: dict, every_hours: float) -> dict | None:
+    """Score news at most every ``every_hours`` (Groq free tier ~200k tokens/day)."""
+    from ..news.analyst import news_context
+
+    try:
+        cached = json.loads(NEWS_CACHE.read_text())
+        age = (datetime.now(timezone.utc) - datetime.fromisoformat(cached["scored_at"])).total_seconds() / 3600
+        if age < every_hours and set(results) <= set(cached["view"]["symbols"]):
+            return cached["view"]
+    except Exception:
+        pass
+    view = news_context(results)
+    if view:
+        NEWS_CACHE.write_text(json.dumps({"scored_at": datetime.now(timezone.utc).isoformat(), "view": view},
+                                         ensure_ascii=False, default=str))
+    return view
+
+
+def run_cycle(symbols: list[str], use_ai: bool, execute: bool, equity: float = 10_000.0,
+              news_every_hours: float = 3.0) -> list[str]:
+    """One full live cycle: analyse, news, AI desk on trade candidates, paper books, status."""
     from ..ai.claude_desk import run_desk
+    from ..config import DEFAULT_CONFIG as cfg
+    from ..news.analyst import apply_news_filter
+    from ..pipeline import analyze_live
     from ..report.charts import render_png
+    from . import paper
 
-    from ..news.analyst import apply_news_filter, news_context
-
-    while True:
-        results = {}
-        for sym in symbols:
-            try:
-                results[sym] = analyze_live(sym, equity=equity, use_cache=False)
-            except Exception as e:
-                print(f"[{sym}] analysis error: {e}")
-        news = news_context(results) if results else None
-        for sym, res in results.items():
-            try:
-                live = res["live"]
-                b = res["_bundle"]
-                if news:
-                    apply_news_filter(live, news["symbols"].get(sym))
+    st = paper.load_state(equity)
+    results, out = {}, []
+    for sym in symbols:
+        try:
+            results[sym] = analyze_live(sym, equity=st["tactical"]["equity"], use_cache=False)
+        except Exception as e:
+            out.append(f"[{sym}] analysis error: {e}")
+    news = _cached_news(results, news_every_hours) if results else None
+    lives = {}
+    for sym, res in results.items():
+        try:
+            live, b = res["live"], res["_bundle"]
+            if news:
+                apply_news_filter(live, news["symbols"].get(sym))
+            final = live["decision"]
+            ai = None
+            # the LLM desk is a veto on trades, so only spend tokens when there is a trade to veto
+            if use_ai and final in ("LONG", "SHORT") and sym not in st["tactical"]["positions"]:
                 png = render_png(b.f, live, JOURNAL_DIR / f"{sym}_latest.png")
-                ai = run_desk(live, png) if use_ai else None
-                final = live["decision"]
-                if ai and ai.get("mode") == "llm":
+                ai = run_desk(live, png)
+                if ai.get("mode") == "llm":
                     final = ai["decision"]["final_decision"]
-                journal_signal(live, {"final_decision": final})
-                last = b.f.iloc[-1]
-                msgs = update_paper(live, float(last["high"]), float(last["low"]), final)
-                if final in ("LONG", "SHORT"):
-                    msgs.append(mt5_send(live, execute))
-                nv = live.get("news_view")
-                head = f"[{sym}] {live['time_utc'][:16]} UTC price {live['price']} -> {final} " \
-                       f"(bias {live['strategic']['bias']:+.2f}, desk {live['composite']:+.3f}" \
-                       + (f", news {nv['score']:+.2f}" if nv else "") + ")"
-                print(head)
-                for m in msgs:
-                    print("   ", m)
-                if final in ("LONG", "SHORT") or msgs:
-                    notify_telegram(head + "\n" + "\n".join(msgs))
-            except Exception as e:  # keep the loop alive
-                print(f"[{sym}] error: {e}")
+                    live["ai_summary_fa"] = ai["decision"].get("summary_fa", "")
+            live["final_decision"] = final
+            lives[sym] = live
+            journal_signal(live, {"final_decision": final})
+            msgs = paper.tactical_step(st, live, b.df, final, cfg)
+            sb = live["strategic"]
+            msgs += paper.swing_step(st, sym, float(b.df["close"].iloc[-1]), sb["bias"],
+                                     sb["vol_target_leverage"], len(symbols))
+            if final in ("LONG", "SHORT") and any("opened" in m for m in msgs):
+                msgs.append(mt5_send(live, execute))
+            nv = live.get("news_view")
+            head = (f"[{sym}] {live['time_utc'][:16]} UTC price {live['price']} -> {final} "
+                    f"(bias {sb['bias']:+.2f}, desk {live['composite']:+.3f}"
+                    + (f", news {nv['score']:+.2f}" if nv else "") + ")")
+            out.append(head)
+            out += ["    " + m for m in msgs]
+            if msgs:
+                notify_telegram(head + "\n" + "\n".join(msgs) +
+                                (f"\n{live.get('ai_summary_fa', '')}" if live.get("ai_summary_fa") else ""))
+        except Exception as e:  # keep the loop alive
+            out.append(f"[{sym}] error: {e}")
+    paper.save_state(st)
+    paper.log_equity(st)
+    STATUS.write_text(paper.status_markdown(st, lives, news), encoding="utf-8")
+    t, s = st["tactical"]["equity"], st["swing"]["equity"]
+    out.append(f"paper equity: tactical ${t:,.2f} | swing ${s:,.2f} | total ${t + s:,.2f}")
+    return out
+
+
+def run_loop(symbols: list[str], use_ai: bool, execute: bool, once: bool = False, equity: float = 10_000.0,
+             news_every_hours: float = 3.0):
+    while True:
+        for line in run_cycle(symbols, use_ai, execute, equity, news_every_hours):
+            print(line, flush=True)
         if once:
             return
         now = datetime.now(timezone.utc)

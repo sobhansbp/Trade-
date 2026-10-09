@@ -108,7 +108,8 @@ def cmd_backtest(args):
 def cmd_live(args):
     from .live.runner import run_loop
 
-    run_loop(args.symbols, use_ai=args.ai, execute=args.execute, once=args.once, equity=args.equity)
+    run_loop(args.symbols, use_ai=args.ai, execute=args.execute, once=args.once, equity=args.equity,
+             news_every_hours=args.news_every)
 
 
 def main(argv=None):
@@ -127,7 +128,9 @@ def main(argv=None):
             p.add_argument("--no-news", action="store_true", help="skip the LLM news analyst")
         if name == "live":
             p.add_argument("--execute", action="store_true", help="route orders to MetaTrader 5")
-            p.add_argument("--once", action="store_true")
+            p.add_argument("--once", action="store_true", help="run one cycle and exit (for cron / CI)")
+            p.add_argument("--news-every", type=float, default=3.0,
+                           help="hours between LLM news scorings (Groq free tier ~200k tokens/day)")
         p.set_defaults(fn=fn)
     args = ap.parse_args(argv)
     args.symbols = [s.upper() for s in args.symbols]

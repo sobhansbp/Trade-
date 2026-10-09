@@ -4,6 +4,6 @@ __pycache__/
 data_cache/
 *.egg-info/
 .env
-journal/
+journal/*.png
 models/
 reports/dashboard_fragment.html

@@ -1,0 +1,28 @@
+{
+ "created": "2026-10-09T18:49:32+00:00",
+ "initial": 10000.0,
+ "tactical": {
+  "equity": 10000.0,
+  "peak": 10000.0,
+  "positions": {},
+  "last_signal_bar": {}
+ },
+ "swing": {
+  "equity": 9999.591328829998,
+  "peak": 10000.0,
+  "positions": {
+   "EURUSD": {
+    "notional": -10850.0,
+    "price": 1.1204482316970823,
+    "frac": -1.085,
+    "updated": "2026-10-09T18:50:59+00:00"
+   },
+   "XAUUSD": {
+    "notional": -599.9767593010873,
+    "price": 4220.0,
+    "frac": -0.06,
+    "updated": "2026-10-09T18:50:59+00:00"
+   }
+  }
+ }
+}

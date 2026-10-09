@@ -39,6 +39,19 @@ python -m aitrader analyze XAUUSD --csv XAUUSD=path/to/XAUUSD_H1.csv
 
 اگر نام نماد در بروکر شما متفاوت است (مثلاً `XAUUSDm`)، متغیر `MT5_SYMBOL_XAUUSD=XAUUSDm` را تنظیم کنید. مدل Claude با `AITRADER_MODEL` قابل تغییر است (پیش‌فرض `claude-opus-5-5`).
 
+## اجرای زنده روی حساب دمو
+
+### روش ۱: خودکار با GitHub Actions (بدون نیاز به کامپیوتر روشن)
+فایل `.github/workflows/paper-trading.yml` هر ساعت (یکشنبه تا جمعه، دقیقه ۷ UTC) یک دور کامل اجرا می‌کند: تحلیل، اخبار با Groq هر ۳ ساعت، میز هوش مصنوعی فقط وقتی سیگنال معامله هست، و به‌روزرسانی دو حساب کاغذی (تاکتیکی و سوئینگ، هر کدام ۱۰ هزار دلار). نتیجه در پوشه `journal/` کامیت می‌شود:
+- `journal/STATUS.md` وضعیت حساب، پوزیشن‌ها، آخرین تحلیل و معاملات بسته‌شده
+- `journal/paper_trades.csv` و `journal/paper_equity.csv` تاریخچه
+- `journal/news_scores.csv` امتیاز اخبار برای سنجش رو به جلو
+
+راه‌اندازی: در گیت‌هاب به Settings → Secrets and variables → Actions بروید و `GROQ_API_KEY` (و در صورت تمایل `TELEGRAM_BOT_TOKEN` و `TELEGRAM_CHAT_ID`) را اضافه کنید. برای اجرای دستی از تب Actions → paper-trading → Run workflow استفاده کنید.
+
+### روش ۲: متاتریدر ۵ روی ویندوز (سفارش واقعی روی حساب دمو)
+`scripts/run_live_windows.bat` را باز کنید، کلیدها را وارد کنید، در MT5 وارد یک **حساب دمو** شوید و فایل را اجرا کنید. با `--execute` سفارش‌ها با حد ضرر و تارگت به MT5 ارسال می‌شوند.
+
 ## قانون معامله
 
 1. **سوگیری روزانه** (میانگین وزن برابر اجزا، بین ‎-1 و ‎+1):

@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+data_cache/
+*.egg-info/
+.env
+journal/
+models/
+reports/dashboard_fragment.html

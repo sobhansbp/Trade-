@@ -1,0 +1,730 @@
+{
+ "live": {
+  "symbol": "EURUSD",
+  "time_utc": "2026-10-09 17:00:00+00:00",
+  "price": 1.1197,
+  "data_source": "EURUSD=X",
+  "decision": "WAIT",
+  "bias": "BEARISH",
+  "composite": 0.128,
+  "threshold": 0.174,
+  "agreement": 0.674,
+  "confidence": 0.249,
+  "meta_p_win": 0.707,
+  "ml_p_long": 0.631,
+  "ml_p_short": 0.281,
+  "strategic": {
+   "bias": -1.0,
+   "components": {
+    "tsmom_ens": {
+     "value": -1.0,
+     "label_fa": "مومنتوم سری زمانی (۲۰/۶۰/۱۲۰/۲۵۰ روز)"
+    },
+    "ema20_100": {
+     "value": -1.0,
+     "label_fa": "تقاطع EMA20/100 روزانه"
+    },
+    "rates_2y_inv": {
+     "value": -1.0,
+     "label_fa": "اختلاف نرخ بهره (روند بازده ۲ساله آمریکا، معکوس)"
+    },
+    "dxy_tsmom20_inv": {
+     "value": -1.0,
+     "label_fa": "روند ۲۰روزه شاخص دلار (معکوس)"
+    }
+   },
+   "vol_target_leverage": 2.17,
+   "swing_position_pct_equity": -217.1,
+   "realized_vol_annual": 0.046
+  },
+  "swing_backtest": {
+   "2005_2023": {
+    "sharpe": 0.96,
+    "ann_return": 0.0663,
+    "max_drawdown": -0.1085,
+    "years": 19.6
+   },
+   "2024_now": {
+    "sharpe": 0.51,
+    "ann_return": 0.0376,
+    "max_drawdown": -0.0729,
+    "years": 2.9
+   },
+   "2005_2011": {
+    "sharpe": 0.64,
+    "ann_return": 0.0448,
+    "max_drawdown": -0.1085,
+    "years": 7.2
+   },
+   "2012_2017": {
+    "sharpe": 1.2,
+    "ann_return": 0.0804,
+    "max_drawdown": -0.0731,
+    "years": 6.2
+   },
+   "2018_2023": {
+    "sharpe": 1.11,
+    "ann_return": 0.0769,
+    "max_drawdown": -0.0769,
+    "years": 6.2
+   }
+  },
+  "holdout_start": "2026-01-28 03:00:00+00:00",
+  "buy_and_hold_holdout": -0.067,
+  "regime": "transition",
+  "trend_strength": 0.526,
+  "vol_state": "normal-vol",
+  "atr": 0.00098,
+  "why_not": [
+   "H1 desk composite +0.128 does not confirm the daily bias -1.00"
+  ],
+  "plan": {
+   "side": "SHORT",
+   "entry_ref": 1.1197,
+   "stop": 1.12117,
+   "tp1_partial": 1.11822,
+   "tp2_final": 1.11601,
+   "risk_reward_final": 2.5,
+   "stop_distance": 0.00147,
+   "stop_distance_pips": 14.7,
+   "liquidity_targets": [
+    [
+     "sup",
+     1.11888
+    ],
+    [
+     "pdl",
+     1.11757
+    ],
+    [
+     "last_sl",
+     1.11757
+    ]
+   ],
+   "risk_fraction": 0.005,
+   "lots_for_equity": 0.34,
+   "equity_assumed": 10000.0,
+   "management": "close 50% at TP1 (+1.0R), move stop to breakeven, hold rest to TP2 (+2.5R) or 72h time stop"
+  },
+  "analysts": [
+   {
+    "name": "trend",
+    "title_fa": "روند چندزمانی",
+    "score": -0.33899102166731954,
+    "reasons": [
+     "H1 EMA stack bearish, Supertrend bullish, Ichimoku below cloud",
+     "H4 structure bearish, D1 structure bearish",
+     "ADX 22.9 (+DI-−DI -6.4)"
+    ]
+   },
+   {
+    "name": "momentum",
+    "title_fa": "مومنتوم",
+    "score": -0.723178232081682,
+    "reasons": [
+     "RSI14 40.1, MACD hist -0.38 ATR, Stoch 5/7",
+     "time-series momentum 5d -0.69σ, 20d -2.25σ"
+    ]
+   },
+   {
+    "name": "mean_reversion",
+    "title_fa": "بازگشت به میانگین",
+    "score": 0.20661953963244792,
+    "reasons": [
+     "Bollinger z -1.35, RSI3 42, distance to VWAP -2.01 ATR, Hurst 0.38"
+    ]
+   },
+   {
+    "name": "smc",
+    "title_fa": "اسمارت‌مانی / ساختار",
+    "score": 0.47574429210210345,
+    "reasons": [
+     "H1 market structure bullish (HH/HL); dealing-range position 30% (discount)",
+     "recent bullish CHoCH (change of character)",
+     "in the OTE zone (retracement 70% of last leg)"
+    ]
+   },
+   {
+    "name": "liquidity",
+    "title_fa": "نقدینگی / استاپ‌هانت",
+    "score": 0.2813319033595115,
+    "reasons": [
+     "recent liquidity sweep echo (-0.12)",
+     "bullish SMT divergence vs correlated market"
+    ]
+   },
+   {
+    "name": "patterns",
+    "title_fa": "الگوها (کندل/کلاسیک/هارمونیک/الیوت)",
+    "score": 0.0,
+    "reasons": []
+   },
+   {
+    "name": "breakout",
+    "title_fa": "شکست / فشردگی نوسان",
+    "score": 0.0,
+    "reasons": []
+   },
+   {
+    "name": "levels",
+    "title_fa": "سطوح حمایت/مقاومت و پروفایل",
+    "score": 0.32759725720851485,
+    "reasons": [
+     "nearest support 1.1189 (0.83 ATR away, strength 3.8)",
+     "nearest resistance 1.1206 (0.96 ATR away, strength 3.8)",
+     "price below prior-day value area"
+    ]
+   },
+   {
+    "name": "macro",
+    "title_fa": "بین‌بازاری / کلان",
+    "score": -0.43571255979190815,
+    "reasons": [
+     "DXY 20d +2.13σ, 5d +0.05σ",
+     "US 2y yield 20d change +1.02σ (rate-differential proxy)"
+    ]
+   },
+   {
+    "name": "seasonality",
+    "title_fa": "فصلی‌بودن ساعتی/روزانه",
+    "score": -0.09377164776458326,
+    "reasons": [
+     "next-6h hour-of-day drift t-stat -0.38, day-of-week t +0.12"
+    ]
+   },
+   {
+    "name": "positioning",
+    "title_fa": "موقعیت‌گیری COT",
+    "score": 0.12137986306441162,
+    "reasons": [
+     "COT speculator index 5% of 3y range, 4w flow -4.5% of OI"
+    ]
+   },
+   {
+    "name": "ml",
+    "title_fa": "یادگیری ماشین (LightGBM)",
+    "score": 0.875064428454687,
+    "reasons": [
+     "walk-forward ML: P(long wins) 63%, P(short wins) 28%"
+    ]
+   }
+  ],
+  "levels": {
+   "support_resistance": [
+    [
+     1.11888,
+     3.8
+    ],
+    [
+     1.12064,
+     3.8
+    ],
+    [
+     1.12176,
+     3.8
+    ],
+    [
+     1.11757,
+     2.0
+    ],
+    [
+     1.1224,
+     3.7
+    ],
+    [
+     1.1167,
+     3.8
+    ],
+    [
+     1.12284,
+     2.0
+    ],
+    [
+     1.12347,
+     3.7
+    ]
+   ],
+   "zones": [
+    {
+     "kind": "bear_fvg",
+     "top": 1.13469,
+     "bottom": 1.13443,
+     "start": "2026-09-30 16:00:00+00:00",
+     "created": "2026-09-30 17:00:00+00:00",
+     "strength": 0.22,
+     "touched": 0
+    },
+    {
+     "kind": "bear_ob",
+     "top": 1.13817,
+     "bottom": 1.13533,
+     "start": "2026-09-30 12:00:00+00:00",
+     "created": "2026-09-30 19:00:00+00:00",
+     "strength": 1.65,
+     "touched": 0
+    },
+    {
+     "kind": "bear_ob",
+     "top": 1.13817,
+     "bottom": 1.13533,
+     "start": "2026-09-30 12:00:00+00:00",
+     "created": "2026-10-01 04:00:00+00:00",
+     "strength": 2.0,
+     "touched": 0
+    },
+    {
+     "kind": "bear_ob",
+     "top": 1.1288,
+     "bottom": 1.12752,
+     "start": "2026-10-02 14:00:00+00:00",
+     "created": "2026-10-05 02:00:00+00:00",
+     "strength": 2.0,
+     "touched": 2
+    },
+    {
+     "kind": "bear_fvg",
+     "top": 1.12613,
+     "bottom": 1.12575,
+     "start": "2026-10-06 23:00:00+00:00",
+     "created": "2026-10-07 00:00:00+00:00",
+     "strength": 0.36,
+     "touched": 0
+    },
+    {
+     "kind": "bear_fvg",
+     "top": 1.12549,
+     "bottom": 1.12511,
+     "start": "2026-10-07 00:00:00+00:00",
+     "created": "2026-10-07 01:00:00+00:00",
+     "strength": 0.36,
+     "touched": 0
+    },
+    {
+     "kind": "bear_fvg",
+     "top": 1.12511,
+     "bottom": 1.12423,
+     "start": "2026-10-07 01:00:00+00:00",
+     "created": "2026-10-07 02:00:00+00:00",
+     "strength": 0.87,
+     "touched": 2
+    },
+    {
+     "kind": "bear_ob",
+     "top": 1.12638,
+     "bottom": 1.126,
+     "start": "2026-10-06 20:00:00+00:00",
+     "created": "2026-10-07 07:00:00+00:00",
+     "strength": 1.97,
+     "touched": 0
+    },
+    {
+     "kind": "bull_ob",
+     "top": 1.11857,
+     "bottom": 1.11757,
+     "start": "2026-10-08 11:00:00+00:00",
+     "created": "2026-10-09 01:00:00+00:00",
+     "strength": 1.58,
+     "touched": 0
+    },
+    {
+     "kind": "bear_fvg",
+     "top": 1.12095,
+     "bottom": 1.12032,
+     "start": "2026-10-09 12:00:00+00:00",
+     "created": "2026-10-09 13:00:00+00:00",
+     "strength": 0.58,
+     "touched": 1
+    }
+   ],
+   "session": {
+    "pdh": 1.12284,
+    "pdl": 1.11757,
+    "pdc": 1.12158,
+    "pwh": 1.13947,
+    "pwl": 1.12196,
+    "asia_high": 1.12461,
+    "asia_low": 1.12145,
+    "day_open": 1.12171,
+    "week_open": 1.12575,
+    "pivot": 1.12066,
+    "r1": 1.12376,
+    "s1": 1.11849,
+    "r2": 1.12593,
+    "s2": 1.11539,
+    "poc": 1.12136,
+    "vah": 1.12191,
+    "val": 1.11971,
+    "eqh": 1.19303,
+    "eql": 1.02155
+   },
+   "fibonacci_last_leg": {
+    "0.236": 1.12295,
+    "0.382": 1.12192,
+    "0.500": 1.12109,
+    "0.618": 1.12026,
+    "0.705": 1.11964,
+    "0.786": 1.11907,
+    "ext_1.272": 1.12652,
+    "ext_1.618": 1.12896
+   },
+   "harmonic_prz": {},
+   "swings": [
+    [
+     "2026-10-05 14:00:00+00:00",
+     "L",
+     1.11907,
+     "HL"
+    ],
+    [
+     "2026-10-05 21:00:00+00:00",
+     "H",
+     1.12347,
+     "HH"
+    ],
+    [
+     "2026-10-06 06:00:00+00:00",
+     "L",
+     1.1207,
+     "HL"
+    ],
+    [
+     "2026-10-06 12:00:00+00:00",
+     "H",
+     1.1279,
+     "HH"
+    ],
+    [
+     "2026-10-06 21:00:00+00:00",
+     "H",
+     1.12689,
+     "LH"
+    ],
+    [
+     "2026-10-07 12:00:00+00:00",
+     "L",
+     1.11682,
+     "LL"
+    ],
+    [
+     "2026-10-07 15:00:00+00:00",
+     "H",
+     1.12057,
+     "LH"
+    ],
+    [
+     "2026-10-07 21:00:00+00:00",
+     "L",
+     1.11869,
+     "HL"
+    ],
+    [
+     "2026-10-08 02:00:00+00:00",
+     "H",
+     1.12158,
+     "HH"
+    ],
+    [
+     "2026-10-08 11:00:00+00:00",
+     "L",
+     1.11757,
+     "LL"
+    ],
+    [
+     "2026-10-08 14:00:00+00:00",
+     "H",
+     1.12284,
+     "HH"
+    ],
+    [
+     "2026-10-09 05:00:00+00:00",
+     "H",
+     1.12461,
+     "HH"
+    ]
+   ]
+  },
+  "patterns": {
+   "elliott": "",
+   "harmonic_recent": "",
+   "geometry": [
+    "ascending channel"
+   ]
+  },
+  "htf": {
+   "h4_trend": -1.0,
+   "d1_trend": -1.0,
+   "h4_rsi": 41.5,
+   "d1_rsi": 24.2
+  },
+  "news": [],
+  "news_blackout": false,
+  "backtest": {
+   "production_oos": {
+    "trades": 302,
+    "years": 1.67,
+    "trades_per_month": 15.0,
+    "win_rate": 0.533,
+    "avg_r": 0.084,
+    "median_r": 0.505,
+    "profit_factor": 1.18,
+    "total_return": 0.1296,
+    "cagr": 0.0755,
+    "sharpe": 0.77,
+    "sortino": 0.88,
+    "max_drawdown": -0.049,
+    "calmar": 1.54,
+    "psr": 0.902,
+    "max_losing_streak": 6,
+    "long_trades": 215,
+    "short_trades": 87,
+    "exit_reasons": {
+     "stop": 141,
+     "breakeven": 91,
+     "target": 68,
+     "time": 2
+    }
+   },
+   "production_dev": {
+    "trades": 187,
+    "years": 1.67,
+    "trades_per_month": 9.3,
+    "win_rate": 0.551,
+    "avg_r": 0.088,
+    "median_r": 0.505,
+    "profit_factor": 1.19,
+    "total_return": 0.0826,
+    "cagr": 0.0485,
+    "sharpe": 0.87,
+    "sortino": 1.06,
+    "max_drawdown": -0.049,
+    "calmar": 0.99,
+    "psr": 0.865,
+    "max_losing_streak": 6,
+    "long_trades": 187,
+    "short_trades": 0,
+    "exit_reasons": {
+     "stop": 84,
+     "breakeven": 64,
+     "target": 38,
+     "time": 1
+    }
+   },
+   "production_holdout": {
+    "trades": 115,
+    "years": 0.7,
+    "trades_per_month": 13.7,
+    "win_rate": 0.513,
+    "avg_r": 0.091,
+    "median_r": 0.505,
+    "profit_factor": 1.18,
+    "total_return": 0.0514,
+    "cagr": 0.0746,
+    "sharpe": 0.91,
+    "sortino": 0.97,
+    "max_drawdown": -0.0398,
+    "calmar": 1.88,
+    "psr": 0.792,
+    "max_losing_streak": 5,
+    "long_trades": 28,
+    "short_trades": 87,
+    "exit_reasons": {
+     "stop": 56,
+     "target": 30,
+     "breakeven": 28,
+     "time": 1
+    }
+   },
+   "with_meta_filter": {
+    "trades": 106,
+    "years": 1.12,
+    "trades_per_month": 7.9,
+    "win_rate": 0.538,
+    "avg_r": 0.132,
+    "median_r": 0.508,
+    "profit_factor": 1.28,
+    "total_return": 0.0702,
+    "cagr": 0.0625,
+    "sharpe": 0.64,
+    "sortino": 0.64,
+    "max_drawdown": -0.0488,
+    "calmar": 1.28,
+    "psr": 0.881,
+    "max_losing_streak": 5,
+    "long_trades": 52,
+    "short_trades": 54,
+    "exit_reasons": {
+     "stop": 49,
+     "breakeven": 29,
+     "target": 26,
+     "time": 2
+    }
+   },
+   "daily_bias_only": {
+    "trades": 409,
+    "years": 1.67,
+    "trades_per_month": 20.4,
+    "win_rate": 0.501,
+    "avg_r": 0.013,
+    "median_r": 0.254,
+    "profit_factor": 1.02,
+    "total_return": -0.004,
+    "cagr": -0.0024,
+    "sharpe": 0.0,
+    "sortino": 0.0,
+    "max_drawdown": -0.0908,
+    "calmar": -0.03,
+    "psr": 0.589,
+    "max_losing_streak": 8,
+    "long_trades": 283,
+    "short_trades": 126,
+    "exit_reasons": {
+     "stop": 203,
+     "breakeven": 118,
+     "target": 84,
+     "time": 4
+    }
+   },
+   "desk_only_v1": {
+    "trades": 359,
+    "years": 1.67,
+    "trades_per_month": 17.9,
+    "win_rate": 0.474,
+    "avg_r": -0.06,
+    "median_r": -1.006,
+    "profit_factor": 0.89,
+    "total_return": -0.0785,
+    "cagr": -0.0477,
+    "sharpe": -0.55,
+    "sortino": -0.79,
+    "max_drawdown": -0.1059,
+    "calmar": -0.45,
+    "psr": 0.159,
+    "max_losing_streak": 8,
+    "long_trades": 228,
+    "short_trades": 131,
+    "exit_reasons": {
+     "stop": 186,
+     "breakeven": 105,
+     "target": 64,
+     "time": 4
+    }
+   },
+   "random_entries": {
+    "trades": 277,
+    "years": 1.67,
+    "trades_per_month": 13.8,
+    "win_rate": 0.487,
+    "avg_r": -0.03,
+    "median_r": -1.005,
+    "profit_factor": 0.94,
+    "total_return": -0.0321,
+    "cagr": -0.0193,
+    "sharpe": -0.19,
+    "sortino": -0.34,
+    "max_drawdown": -0.087,
+    "calmar": -0.22,
+    "psr": 0.328,
+    "max_losing_streak": 8,
+    "long_trades": 137,
+    "short_trades": 140,
+    "exit_reasons": {
+     "stop": 141,
+     "breakeven": 82,
+     "target": 53,
+     "time": 1
+    }
+   }
+  },
+  "buy_and_hold_return": 0.0785,
+  "ml_reports": {
+   "direction": {
+    "long": {
+     "folds": 14,
+     "mean_auc": 0.5263230035475676,
+     "min_auc": 0.4561191626409018,
+     "mean_brier": 0.26581124593235367
+    },
+    "short": {
+     "folds": 14,
+     "mean_auc": 0.5257661434052887,
+     "min_auc": 0.4291963094312157,
+     "mean_brier": 0.26784996836396435
+    }
+   },
+   "meta": {
+    "folds": 10,
+    "mean_auc": 0.5078751713828545,
+    "min_auc": 0.4173669467787115,
+    "mean_brier": 0.2679162741492983
+   }
+  },
+  "feature_importance": [
+   [
+    "peer_corr",
+    194.0
+   ],
+   [
+    "hurst",
+    191.0
+   ],
+   [
+    "mac_silver_ret20",
+    182.0
+   ],
+   [
+    "mac_gold_ret20",
+    182.0
+   ],
+   [
+    "mac_spx_ret5",
+    177.0
+   ],
+   [
+    "sb_leverage",
+    171.0
+   ],
+   [
+    "d1_adx",
+    170.0
+   ],
+   [
+    "mac_us2y_chg20",
+    166.0
+   ],
+   [
+    "h4_adx",
+    163.0
+   ],
+   [
+    "sup_str",
+    162.0
+   ],
+   [
+    "d1_macd_hist",
+    160.0
+   ],
+   [
+    "mac_breakeven10y_chg5",
+    156.0
+   ],
+   [
+    "mac_eurusd_ret20",
+    152.0
+   ],
+   [
+    "mac_us10y_chg5",
+    148.0
+   ],
+   [
+    "mac_silver_ret5",
+    145.0
+   ]
+  ]
+ },
+ "ai": {
+  "mode": "offline",
+  "summary_fa": "تحلیل EURUSD در قیمت 1.1197 (UTC 2026-10-09 17:00):\nسوگیری راهبردی روزانه -1.00 (نزولی) و برآیند میز تحلیل ساعتی +0.128؛ رژیم بازار: transition.\nتصمیم سیستم: صبر / بدون معامله.\nدلیل عدم ورود: H1 desk composite +0.128 does not confirm the daily bias -1.00\nشواهد صعودی: یادگیری ماشین (LightGBM) (+0.88)، اسمارت‌مانی / ساختار (+0.48)، سطوح حمایت/مقاومت و پروفایل (+0.33)، نقدینگی / استاپ‌هانت (+0.28)\nشواهد نزولی: مومنتوم (-0.72)، بین‌بازاری / کلان (-0.44)، روند چندزمانی (-0.34)\nپلن مشروط (فروش): ورود حدود 1.1197، حد ضرر 1.12117، تارگت اول 1.11822 و تارگت نهایی 1.11601 (ریسک 0.50٪ سرمایه).",
+  "summary_en": "EURUSD @ 1.1197: strategic bias -1.00, desk composite +0.128, regime transition. Decision: WAIT. Blocked because: H1 desk composite +0.128 does not confirm the daily bias -1.00. Bull evidence: ml +0.88, smc +0.48, levels +0.33, liquidity +0.28. Bear evidence: momentum -0.72, macro -0.44, trend -0.34.",
+  "final_decision": "WAIT"
+ }
+}

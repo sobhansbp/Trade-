@@ -65,11 +65,18 @@ def cmd_analyze(args):
         txt = ai.get("summary_fa") or ai.get("decision", {}).get("summary_fa", "")
         print("  " + txt.replace("\n", "\n  "))
     notes = json.loads(open(args.notes, encoding="utf-8").read()) if args.notes else None
-    html = build_dashboard(items, FINDINGS, standalone=True, ai_commentary=notes)
+    from .portfolio import account_view
+    acc = account_view(results)
+    acc_json = {k: v for k, v in acc.items() if not k.startswith("_")}
+    (REPORT_DIR / "account_view.json").write_text(to_json(acc_json))
+    if "combined" in acc:
+        print(f"\naccount: combined sharpe {acc['combined']['sharpe']} | H1 {acc['h1']['sharpe']} | "
+              f"swing {acc['swing']['sharpe']} | corr {acc['corr_h1_swing']}")
+    html = build_dashboard(items, FINDINGS, standalone=True, ai_commentary=notes, account=acc)
     out = REPORT_DIR / "dashboard.html"
     out.write_text(html, encoding="utf-8")
     (REPORT_DIR / "dashboard_fragment.html").write_text(build_dashboard(items, FINDINGS, standalone=False,
-                                                                        ai_commentary=notes),
+                                                                        ai_commentary=notes, account=acc),
                                                        encoding="utf-8")
     print(f"\ndashboard -> {out}")
 
@@ -112,6 +119,8 @@ def main(argv=None):
         p.add_argument("symbols", nargs="*", default=["EURUSD", "XAUUSD"])
         p.add_argument("--csv", action="append", help="SYMBOL=path/to/broker_export.csv (H1 or lower)")
         p.add_argument("--equity", type=float, default=10_000.0)
+        p.add_argument("--risk", type=float, default=None,
+                       help="risk per trade as a fraction of equity (default 0.005; >0.01 is not recommended)")
         p.add_argument("--ai", action="store_true", help="run the LLM bull/bear/head-trader desk (Groq or Claude)")
         if name == "analyze":
             p.add_argument("--notes", help="JSON file {SYMBOL: analyst commentary} added to the dashboard")
@@ -122,6 +131,14 @@ def main(argv=None):
         p.set_defaults(fn=fn)
     args = ap.parse_args(argv)
     args.symbols = [s.upper() for s in args.symbols]
+    if args.risk is not None:
+        from . import config
+        if not 0 < args.risk <= 0.05:
+            ap.error("--risk must be between 0 and 0.05")
+        if args.risk > 0.01:
+            print(f"WARNING: risk {args.risk:.1%} per trade - see the Monte Carlo table: drawdowns grow fast")
+        config.DEFAULT_CONFIG.risk_per_trade = args.risk
+        config.DEFAULT_CONFIG.max_risk_per_trade = max(config.DEFAULT_CONFIG.max_risk_per_trade, 2 * args.risk)
     bad = [s for s in args.symbols if s not in INSTRUMENTS]
     if bad:
         ap.error(f"unknown symbols {bad}; available: {list(INSTRUMENTS)}")

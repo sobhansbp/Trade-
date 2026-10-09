@@ -1,18 +1,18 @@
 {
  "live": {
   "symbol": "EURUSD",
-  "time_utc": "2026-10-09 17:00:00+00:00",
-  "price": 1.1197,
+  "time_utc": "2026-10-09 18:00:00+00:00",
+  "price": 1.1202,
   "data_source": "EURUSD=X",
   "decision": "WAIT",
   "bias": "BEARISH",
-  "composite": 0.127,
+  "composite": 0.065,
   "threshold": 0.177,
-  "agreement": 0.675,
-  "confidence": 0.243,
-  "meta_p_win": 0.763,
-  "ml_p_long": 0.644,
-  "ml_p_short": 0.302,
+  "agreement": 0.63,
+  "confidence": 0.115,
+  "meta_p_win": 0.681,
+  "ml_p_long": 0.604,
+  "ml_p_short": 0.359,
   "strategic": {
    "bias": -1.0,
    "components": {
@@ -69,24 +69,24 @@
     "years": 6.2
    }
   },
-  "holdout_start": "2026-01-28 03:00:00+00:00",
-  "buy_and_hold_holdout": -0.067,
+  "holdout_start": "2026-01-28 04:00:00+00:00",
+  "buy_and_hold_holdout": -0.0669,
   "regime": "transition",
-  "trend_strength": 0.523,
+  "trend_strength": 0.487,
   "vol_state": "normal-vol",
-  "atr": 0.00101,
+  "atr": 0.00096,
   "why_not": [
-   "H1 desk composite +0.127 does not confirm the daily bias -1.00"
+   "H1 desk composite +0.065 does not confirm the daily bias -1.00"
   ],
   "plan": {
    "side": "SHORT",
-   "entry_ref": 1.1197,
-   "stop": 1.12121,
-   "tp1_partial": 1.11818,
-   "tp2_final": 1.11591,
+   "entry_ref": 1.1202,
+   "stop": 1.12303,
+   "tp1_partial": 1.11736,
+   "tp2_final": 1.11311,
    "risk_reward_final": 2.5,
-   "stop_distance": 0.00151,
-   "stop_distance_pips": 15.1,
+   "stop_distance": 0.00283,
+   "stop_distance_pips": 28.3,
    "liquidity_targets": [
     [
      "sup",
@@ -101,55 +101,56 @@
      1.11757
     ]
    ],
-   "risk_fraction": 0.005,
-   "lots_for_equity": 0.33,
+   "risk_fraction": 0.0025,
+   "lots_for_equity": 0.09,
    "equity_assumed": 10000.0,
-   "management": "close 50% at TP1 (+1.0R), move stop to breakeven, hold rest to TP2 (+2.5R) or 72h time stop"
+   "management": "close 50% at TP1 (+1.0R), move stop to breakeven, hold rest to TP2 (+2.5R) or 72h time stop",
+   "news_note": "risk halved: news analyst flagged event risk"
   },
   "analysts": [
    {
     "name": "trend",
     "title_fa": "روند چندزمانی",
-    "score": -0.3340766761031682,
+    "score": -0.31996522709036246,
     "reasons": [
      "H1 EMA stack bearish, Supertrend bullish, Ichimoku below cloud",
      "H4 structure bearish, D1 structure bearish",
-     "ADX 22.4 (+DI-−DI -3.5)"
+     "ADX 21.1 (+DI-−DI -1.6)"
     ]
    },
    {
     "name": "momentum",
     "title_fa": "مومنتوم",
-    "score": -0.7217380460245875,
+    "score": -0.4054127478937374,
     "reasons": [
-     "RSI14 40.1, MACD hist -0.37 ATR, Stoch 5/7",
-     "time-series momentum 5d -0.69σ, 20d -2.25σ"
+     "RSI14 44.3, MACD hist -0.30 ATR, Stoch 12/8",
+     "time-series momentum 5d -0.61σ, 20d -2.24σ"
     ]
    },
    {
     "name": "mean_reversion",
     "title_fa": "بازگشت به میانگین",
-    "score": 0.20575354366813436,
+    "score": 0.10012068829616941,
     "reasons": [
-     "Bollinger z -1.35, RSI3 42, distance to VWAP -1.96 ATR, Hurst 0.38"
+     "Bollinger z -0.94, RSI3 63, distance to VWAP -1.46 ATR, Hurst 0.38"
     ]
    },
    {
     "name": "smc",
     "title_fa": "اسمارت‌مانی / ساختار",
-    "score": 0.47574429210210345,
+    "score": 0.30503564487322343,
     "reasons": [
-     "H1 market structure bullish (HH/HL); dealing-range position 30% (discount)",
+     "H1 market structure bullish (HH/HL); dealing-range position 37% (discount)",
      "recent bullish CHoCH (change of character)",
-     "in the OTE zone (retracement 70% of last leg)"
+     "price is inside a bearish fair value gap",
+     "in the OTE zone (retracement 63% of last leg)"
     ]
    },
    {
     "name": "liquidity",
     "title_fa": "نقدینگی / استاپ‌هانت",
-    "score": 0.2813319033595115,
+    "score": 0.22329327967255228,
     "reasons": [
-     "recent liquidity sweep echo (-0.12)",
      "bullish SMT divergence vs correlated market"
     ]
    },
@@ -168,17 +169,17 @@
    {
     "name": "levels",
     "title_fa": "سطوح حمایت/مقاومت و پروفایل",
-    "score": 0.3287591449731808,
+    "score": -0.1483450507613155,
     "reasons": [
-     "nearest support 1.1189 (0.81 ATR away, strength 3.8)",
-     "nearest resistance 1.1206 (0.93 ATR away, strength 3.8)",
-     "price below prior-day value area"
+     "nearest support 1.1189 (1.37 ATR away, strength 3.8)",
+     "nearest resistance 1.1206 (0.45 ATR away, strength 3.8)",
+     "price inside prior-day value area"
     ]
    },
    {
     "name": "macro",
     "title_fa": "بین‌بازاری / کلان",
-    "score": -0.431548068324999,
+    "score": -0.4142734852538058,
     "reasons": [
      "DXY 20d +2.13σ, 5d +0.05σ",
      "US 2y yield 20d change +1.02σ (rate-differential proxy)"
@@ -187,9 +188,9 @@
    {
     "name": "seasonality",
     "title_fa": "فصلی‌بودن ساعتی/روزانه",
-    "score": -0.09377164776458326,
+    "score": 0.20278928019219994,
     "reasons": [
-     "next-6h hour-of-day drift t-stat -0.38, day-of-week t +0.12"
+     "next-6h hour-of-day drift t-stat +0.70, day-of-week t +0.12"
     ]
    },
    {
@@ -203,20 +204,28 @@
    {
     "name": "ml",
     "title_fa": "یادگیری ماشین (LightGBM)",
-    "score": 0.8566155796149764,
+    "score": 0.6123331953804831,
     "reasons": [
-     "walk-forward ML: P(long wins) 64%, P(short wins) 30%"
+     "walk-forward ML: P(long wins) 60%, P(short wins) 36%"
+    ]
+   },
+   {
+    "name": "news",
+    "title_fa": "اخبار (هوش مصنوعی)",
+    "score": -0.347,
+    "reasons": [
+     "12 relevant headlines, headline score -0.19, model view -0.50, EVENT RISK"
     ]
    }
   ],
   "levels": {
    "support_resistance": [
     [
-     1.11888,
+     1.12064,
      3.8
     ],
     [
-     1.12064,
+     1.11888,
      3.8
     ],
     [
@@ -224,16 +233,12 @@
      3.8
     ],
     [
-     1.11757,
-     2.0
-    ],
-    [
      1.1224,
      3.7
     ],
     [
-     1.1167,
-     3.8
+     1.11757,
+     2.0
     ],
     [
      1.12284,
@@ -242,18 +247,13 @@
     [
      1.12347,
      3.7
+    ],
+    [
+     1.1167,
+     3.8
     ]
    ],
    "zones": [
-    {
-     "kind": "bear_ob",
-     "top": 1.13908,
-     "bottom": 1.13675,
-     "start": "2026-09-28 16:00:00+00:00",
-     "created": "2026-09-29 16:00:00+00:00",
-     "strength": 2.0,
-     "touched": 3
-    },
     {
      "kind": "bear_fvg",
      "top": 1.13469,
@@ -333,7 +333,16 @@
      "start": "2026-10-09 12:00:00+00:00",
      "created": "2026-10-09 13:00:00+00:00",
      "strength": 0.58,
-     "touched": 1
+     "touched": 2
+    },
+    {
+     "kind": "bull_fvg",
+     "top": 1.12007,
+     "bottom": 1.1197,
+     "start": "2026-10-09 17:00:00+00:00",
+     "created": "2026-10-09 18:00:00+00:00",
+     "strength": 0.39,
+     "touched": 0
     }
    ],
    "session": {
@@ -491,7 +500,7 @@
     "median_r": 0.504,
     "profit_factor": 1.14,
     "total_return": 0.0638,
-    "cagr": 0.0377,
+    "cagr": 0.0376,
     "sharpe": 0.71,
     "sortino": 1.03,
     "max_drawdown": -0.0501,
@@ -508,26 +517,26 @@
     }
    },
    "production_holdout": {
-    "trades": 125,
+    "trades": 126,
     "years": 0.7,
-    "trades_per_month": 14.9,
-    "win_rate": 0.528,
-    "avg_r": 0.094,
-    "median_r": 0.505,
-    "profit_factor": 1.19,
-    "total_return": 0.0584,
-    "cagr": 0.0848,
-    "sharpe": 1.04,
-    "sortino": 1.08,
-    "max_drawdown": -0.0422,
-    "calmar": 2.01,
-    "psr": 0.816,
+    "trades_per_month": 15.1,
+    "win_rate": 0.516,
+    "avg_r": 0.073,
+    "median_r": 0.478,
+    "profit_factor": 1.15,
+    "total_return": 0.045,
+    "cagr": 0.0652,
+    "sharpe": 0.83,
+    "sortino": 0.84,
+    "max_drawdown": -0.0424,
+    "calmar": 1.54,
+    "psr": 0.759,
     "max_losing_streak": 5,
-    "long_trades": 28,
+    "long_trades": 29,
     "short_trades": 97,
     "exit_reasons": {
-     "stop": 59,
-     "breakeven": 34,
+     "stop": 61,
+     "breakeven": 33,
      "target": 32
     }
    },
@@ -536,16 +545,16 @@
     "years": 1.12,
     "trades_per_month": 9.8,
     "win_rate": 0.527,
-    "avg_r": 0.078,
+    "avg_r": 0.076,
     "median_r": 0.507,
     "profit_factor": 1.16,
-    "total_return": 0.0526,
-    "cagr": 0.0468,
-    "sharpe": 0.45,
-    "sortino": 0.43,
-    "max_drawdown": -0.0621,
-    "calmar": 0.75,
-    "psr": 0.785,
+    "total_return": 0.0514,
+    "cagr": 0.0458,
+    "sharpe": 0.44,
+    "sortino": 0.42,
+    "max_drawdown": -0.0625,
+    "calmar": 0.73,
+    "psr": 0.782,
     "max_losing_streak": 6,
     "long_trades": 70,
     "short_trades": 61,
@@ -561,16 +570,16 @@
     "years": 1.67,
     "trades_per_month": 20.2,
     "win_rate": 0.501,
-    "avg_r": 0.013,
+    "avg_r": 0.012,
     "median_r": 0.254,
     "profit_factor": 1.02,
-    "total_return": 0.0062,
-    "cagr": 0.0037,
-    "sharpe": 0.11,
-    "sortino": 0.1,
+    "total_return": 0.0039,
+    "cagr": 0.0023,
+    "sharpe": 0.09,
+    "sortino": 0.09,
     "max_drawdown": -0.088,
-    "calmar": 0.04,
-    "psr": 0.589,
+    "calmar": 0.03,
+    "psr": 0.581,
     "max_losing_streak": 8,
     "long_trades": 278,
     "short_trades": 127,
@@ -582,28 +591,28 @@
     }
    },
    "desk_only_v1": {
-    "trades": 364,
+    "trades": 365,
     "years": 1.67,
-    "trades_per_month": 18.1,
-    "win_rate": 0.481,
-    "avg_r": -0.009,
+    "trades_per_month": 18.2,
+    "win_rate": 0.482,
+    "avg_r": -0.008,
     "median_r": -1.004,
     "profit_factor": 0.98,
-    "total_return": -0.0261,
-    "cagr": -0.0157,
+    "total_return": -0.0253,
+    "cagr": -0.0152,
     "sharpe": -0.12,
-    "sortino": -0.17,
+    "sortino": -0.16,
     "max_drawdown": -0.0857,
     "calmar": -0.18,
-    "psr": 0.439,
+    "psr": 0.445,
     "max_losing_streak": 7,
-    "long_trades": 237,
+    "long_trades": 238,
     "short_trades": 127,
     "exit_reasons": {
      "stop": 185,
      "breakeven": 100,
      "target": 75,
-     "time": 4
+     "time": 5
     }
    },
    "random_entries": {
@@ -632,27 +641,27 @@
     }
    }
   },
-  "buy_and_hold_return": 0.0785,
+  "buy_and_hold_return": 0.079,
   "ml_reports": {
    "direction": {
     "long": {
      "folds": 14,
-     "mean_auc": 0.5304358980001223,
+     "mean_auc": 0.530662273470364,
      "min_auc": 0.4549473775017253,
-     "mean_brier": 0.2643032104361342
+     "mean_brier": 0.2642576596278608
     },
     "short": {
      "folds": 14,
-     "mean_auc": 0.5296237804048413,
+     "mean_auc": 0.5294823011250652,
      "min_auc": 0.44832601380254367,
-     "mean_brier": 0.2668968677210831
+     "mean_brier": 0.26681004896150534
     }
    },
    "meta": {
     "folds": 10,
-    "mean_auc": 0.517590562962374,
+    "mean_auc": 0.5193597694712156,
     "min_auc": 0.4406489675516224,
-    "mean_brier": 0.26549680390535874
+    "mean_brier": 0.26549601081633684
    }
   },
   "feature_importance": [
@@ -716,47 +725,139 @@
     "mac_silver_ret5",
     144.0
    ]
-  ]
+  ],
+  "news_view": {
+   "score": -0.347,
+   "headline_score": -0.194,
+   "model_score": -0.5,
+   "event_risk": true,
+   "rationale_fa": "در ۲۴ ساعت آینده فشارهای سیاسی علیه یکی از اعضای فدرال رزرو و انتشار داده‌های تورمی که نشانگر فشارهای قیمتی بیشتر است، باعث تقویت دلار می‌شود. اخبار مثبت طلا و ضعف موقت احساسات ریسک‑آفرین تنها اثر محدود و کوتاه‌مدتی دارند. بنابراین پیش‌بینی می‌شود یورو نسبت به دلار کمی ضعیف بماند.",
+   "n": 12
+  },
+  "news_headlines": [
+   {
+    "title": "Japanese Yen struggles as wide US-Japan yield gap weighs | FXStreet",
+    "source": "شبكة تواصل الإخبارية",
+    "time": "2026-10-09T18:10:50+00:00",
+    "impact": -1,
+    "confidence": 80
+   },
+   {
+    "title": "Gold reclaims $4,200 as weak US sentiment revives bullion demand",
+    "source": "FXStreet",
+    "time": "2026-10-09T18:04:49+00:00",
+    "impact": 1,
+    "confidence": 85
+   },
+   {
+    "title": "September CPI is just the tip of the inflation iceberg",
+    "source": "RBC",
+    "time": "2026-10-09T18:00:04+00:00",
+    "impact": 1,
+    "confidence": 75
+   },
+   {
+    "title": "Gold (XAUUSD), Silver, Platinum – Gold Tests $4200 Amid Broad Rally In Precious Metals Markets",
+    "source": "FXEmpire",
+    "time": "2026-10-09T17:54:37+00:00",
+    "impact": 1,
+    "confidence": 80
+   },
+   {
+    "title": "Japanese Yen struggles as wide US-Japan yield gap weighs",
+    "source": "FXStreet",
+    "time": "2026-10-09T17:52:08+00:00",
+    "impact": -1,
+    "confidence": 80
+   },
+   {
+    "title": "Gold prices hit one-week high, investors eye Fed rate trajectory",
+    "source": "Investing.com commodities",
+    "time": "2026-10-09T17:51:41+00:00",
+    "impact": 1,
+    "confidence": 85
+   },
+   {
+    "title": "U.S. Dollar Strengthens As Fed Rate Hike Fears Grow",
+    "source": "Seeking Alpha",
+    "time": "2026-10-09T17:50:00+00:00",
+    "impact": -1,
+    "confidence": 80
+   },
+   {
+    "title": "Gold Technical Outlook: XAU/USD Selloff Tests Critical Support",
+    "source": "StoneX",
+    "time": "2026-10-09T16:48:57+00:00",
+    "impact": -1,
+    "confidence": 70
+   },
+   {
+    "title": "U.S. Dollar Gains Ground As Bond Sell-Off Resumes: Analysis For EUR/USD, GBP/USD, USD/CAD, USD/JPY",
+    "source": "FXEmpire",
+    "time": "2026-10-09T16:47:21+00:00",
+    "impact": -1,
+    "confidence": 80
+   },
+   {
+    "title": "ECB price stability policy weighs on euro to Thai baht exchange rate near ฿37.3564 support",
+    "source": "Traders Union",
+    "time": "2026-10-09T16:41:30+00:00",
+    "impact": -1,
+    "confidence": 70
+   },
+   {
+    "title": "Trump sets up committee to investigate Fed Governor Lisa Cook over fraud claims",
+    "source": "The Financial Express",
+    "time": "2026-10-09T16:41:09+00:00",
+    "impact": -1,
+    "confidence": 75
+   },
+   {
+    "title": "Trump orders White House inquiry into Fed Governor Cook, renewing push to force her out",
+    "source": "TRT World",
+    "time": "2026-10-09T16:36:02+00:00",
+    "impact": -1,
+    "confidence": 75
+   }
+  ],
+  "news_theme_fa": "تقویت دلار و فشار بر طلا به دلیل نگرانی‌های تورمی و مداخلات سیاسی در فدرال رزرو"
  },
  "ai": {
   "mode": "llm",
   "provider": "groq",
   "model": "openai/gpt-oss-120b",
-  "bull_case": "**Long case (1‑3 days)**  \n\n- **Machine‑learning edge:** the ML analyst scores 0.857 and its walk‑forward test shows a 64 % win‑rate for long entries versus only 30 % for shorts. This is the strongest single signal in the dossier.  \n\n- **H1 timing bias:** the hour‑ahead composite is **+0.127**, explicitly noted in *why_not* as “does not confirm the daily bias –1.00”. The short‑term signal is therefore bullish, suggesting a near‑term bounce even while the longer‑term bias stays bearish.  \n\n- **Smart‑money structure:** the SMC score is +0.476. It flags a bullish market‑structure on H1 (higher highs/lower lows) and a recent CHoCH (change of character) that typically precedes a move upward.  \n\n- **Liquidity & divergence:** the liquidity analyst gives a +0.281 score, citing a recent liquidity‑sweep echo and a bullish SMT divergence versus correlated markets – both classic short‑term buying‑pressure cues.  \n\n- **Mean‑reversion & oversold RSI:** mean‑reversion is mildly bullish (+0.206) and the 3‑period RSI sits at **42**, while the 14‑period RSI is **40.1**. These values are near the lower‑bound of the typical range, indicating the pair may be oversold and primed for a corrective rise.  \n\n- **Key price zone:** current price **1.11970** sits just above the nearest support **1.11888** (0.81 ATR away, strength 3.8). The ascending‑channel geometry also points upward. A bounce to the first target **1.11818** (partial) and then to **1.11591** (final) would be consistent with a short‑term rally before the broader bearish regime reasserts.  \n\n- **No news drag:** the news block is empty and there is no blackout, so no macro surprise is expected to suppress the short‑term upside.  \n\n**Risk management:** place a stop just above the recent low **1.11757** (≈ 15 pips) and target the first resistance **1.12064** (≈ 10 pips) for a ~1:1‑1.5R payoff.  \n\n**Single falsifier:** a decisive break below **1.11757** (the session low) with price closing under it would invalidate the bullish short‑term bias.",
-  "bear_case": "**Short case (1‑3 days)**  \n\n- **Strategic bias:** The 20‑yr strategic engine rates EURUSD **‑1.0** (bearish) on four high‑conviction components – time‑series momentum, EMA20/100 cross, US‑2‑yr yield spread, and the 20‑day DXY trend – all at –1.0.  \n- **Higher‑timeframe confirmation:** H4 and D1 trends are both **‑1.0**; D1 RSI is **24.2** (deeply oversold) and H4 RSI **41.5**, indicating a still‑weak market.  \n- **Technical edge:** The H1 desk composite (+0.127) is the only outlier; the plan therefore follows the higher‑timeframe bias. The price sits **15 pips** (0.0015) above the nearest support **1.11888** (0.81 ATR) and **15 pips** below the next resistance **1.12064** (0.93 ATR). A break below the support would trigger the planned entry at **1.1197** with a tight stop at **1.12121** (15 pips) and TP1 at **1.11818** (≈1 R) and TP2 at **1.11591** (≈2.5 R).  \n- **Macro pressure:** DXY is +2.13 σ on the 20‑day horizon and US 2‑yr yields are +1.02 σ, both pulling EURUSD lower (macro analyst score –0.432).  \n- **Out‑of‑sample performance:** In the production‑holdout set, **97 short trades vs 28 long** produced a 52.8 % win‑rate, 1.19 profit factor and 2.01 Calmar – the strongest evidence that the model’s short edge survives real‑time noise.  \n- **Liquidity & structure:** The “ascending channel” geometry is already broken; recent liquidity sweep echo is modest (‑0.12) and the market is in a bearish order‑block (top 1.13908, bottom 1.13675).  \n\n**Fail‑condition:** If EURUSD **closes above 1.1206** with RSI > 50 and the H1 composite flips to ≥ 0.5, the short thesis collapses.",
+  "bull_case": "**Why a 1‑2‑day long on EUR/USD looks more attractive than the “WAIT/BEAR” label**\n\n*Technical edge* – The H1 market‑structure score is **+0.305** (SMC) and the liquidity score is **+0.223**, both indicating that the current price action is still in a bullish micro‑structure. The price sits inside a **bearish fair‑value‑gap (1.12095‑1.12032) that has already been touched twice**, a classic “gap‑fill” trigger for a short‑term bounce. Moreover, the price is in the **optimal‑trade‑entry (OTE) zone – a 63 % retracement of the last leg (≈1.1197‑1.1203)**, which historically yields a favourable risk‑reward on EUR/USD.\n\n*Support and upside targets* – The nearest **hard support** is at **1.11888** (strength 3.8, 1.37 ATR away). Above it lies a **bullish order‑block (1.11857‑1.11957)** and the **ascending‑channel upper bound** around **1.1206** (0.45 ATR, strength 3.8). A break above the channel top would give a clean path to the **first partial target 1.1210‑1.1214** (the 0.236 Fibo level) and, if momentum holds, to the **final target 1.1230‑1.1235** (the 0.382 Fibo level and the next resistance at 1.12376).\n\n*Macro & news drivers* – The **ML model** still assigns a **60 % win probability to longs** (P‑long = 0.604) and a **positive macro score (‑0.414)** is driven mainly by a **strong DXY rally (+2.13 σ on 20‑day)** that often precedes a short‑term EUR correction, but the **event‑risk flag** is modest (news‑risk halved). In the next 24 h the market is absorbing **gold’s rally to $4,200** and **JPY weakness**, both of which tend to **support the dollar** but also **inflate risk‑off sentiment**, which can temporarily lift the euro as traders rotate into “safe‑haven” assets.\n\n*Seasonality & positioning* – The **seasonality score (+0.203)** shows a small but positive hour‑of‑day drift, and the **COT positioning** is slightly net‑short on the euro (speculator index 5 % of 3‑year range, 4‑week flow –4.5 %). This modest short‑covering pressure can add a short‑term lift.\n\n*Risk management* – Entry at the current **1.12020**, stop just below the **1.11888** support (≈28 pips), giving a **2.5 R** potential to the final target. The plan to close 50 % at the first partial target and move the stop to breakeven limits downside.\n\n**Bottom line:** The confluence of a bullish micro‑structure, a well‑defined OTE entry, strong support at 1.11888, and a positive ML‑derived long probability outweigh the higher‑time bearish bias for the next 1‑3 days.\n\n**What would prove this wrong?** A decisive break below **1.11857** (the lower edge of the bullish order‑block) with the price closing beneath it on the H1 chart.",
+  "bear_case": "**Short‑term case for a EUR USD short (1‑3 days)**  \n\n- **Strategic bias:** The daily model gives a **‑1.0 (bearish) bias** with a composite of –0.065 and 63 % desk agreement. The regime is flagged as *transition* but the “why not” note shows the H1 composite (+0.065) fails to overturn the daily signal, reinforcing the need to follow the higher‑time bias.  \n\n- **Macro drivers:** The “strategic components” all read –1.0:  \n  *TS‑mom (20‑250 d) –1.0, EMA20/100 cross –1.0, US‑2y yield spread –1.0, DXY 20‑d momentum –1.0.*  \n  The news view scores –0.347 with event‑risk flagged: political pressure on a Fed governor and upcoming CPI data are expected to **strengthen the dollar** (headline rationale).  \n\n- **Technical edge:**  \n  * H4 & D1 trends are both –1.0; RSI on D1 is 24.2 (deep oversold for the euro).  \n  * Nearest resistance at **1.12064** (3.8 ATR) and **1.12176** (3.8 ATR) lie just above the current price (1.1202).  \n  * The plan’s entry at 1.1202 targets **TP1 = 1.11736** (≈ 28 pips, 1 R) and **TP2 = 1.11311** (≈ 71 pips, 2.5 R).  \n  * Stop at **1.12303** (≈ 28 pips risk) gives a 2.5 R reward‑to‑risk.  \n\n- **Liquidity & structure:** The H1 market‑structure score is slightly bullish (0.305) but the price sits inside a **bearish fair‑value gap** and an **OTE zone** (63 % retracement), suggesting a short‑term pull‑back is more probable than a breakout.  \n\n- **Out‑of‑sample evidence:** Production‑holdout back‑test (126 trades) shows a **win‑rate ≈ 52 %**, profit factor 1.15 and Sharpe 0.83 when the daily bias + desk agreement rule is applied. Random‑entry benchmarks are negative, confirming the edge comes from the bias rule, not the H1 signals alone.  \n\n**Execution:** Open a short at the market (≈ 1.1202), place stop at 1.12303, take partial profit at 1.11736 and run the remainder to 1.11311 or a 72‑hour time stop.\n\n**Single falsifier:** If the EUR USD **closes above 1.1220** and stays above that level for the next 12 hours, the bearish bias would be disproved.",
   "decision": {
-   "agrees_with_quant": true,
-   "alternative_scenario": "Long bias – the H1 hour‑ahead composite is +0.127 and the ML analyst scores 0.857, indicating a 64 % win‑rate for long entries. SMC shows a bullish H1 market structure with a recent change of character, and liquidity analysis notes a bullish SMT divergence. RSI values (14‑period 40.1, 3‑period 42) suggest the pair is near oversold, while the ascending‑channel geometry points upward. A potential long entry could be taken if price breaks above the nearest resistance at 1.12064 and holds, targeting the day high around 1.12158.",
-   "conviction": 45,
    "decision": "WAIT",
-   "entry_zone_high": 1.1199,
-   "entry_zone_low": 1.1195,
-   "invalidation": "Close above 1.12064 with RSI > 50 and H1 composite ≥ 0.5",
-   "key_risks": [
-    "H1 composite could flip bullish, eroding short edge",
-    "Unexpected macro news or surprise data could shift EURUSD",
-    "Liquidity sweep may cause rapid price spikes and hit stop",
-    "Break below 1.11757 would confirm deeper downtrend and invalidate long bias",
-    "Model’s short‑term bullish signal may be a false breakout"
-   ],
-   "levels_to_watch": [
-    "1.12064 (nearest resistance)",
-    "1.1197 (entry reference)",
-    "1.11888 (nearest support)",
-    "1.11757 (session low)",
-    "1.12121 (stop level for short entry)",
-    "1.11818 (TP1)",
-    "1.11591 (TP2)",
-    "1.12158 (day high / potential long target)"
-   ],
-   "primary_scenario": "Short bias – the strategic engine rates EURUSD bearish (‑1.0) on four high‑conviction components (time‑series momentum, EMA20/100 cross, US‑2‑yr yield spread, DXY 20‑day trend). Both H4 and D1 trends are –1.0, and macro pressure from a strong DXY (+2.13σ) and US 2‑yr yields (+1.02σ) supports further downside. Production‑holdout back‑test shows a 52.8 % win‑rate on short trades with a profit factor of 1.19. The plan is to enter short near 1.1197, set a stop at 1.12121, and target 1.11818 (partial) and 1.11591 (final).",
-   "stop": 1.12121,
-   "summary_en": "The strategic engine rates EURUSD bearish (‑1.0) on four high‑conviction components and both H4 and D1 trends are down, while the production‑holdout back‑test shows a modest edge for short trades (52.8 % win‑rate, profit factor 1.19). At the same time, the H1 hour‑ahead composite is +0.127 and the ML analyst gives a strong long bias (score 0.857, 64 % win‑rate for longs), creating a short‑term bullish signal. Because these signals conflict, the prudent recommendation is to wait for a clear trigger before taking a position. A short entry would be considered near 1.1197 with a stop at 1.12121 and targets at 1.11818 and 1.11591, but this is invalidated if price closes above 1.12064 with RSI > 50 and H1 composite ≥ 0.5. Conversely, a long entry could be taken if price breaks above 1.12064 and the H1 composite remains positive, aiming for the day high around 1.12158.",
-   "summary_fa": "موتور استراتژیک EURUSD را به‑صورت نزولی (‑1.0) بر پایه چهار مؤلفه با اطمینان بالا ارزیابی می‌کند و روندهای H4 و D1 نیز منفی هستند؛ در تست hold‑out مدل، معاملات کوتاه با نرخ برد 52.8 % و فاکتور سود 1.19 عملکرد مثبت دارد. در عین حال، ترکیب ساعتی H1 مقدار +0.127 دارد و نمره ML برای سمت طولانی 0.857 (احتمال برد 64 %) نشان‌دهنده سیگنال کوتاه‌مدت صعودی است. به‌دلیل این تضاد، توصیهٔ محتاطانه «صبر» است تا یک سیگنال واضح ظاهر شود. اگر قیمت به‌نزدیک 1.1197 برسد و زیر 1.12121 بسته نشود، می‌توان موقعیت کوتاه با هدف 1.11818 و 1.11591 باز کرد؛ این موقعیت در صورتی که قیمت بالای 1.12064 بسته شود و RSI > 50 و ترکیب H1 ≥ 0.5 باشد، باطل می‌شود. در مقابل، اگر قیمت بالای 1.12064 بماند و ترکیب H1 مثبت بماند، می‌توان موقعیت طولانی با هدف نزدیک 1.12158 در نظر گرفت.",
+   "conviction": 30,
+   "agrees_with_quant": true,
+   "entry_zone_low": 1.1198,
+   "entry_zone_high": 1.1206,
+   "stop": 1.12303,
    "targets": [
-    1.11818,
-    1.11591
+    1.11736,
+    1.11311
    ],
+   "invalidation": "Price closes above 1.1220 on the H1 timeframe and remains above for two consecutive bars, invalidating the bearish bias",
+   "primary_scenario": "Bearish short‑term case: daily strategic bias is -1.0, composite -0.065 with 63% desk agreement. H4/D1 trends are bearish, D1 RSI 24.2 indicates oversold euro. Plan targets TP1 1.11736 (≈1 R) and TP2 1.11311 (≈2.5 R) with stop at 1.12303 (~28 pips risk).",
+   "alternative_scenario": "Bullish short‑term case: H1 SMC score +0.305 and liquidity score +0.223 suggest micro‑structure bullishness. Price sits in a bearish fair‑value gap that has been touched twice, acting as a bounce trigger. OTE zone (≈1.1197‑1.1203) offers entry around 1.1202, with support at 1.11888 and upside targets near 1.1210‑1.1214 and 1.1230‑1.1235.",
+   "levels_to_watch": [
+    "Entry 1.1202",
+    "Stop 1.12303",
+    "Support 1.11888",
+    "Resistance 1.12064",
+    "Resistance 1.12176",
+    "Pivot 1.12066"
+   ],
+   "key_risks": [
+    "Event‑risk from upcoming CPI and Fed‑governor news",
+    "Break below 1.11857 invalidates bullish micro‑structure",
+    "Unexpected strength in DXY could push EUR/USD lower",
+    "Liquidity gaps may trigger rapid moves"
+   ],
+   "summary_en": "The desk’s quantitative model signals a WAIT stance as the daily bearish bias is not confirmed by the H1 composite. A short trade aligns with the strategic bias, entry around 1.1202, stop at 1.12303 and targets 1.11736/1.11311, but the setup is vulnerable to a break above 1.1220. Bullish micro‑structure signals exist, offering a conditional long entry if price rebounds into the OTE zone and respects support at 1.11888. Until a clear directional trigger appears, the recommendation is to stay on the sidelines.",
+   "summary_fa": "دستگاه کمی مدل روزانه یک بایاس نزولی (-1.0) نشان می‌دهد اما ترکیب H1 (+0.065) این بایاس را تأیید نمی‌کند؛ بنابراین تصمیم WAIT است. اگر قیمت به ناحیه ورود 1.1202 برسد و زیر سطح حمایت 1.11888 باقی بماند، می‌توان به‌صورت کوتاه (SHORT) با توقف 1.12303 و هدف‌های 1.11736 و 1.11311 وارد شد. در مقابل، نمره‌های ساختار بازار H1 مثبت (+0.305) و فواصل فاندامنتال می‌توانند فرصت خرید (LONG) در ناحیه OTE (≈1.1197‑1.1203) فراهم کنند. تا زمانی که قیمت بالای 1.1220 بسته نشود یا خبرهای مهم CPI و فشارهای سیاسی بر فدرال رزرو رخ ندهد، بهتر است در حالت انتظار بمانیم.",
    "final_decision": "WAIT",
    "guardrail_notes": []
   }

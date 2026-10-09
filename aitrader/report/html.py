@@ -75,6 +75,7 @@ td.num{text-align:left;white-space:nowrap}
 .ai{border-inline-start:4px solid var(--brass);white-space:pre-line}
 .ai .lead{font-size:1rem}
 .good{color:var(--buy);font-weight:700} .bad{color:var(--sell);font-weight:700}
+tr.bad td{color:var(--sell)}
 .chart{min-height:420px;direction:ltr;min-width:640px}
 .findings{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
 .findings .card p{margin:6px 0 0;font-size:.9rem;color:var(--muted)}
@@ -271,8 +272,63 @@ def _ai_block(ai: dict | None) -> str:
     return f"""<div class="card ai"><div class="eyebrow">جمع‌بندی تحلیلگر</div><p class="lead">{_e(ai.get('summary_fa', ''))}</p></div>"""
 
 
+def _account_section(acc: dict | None) -> str:
+    if not acc or "combined" not in acc:
+        return ""
+    def pct(x, d=1):
+        return "–" if x is None else f"{x*100:+.{d}f}%"
+    months = acc["monthly_h1_portfolio"]
+    mrows = "".join(f"<tr><td class='num'>{_e(k)}</td><td class='num {'good' if v > 0 else 'bad'}'>{pct(v)}</td></tr>"
+                    for k, v in months.items())
+    vals = list(months.values())
+    pos = sum(1 for v in vals if v > 0) / max(1, len(vals))
+
+    def mc_rows(rows):
+        out = []
+        for r in rows:
+            danger = r["p_drawdown_50pct"] >= 0.05 or r["median_max_dd"] <= -0.3
+            out.append(f"<tr{' class=bad' if danger else ''}><td class='num'>{r['target_vol']*100:.0f}%</td>"
+                       f"<td class='num'>{r['leverage_x']:.1f}×</td><td class='num'>{pct(r['median_month'])}</td>"
+                       f"<td class='num'>{pct(r['mean_month'])}</td><td class='num'>{r['p_month_ge_10pct']*100:.0f}%</td>"
+                       f"<td class='num'>{pct(r['median_max_dd'], 0)}</td><td class='num'>{pct(r['p95_max_dd'], 0)}</td>"
+                       f"<td class='num'>{r['p_drawdown_50pct']*100:.0f}%</td></tr>")
+        return "".join(out)
+    head = ("<thead><tr><th>نوسان سالانه هدف</th><th>اهرم</th><th>میانه ماه</th><th>میانگین ماه</th><th>احتمال ماه ≥۱۰٪</th>"
+            "<th>میانه افت حداکثر</th><th>افت بد (۵٪ بدترین)</th><th>احتمال نصف شدن حساب</th></tr></thead>")
+    k = acc["kelly"]
+    c, h1, sw = acc["combined"], acc["h1"], acc["swing"]
+    return f"""
+<section class="desk" id="account"><header><h2>حساب ترکیبی و هدف ۱۰٪ ماهانه</h2>
+<span class="muted num">{_e(acc['window'][0])} → {_e(acc['window'][1])}</span></header>
+<div class="grid2">
+ <div class="card"><h3>دو استراتژی با هم</h3>
+  <div class="scroll"><table><thead><tr><th>بخش</th><th>شارپ</th><th>بازده سالانه</th><th>نوسان</th><th>افت حداکثر</th></tr></thead><tbody>
+  <tr><td>تاکتیکی ساعتی (ریسک ۰٫۵٪)</td><td class="num">{h1['sharpe']}</td><td class="num">{pct(h1['ann_return'])}</td><td class="num">{pct(h1['vol'])}</td><td class="num">{pct(h1['max_dd'])}</td></tr>
+  <tr><td>سوئینگ روزانه (نوسان ۱۰٪ تقسیم بر دو نماد)</td><td class="num">{sw['sharpe']}</td><td class="num">{pct(sw['ann_return'])}</td><td class="num">{pct(sw['vol'])}</td><td class="num">{pct(sw['max_dd'])}</td></tr>
+  <tr><td><b>ترکیب با ریسک برابر</b></td><td class="num"><b>{c['sharpe']}</b></td><td class="num">{pct(c['ann_return'])}</td><td class="num">{pct(c['vol'])}</td><td class="num">{pct(c['max_dd'])}</td></tr>
+  <tr><td>سوئینگ، ۲۰۰۵ تا ۲۰۲۳ (بلندمدت)</td><td class="num">{acc['swing_20y']['sharpe']}</td><td class="num">{pct(acc['swing_20y']['ann_return'])}</td><td class="num">{pct(acc['swing_20y']['vol'])}</td><td class="num">{pct(acc['swing_20y']['max_dd'])}</td></tr>
+  </tbody></table></div>
+  <p class="muted">همبستگی دو استراتژی: <span class="num">{acc['corr_h1_swing']}</span>. چون کم است، ترکیب شارپ را بالا می‌برد و افت را کم می‌کند. افزودن جفت‌ارزهای دیگر کمکی نکرد (همه تابع دلارند).</p>
+ </div>
+ <div class="card"><h3>سود ماهانه پرتفوی ساعتی (ریسک ۰٫۵٪)</h3>
+  <p class="muted">{len(vals)} ماه · ماه‌های مثبت <span class="num">{pos*100:.0f}%</span> · میانگین <span class="num">{pct(float(np.mean(vals)), 2)}</span></p>
+  <details><summary>جدول ماه‌به‌ماه</summary><div class="scroll"><table><thead><tr><th>ماه</th><th>بازده</th></tr></thead><tbody>{mrows}</tbody></table></div></details>
+ </div>
+</div>
+<div class="card"><h3>با چه ریسکی به ۱۰٪ ماهانه می‌رسیم؟ (مونت‌کارلو ۴۰۰۰ مسیر یک‌ساله)</h3>
+ <p>طبق فرمول کلی، حداکثر رشد مرکب ممکن حتی با اهرم بهینه حدود SR²/2 در سال است. با شارپ بک‌تست <span class="num">{k['backtested']['sharpe']:.2f}</span>
+ سقف نظری <span class="num">{k['backtested']['max_growth_month']*100:.1f}%</span> در ماه است و با شارپ واقع‌بینانه ۰٫۹ حدود <span class="num">{k['conservative']['max_growth_month']*100:.1f}%</span>.
+ برای ۱۰٪ ماهانه شارپ پایدار حدود <span class="num">{k['backtested']['sharpe_needed_for_10pct_month']:.1f}</span> لازم است که در عمل برای معامله‌گر خرد دست‌نیافتنی است.
+ «میانه» یعنی ماه معمولی؛ «میانگین» را چند مسیر خوش‌شانس بالا می‌کشد. ردیف‌های قرمز یعنی ریسک نابودی جدی.</p>
+ <h3>اگر آینده مثل بک‌تست باشد</h3><div class="scroll"><table>{head}<tbody>{mc_rows(acc['mc_backtested'])}</tbody></table></div>
+ <h3>اگر لبه واقعی نصف بک‌تست باشد (معمول در اجرای زنده)</h3><div class="scroll"><table>{head}<tbody>{mc_rows(acc['mc_haircut'])}</tbody></table></div>
+ <p class="muted">پیشنهاد: ریسک ۰٫۵٪ تا حداکثر ۱٪ در هر معامله (نوسان ۱۰ تا ۲۰٪). تنظیم با <span class="mono">--risk 0.01</span>.</p>
+</div>
+</section>"""
+
+
 def build_dashboard(items: list[dict], findings: list[tuple[str, str]], standalone: bool = True,
-                    ai_commentary: dict | None = None) -> str:
+                    ai_commentary: dict | None = None, account: dict | None = None) -> str:
     """items: [{"live": live_dict, "ai": ai_dict, "chart": plotly_div, "equity": plotly_div}]"""
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     cards = "".join(_verdict_card(it["live"], it.get("ai")) for it in items)
@@ -315,6 +371,7 @@ def build_dashboard(items: list[dict], findings: list[tuple[str, str]], standalo
     <div class="muted num">{now}</div>
   </header>
   <div class="summary">{cards}</div>
+  {_account_section(account)}
   <section class="desk"><header><h2>یافته‌های پژوهش</h2></header><div class="findings">{fnd}</div></section>
   {''.join(desks)}
   <footer>این گزارش خودکار توسط موتور aitrader تولید شده است. نتایج گذشته تضمینی برای آینده نیست؛ همه آمارها پس از هزینه معامله و خارج از نمونه‌اند مگر خلافش ذکر شده باشد. قیمت طلا از قرارداد آتی COMEX (GC=F) است و با قیمت اسپات بروکر چند دلار اختلاف دارد.</footer>

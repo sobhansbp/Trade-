@@ -46,7 +46,10 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python -m aitrader live EURUSD XAUUSD --once --ai --news-every 3
+        run: |
+          EXTRA=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then EXTRA="--summary"; fi
+          python -m aitrader live EURUSD XAUUSD --once --ai --news-every 3 $EXTRA
 
       - name: Commit journal
         run: |

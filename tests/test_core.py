@@ -231,3 +231,11 @@ def test_paper_account_lifecycle(tmp_path, monkeypatch):
     assert st["swing"]["equity"] > 10_000 + 40   # +1% on 50% notional = ~+50 minus costs
     md = paper.status_markdown(st, {}, None)
     assert "حساب دمو" in md
+
+
+def test_summary_text():
+    from aitrader.live.runner import summary_text
+    st = {"initial": 10_000, "tactical": {"equity": 10_100, "positions": {}}, "swing": {"equity": 9_950, "positions": {}}}
+    live = {"price": 1.1, "decision": "WAIT", "composite": 0.1, "strategic": {"bias": -1.0}}
+    txt = summary_text(st, {"EURUSD": live}, None)
+    assert "گزارش حساب دمو" in txt and "+1.00%" in txt and "EURUSD" in txt

@@ -89,8 +89,31 @@ def _cached_news(results: dict, every_hours: float) -> dict | None:
     return view
 
 
+def summary_text(st: dict, lives: dict, news: dict | None) -> str:
+    """Short Persian account summary for Telegram."""
+    init = st["initial"]
+    t, s = st["tactical"]["equity"], st["swing"]["equity"]
+    fa = {"LONG": "خرید", "SHORT": "فروش", "WAIT": "صبر"}
+    lines = ["📊 گزارش حساب دمو aitrader",
+             f"تاکتیکی: ${t:,.2f} ({(t / init - 1) * 100:+.2f}%)",
+             f"سوئینگ: ${s:,.2f} ({(s / init - 1) * 100:+.2f}%)",
+             f"جمع: ${t + s:,.2f} ({((t + s) / (2 * init) - 1) * 100:+.2f}%)"]
+    for sym, p in st["tactical"]["positions"].items():
+        lines.append(f"🔹 باز: {sym} {fa.get(p['side'], p['side'])} از {p['entry']} | SL {p['stop']} | TP {p['tp2']}")
+    for sym, L in lives.items():
+        nv = (L.get("news_view") or {}).get("score")
+        lines.append(f"{sym} {L['price']}: {fa.get(L.get('final_decision', L['decision']), L['decision'])} | "
+                     f"سوگیری روزانه {L['strategic']['bias']:+.2f} | میز ساعتی {L['composite']:+.3f}"
+                     + (f" | اخبار {nv:+.2f}" if nv is not None else ""))
+    if news and news.get("theme_fa"):
+        lines.append(f"📰 {news['theme_fa']}")
+    lines.append("جزئیات: github.com/sobhansbp/Trade-/blob/ccr-131f7ec0-kdgwmt/journal/STATUS.md")
+    return "\n".join(lines)
+
+
 def run_cycle(symbols: list[str], use_ai: bool, execute: bool, equity: float = 10_000.0,
-              news_every_hours: float = 3.0) -> list[str]:
+              news_every_hours: float = 3.0, send_summary: bool = False,
+              summary_hour_utc: int | None = 21) -> list[str]:
     """One full live cycle: analyse, news, AI desk on trade candidates, paper books, status."""
     from ..ai.claude_desk import run_desk
     from ..config import DEFAULT_CONFIG as cfg
@@ -145,15 +168,18 @@ def run_cycle(symbols: list[str], use_ai: bool, execute: bool, equity: float = 1
     paper.save_state(st)
     paper.log_equity(st)
     STATUS.write_text(paper.status_markdown(st, lives, news), encoding="utf-8")
+    if send_summary or (summary_hour_utc is not None and datetime.now(timezone.utc).hour == summary_hour_utc):
+        ok = notify_telegram(summary_text(st, lives, news))
+        out.append(f"telegram summary sent: {ok}")
     t, s = st["tactical"]["equity"], st["swing"]["equity"]
     out.append(f"paper equity: tactical ${t:,.2f} | swing ${s:,.2f} | total ${t + s:,.2f}")
     return out
 
 
 def run_loop(symbols: list[str], use_ai: bool, execute: bool, once: bool = False, equity: float = 10_000.0,
-             news_every_hours: float = 3.0):
+             news_every_hours: float = 3.0, send_summary: bool = False):
     while True:
-        for line in run_cycle(symbols, use_ai, execute, equity, news_every_hours):
+        for line in run_cycle(symbols, use_ai, execute, equity, news_every_hours, send_summary):
             print(line, flush=True)
         if once:
             return

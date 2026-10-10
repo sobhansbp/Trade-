@@ -52,7 +52,7 @@ def _groq(messages: list, schema: dict | None, model: str, max_tokens: int, effo
         raise LLMError("GROQ_API_KEY is not set")
     est_in = sum(len(m["content"]) if isinstance(m["content"], str) else 2000 for m in messages) // 3
     max_tokens = int(max(800, min(max_tokens, GROQ_TPM * 0.92 - est_in)))
-    body = {"model": model, "messages": messages, "max_completion_tokens": max_tokens, "temperature": 0.2}
+    body = {"model": model, "messages": messages, "max_completion_tokens": max_tokens, "temperature": 0.0}
     if model.startswith("openai/gpt-oss"):
         body["reasoning_effort"] = {"low": "low", "medium": "medium"}.get(effort, "high")
     if schema:
@@ -72,11 +72,19 @@ def _groq(messages: list, schema: dict | None, model: str, max_tokens: int, effo
             time.sleep(min(65.0, float(wait) + 1 if wait else 5 * (attempt + 1)))
             continue
         if r.status_code >= 400:
-            # strict schema unsupported by a model -> retry once in plain JSON mode
-            if schema and "json_schema" in r.text and body.get("response_format", {}).get("type") == "json_schema":
-                body["response_format"] = {"type": "json_object"}
-                messages[-1]["content"] = (messages[-1]["content"] if isinstance(messages[-1]["content"], str)
-                                           else messages[-1]["content"])
+            # Groq validates JSON *after* generation, so a long structured answer can fail.
+            # Step down: strict json_schema -> json_object (schema in prompt) -> free text
+            # (chat_json() extracts the JSON itself).
+            mode = (body.get("response_format") or {}).get("type")
+            if schema and mode in ("json_schema", "json_object") and r.status_code == 400:
+                if mode == "json_schema":
+                    body["response_format"] = {"type": "json_object"}
+                    msgs = [dict(m) for m in body["messages"]]
+                    if isinstance(msgs[-1]["content"], str):
+                        msgs[-1]["content"] += "\n\nJSON schema to follow exactly:\n" + json.dumps(schema)
+                    body["messages"] = msgs
+                else:
+                    body.pop("response_format", None)
                 continue
             raise LLMError(f"groq {r.status_code}: {r.text[:300]}")
         out = r.json()["choices"][0]

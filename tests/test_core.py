@@ -239,3 +239,25 @@ def test_summary_text():
     live = {"price": 1.1, "decision": "WAIT", "composite": 0.1, "strategic": {"bias": -1.0}}
     txt = summary_text(st, {"EURUSD": live}, None)
     assert "گزارش حساب دمو" in txt and "+1.00%" in txt and "EURUSD" in txt
+
+
+def test_groq_json_step_down(monkeypatch):
+    from types import SimpleNamespace
+
+    from aitrader.ai import llm
+    calls = []
+
+    def fake_post(url, headers=None, json=None, timeout=None):
+        calls.append((json.get("response_format") or {}).get("type"))
+        if len(calls) < 3:
+            return SimpleNamespace(status_code=400, text='{"error":{"code":"json_validate_failed"}}', headers={})
+        return SimpleNamespace(status_code=200, headers={}, text="",
+                               json=lambda: {"choices": [{"finish_reason": "stop",
+                                                          "message": {"content": 'ok {"a": 1} done'}}]})
+    monkeypatch.setenv("GROQ_API_KEY", "test")
+    monkeypatch.setenv("AITRADER_LLM", "groq")
+    monkeypatch.setattr(llm.requests, "post", fake_post)
+    out = llm.chat_json("sys", "user", {"type": "object", "properties": {"a": {"type": "integer"}},
+                                        "required": ["a"], "additionalProperties": False})
+    assert out == {"a": 1}
+    assert calls == ["json_schema", "json_object", None]

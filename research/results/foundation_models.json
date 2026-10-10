@@ -82,5 +82,17 @@
   "net_sharpe": -0.74,
   "t_net": -0.63,
   "flip_rate": 0.222
+ },
+ "amazon/chronos-2|XAUUSD|hourly": {
+  "n": 1000,
+  "hit_rate": 0.496,
+  "base_rate": 0.525,
+  "naive_momentum_hit": 0.522,
+  "p_hit_vs_50pct": 0.8248,
+  "gross_ann": -0.5057,
+  "net_ann": -0.7537,
+  "net_sharpe": -3.32,
+  "t_net": -1.33,
+  "flip_rate": 0.265
  }
 }

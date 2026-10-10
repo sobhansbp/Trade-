@@ -15,7 +15,7 @@ import pandas as pd
 
 sys.path.insert(0, ".")
 from aitrader.config import CACHE_DIR, INSTRUMENTS, StrategyConfig  # noqa: E402
-from aitrader.backtest.engine import combine_portfolio  # noqa: E402
+from aitrader.backtest.engine import combine_portfolio, run_backtest, signal_mask  # noqa: E402
 from aitrader.features import build_features  # noqa: E402
 from aitrader.pipeline import Bundle, load_inputs, research, swing_stats  # noqa: E402
 from aitrader.risk.manager import label_outcomes, stop_distances  # noqa: E402
@@ -55,7 +55,22 @@ def run_symbol(sym: str) -> None:
     t = time.time()
     b = bundle_for(sym)
     r = research(sym, CFG, bundle=b, meta=False)
-    run = r["_runs"]["production_oos"]
+    # The 12% drawdown halt is permanent inside a backtest: once hit, nothing trades for the rest
+    # of the 12 years. Live, a halt would be reviewed and lifted, so the main read uses no halt
+    # (the 6% throttle that halves risk stays on); the halted runs are kept for reference.
+    nohalt = StrategyConfig(**{**CFG.__dict__, "dd_halt": 1.0})
+    bb, start = r["_bundle"], int(len(r["_bundle"].f) * CFG.wf_initial_frac)
+    sig = signal_mask(bb.f, bb.ens, nohalt, bb.meta_p)
+    bias = bb.f["sb_bias"].fillna(0)
+    sig_bias = pd.Series(np.where((bias.abs() >= nohalt.bias_min) & ~bb.f["hour"].isin(nohalt.avoid_hours_utc),
+                                  np.sign(bias), 0.0), index=bb.f.index)
+    rnd = pd.Series(np.random.default_rng(42).choice([-1.0, 0.0, 1.0], size=len(bb.f), p=[0.02, 0.96, 0.02]),
+                    index=bb.f.index)
+    extra = {"production_nohalt": run_backtest(bb.f, sig, bb.stops, bb.inst, nohalt, start=start),
+             "daily_bias_only_nohalt": run_backtest(bb.f, sig_bias, bb.stops, bb.inst, nohalt, start=start),
+             "random_entries_nohalt": run_backtest(bb.f, rnd, bb.stops, bb.inst, nohalt, start=start)}
+    r["runs"].update({k: v["stats"] for k, v in extra.items()})
+    run = extra["production_nohalt"]
     tr = run["trades"]
     mret = monthly(tr) if len(tr) else pd.Series(dtype=float)
     res = {k: v for k, v in r.items() if not k.startswith("_")}

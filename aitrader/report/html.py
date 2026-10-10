@@ -81,6 +81,14 @@ tr.bad td{color:var(--sell)}
 .findings .card p{margin:6px 0 0;font-size:.9rem;color:var(--muted)}
 .tag{display:inline-block;font-size:.72rem;border:1px solid var(--line);border-radius:4px;padding:0 6px;color:var(--muted)}
 details summary{cursor:pointer;font-weight:700}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:4px}
+.kpi b{font-family:var(--f-num);font-size:1.7rem;font-weight:600;direction:ltr;text-align:right;line-height:1.2}
+.kpi span{font-size:.8rem;color:var(--muted)}
+.figure{background:#fff;border-radius:8px;padding:6px;margin-top:10px;overflow-x:auto}
+.figure img{width:100%;min-width:560px;height:auto;display:block}
+.src{columns:2 320px;font-size:.85rem;padding-inline-start:18px}
+.src li{break-inside:avoid;margin-bottom:4px;direction:ltr;text-align:left}
 footer{font-size:.82rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
 a{color:var(--brass)} a:focus-visible,summary:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
 @media (max-width:520px){.kv{grid-template-columns:repeat(2,minmax(0,1fr))}.plan{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -328,7 +336,7 @@ def _account_section(acc: dict | None) -> str:
 
 
 def build_dashboard(items: list[dict], findings: list[tuple[str, str]], standalone: bool = True,
-                    ai_commentary: dict | None = None, account: dict | None = None) -> str:
+                    ai_commentary: dict | None = None, account: dict | None = None, lab: str = "") -> str:
     """items: [{"live": live_dict, "ai": ai_dict, "chart": plotly_div, "equity": plotly_div}]"""
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     cards = "".join(_verdict_card(it["live"], it.get("ai")) for it in items)
@@ -374,6 +382,7 @@ def build_dashboard(items: list[dict], findings: list[tuple[str, str]], standalo
   {_account_section(account)}
   <section class="desk"><header><h2>یافته‌های پژوهش</h2></header><div class="findings">{fnd}</div></section>
   {''.join(desks)}
+  {lab}
   <footer>این گزارش خودکار توسط موتور aitrader تولید شده است. نتایج گذشته تضمینی برای آینده نیست؛ همه آمارها پس از هزینه معامله و خارج از نمونه‌اند مگر خلافش ذکر شده باشد. قیمت طلا از قرارداد آتی COMEX (GC=F) است و با قیمت اسپات بروکر چند دلار اختلاف دارد.</footer>
 </div>
 <script>

@@ -177,7 +177,7 @@ def log_equity(st: dict) -> None:
         w.writerow([_now(), round(t, 2), round(s, 2), round(t + s, 2), ",".join(st["tactical"]["positions"])])
 
 
-def status_markdown(st: dict, lives: dict, news: dict | None) -> str:
+def status_markdown(st: dict, lives: dict, news: dict | None, forward: list[dict] | None = None) -> str:
     init = st["initial"]
     t, s = st["tactical"], st["swing"]
 
@@ -219,5 +219,13 @@ def status_markdown(st: dict, lives: dict, news: dict | None) -> str:
             for _, r in df.tail(15).iloc[::-1].iterrows():
                 lines.append(f"| {str(r['closed'])[:16]} | {r['symbol']} | {r['side']} | {r['entry']} | {r['exit']} | "
                              f"{r['reason']} {r['r_multiple']:+.2f}R | ${r['pnl_usd']:,.2f} |")
+    if forward:
+        lines += ["", "## آزمون رو به جلو فرضیه‌ها (فقط ثبت، بدون معامله)", "",
+                  "| فرضیه | نماد | معامله | میانگین خالص (bp) | جمع (bp) | برد | t |", "|---|---|---|---|---|---|---|"]
+        for h in forward:
+            t = f"{h['t']:+.2f}" if h["t"] == h["t"] else "–"
+            lines.append(f"| {h['hypothesis']} | {h['symbol']} | {h['n']} | {h['mean_net_bp']:+.2f} | "
+                         f"{h['sum_net_bp']:+.1f} | {h['hit']:.0%} | {t} |")
+        lines.append("ثبت از ۲۰۲۶-۱۰-۱۲؛ قاعده‌ها پیش از دیدن این داده‌ها ثابت شده‌اند (`aitrader/live/forward.py`).")
     lines += ["", "> حساب کاغذی است؛ هیچ سفارشی به بروکر ارسال نمی‌شود. نتایج گذشته تضمین آینده نیست."]
     return "\n".join(lines) + "\n"

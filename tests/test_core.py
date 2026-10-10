@@ -261,3 +261,36 @@ def test_groq_json_step_down(monkeypatch):
                                         "required": ["a"], "additionalProperties": False})
     assert out == {"a": 1}
     assert calls == ["json_schema", "json_object", None]
+
+
+def test_forward_rules_and_logger(tmp_path, monkeypatch):
+    from aitrader.live import forward as fw
+
+    # one synthetic London day (BST): flat 2000 range overnight, break lower at 08:00 London, drift down
+    idx = pd.date_range("2026-10-13 22:00", "2026-10-14 20:00", freq="5min", tz="UTC")
+    px = np.full(len(idx), 2000.0)
+    brk = idx >= pd.Timestamp("2026-10-14 07:00", tz="UTC")          # 08:00 London
+    px[brk] = 2000.0 - 2.0 - 0.05 * np.arange(brk.sum())
+    df = pd.DataFrame({"open": px, "close": px, "high": px + 0.5, "low": px - 0.5}, index=idx)
+    df.loc[~brk, ["high", "low"]] = [2001.0, 1999.0]
+    r = fw.gold_london_breakout_short(df, pd.Timestamp("2026-10-14"))
+    assert r["side"] == -1 and r["entry"] == 1999.0 and r["gross_bp"] > 0 and r["net_bp"] < r["gross_bp"]
+    # an upward first break is not part of the (short-only) hypothesis
+    up = df.copy()
+    up.loc[brk, ["open", "close"]] = 2005.0
+    up.loc[brk, "high"], up.loc[brk, "low"] = 2006.0, 2004.0
+    assert fw.gold_london_breakout_short(up, pd.Timestamp("2026-10-14"))["side"] == 0
+
+    # the logger only evaluates completed days after START and never logs a day twice
+    monkeypatch.setattr(fw, "PATH", tmp_path / "fwd.csv")
+    monkeypatch.setattr(fw, "START", pd.Timestamp("2026-10-14"))
+    data = {"XAUUSD": df}
+    first = fw.update(now=pd.Timestamp("2026-10-14 13:00", tz="UTC"), data=data)   # 08:20 ET + 30 min passed
+    assert len(first) == 1 and "gold_overnight_long" in first[0] and "no data" in first[0]
+    later = fw.update(now=pd.Timestamp("2026-10-14 15:45", tz="UTC"), data=data)   # 16:00 London + 30 min
+    assert len(later) == 1 and "breakout" in later[0]
+    last = fw.update(now=pd.Timestamp("2026-10-14 18:30", tz="UTC"), data=data)    # 13:30 ET + 30 min
+    assert len(last) == 1 and "gold_day_long" in last[0]
+    assert fw.update(now=pd.Timestamp("2026-10-14 19:00", tz="UTC"), data=data) == []
+    s = {h["hypothesis"]: h for h in fw.summary()}
+    assert s["gold_london_breakout_short"]["n"] == 1 and s["gold_london_breakout_short"]["mean_net_bp"] > 0

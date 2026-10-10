@@ -72,11 +72,14 @@ def cmd_analyze(args):
     if "combined" in acc:
         print(f"\naccount: combined sharpe {acc['combined']['sharpe']} | H1 {acc['h1']['sharpe']} | "
               f"swing {acc['swing']['sharpe']} | corr {acc['corr_h1_swing']}")
-    html = build_dashboard(items, FINDINGS, standalone=True, ai_commentary=notes, account=acc)
+    from .report.lab import lab_section
+    from .research_notes import LAB_CHART_NOTES, LAB_HYPOTHESES, LAB_SOURCES, LAB_SURVEY
+    lab = lab_section(LAB_SURVEY, LAB_HYPOTHESES, LAB_CHART_NOTES, LAB_SOURCES)
+    html = build_dashboard(items, FINDINGS, standalone=True, ai_commentary=notes, account=acc, lab=lab)
     out = REPORT_DIR / "dashboard.html"
     out.write_text(html, encoding="utf-8")
     (REPORT_DIR / "dashboard_fragment.html").write_text(build_dashboard(items, FINDINGS, standalone=False,
-                                                                        ai_commentary=notes, account=acc),
+                                                                        ai_commentary=notes, account=acc, lab=lab),
                                                        encoding="utf-8")
     print(f"\ndashboard -> {out}")
 

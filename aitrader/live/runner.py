@@ -167,7 +167,14 @@ def run_cycle(symbols: list[str], use_ai: bool, execute: bool, equity: float = 1
             out.append(f"[{sym}] error: {e}")
     paper.save_state(st)
     paper.log_equity(st)
-    STATUS.write_text(paper.status_markdown(st, lives, news), encoding="utf-8")
+    try:   # pre-registered research hypotheses, logged only (never traded)
+        from . import forward
+        out += forward.update()
+        fwd = forward.summary()
+    except Exception as e:
+        out.append(f"forward test error: {e}")
+        fwd = None
+    STATUS.write_text(paper.status_markdown(st, lives, news, fwd), encoding="utf-8")
     if send_summary or (summary_hour_utc is not None and datetime.now(timezone.utc).hour == summary_hour_utc):
         ok = notify_telegram(summary_text(st, lives, news))
         out.append(f"telegram summary sent: {ok}")

@@ -195,11 +195,48 @@ def _long_history(js: dict | None) -> str:
                  f"بهترین <b class='num'>{v.max() * 100:+.1f}%</b> و بدترین <b class='num'>{v.min() * 100:+.1f}%</b>.</p>")
     oos = js.get(syms[0], {}).get("ml_oos_start", "")[:10] if syms else ""
     head = "<thead><tr><th></th>" + "".join(f"<th>{label[c]}</th>" for c in cols) + "</tr></thead>"
+    runs_fa = (("production_oos", "استراتژی ربات"), ("daily_bias_only", "فقط سوگیری روزانه"),
+               ("desk_only_v1", "فقط میز ساعتی"), ("random_entries", "ورود تصادفی"))
+    cmp_rows = []
+    for sym in syms:
+        for k, fa in runs_fa:
+            st = js[sym].get("runs", {}).get(k) or {}
+            if not st.get("trades"):
+                continue
+            cmp_rows.append(
+                f"<tr><td class='num'>{sym}</td><td>{fa}</td><td class='num'>{st['trades']}</td>"
+                f"<td class='num'>{st['profit_factor']:.2f}</td><td class='num'>{st['sharpe']:+.2f}</td>"
+                f"<td class='num {'good' if st['cagr'] > 0 else 'bad'}'>{st['cagr']:+.1%}</td>"
+                f"<td class='num'>{st['max_drawdown']:+.1%}</td></tr>")
+    cmp_head = ("<thead><tr><th>نماد</th><th>نسخه</th><th>معامله</th><th>ضریب سود</th><th>شارپ</th>"
+                "<th>بازده سالانه</th><th>افت حداکثر</th></tr></thead>")
     return (f"<p class='muted'>کد همان کد ربات است، فقط داده ساعتی به‌جای ۲ سال یاهو، ۱۶ سال HistData است. "
             f"یادگیری ماشین walk-forward است و دوره خارج از نمونه از <span class='num'>{_e(oos)}</span> شروع می‌شود. "
-            f"ریسک هر معامله ۰٫۵٪ است و هزینه‌ها کسر شده‌اند.</p>{month}"
+            f"ریسک هر معامله ۰٫۵٪ است و هزینه‌ها کسر شده‌اند. فیلتر متا که در حالت عادی هم خاموش است، اجرا نشد.</p>{month}"
             f"<div class='grid2'><div class='scroll'><table>{head}<tbody>{''.join(stats_rows)}</tbody></table></div>"
-            f"<div class='scroll'><table>{head}<tbody>{''.join(body)}</tbody></table></div></div>")
+            f"<div class='scroll'><table>{head}<tbody>{''.join(body)}</tbody></table></div></div>"
+            f"<h3 style='margin-top:14px'>در برابر نسخه‌های ساده‌تر</h3>"
+            f"<div class='scroll'><table>{cmp_head}<tbody>{''.join(cmp_rows)}</tbody></table></div>")
+
+
+def _risk_scaling(js: dict | None) -> str:
+    if not js:
+        return ""
+    rows = []
+    for risk, st in js.items():
+        cls = "bad" if st["max_drawdown"] < -0.35 else ""
+        rows.append(
+            f"<tr class='{cls}'><td class='num'>{float(risk) * 100:.1f}%</td><td class='num'>{st['cagr']:+.1%}</td>"
+            f"<td class='num'>{st['median_month']:+.2%}</td><td class='num'>{st['mean_month']:+.2%}</td>"
+            f"<td class='num'>{st['positive_months']:.0%}</td><td class='num'>{st['best_month']:+.1%}</td>"
+            f"<td class='num'>{st['worst_month']:+.1%}</td><td class='num'>{st['worst_12m']:+.1%}</td>"
+            f"<td class='num'>{st['max_drawdown']:+.1%}</td><td class='num'>{st['months_ge_10pct']} از {st['months']}</td></tr>")
+    head = ("<thead><tr><th>ریسک هر معامله</th><th>بازده سالانه</th><th>میانه ماه</th><th>میانگین ماه</th><th>ماه مثبت</th>"
+            "<th>بهترین ماه</th><th>بدترین ماه</th><th>بدترین ۱۲ ماه</th><th>افت حداکثر</th><th>ماه‌های ۱۰٪+</th></tr></thead>")
+    return ("<h3 style='margin-top:14px'>اگر ریسک هر معامله بیشتر بود</h3>"
+            "<p class='muted'>همان معاملات ۱۶ ساله با ریسک بزرگ‌تر دوباره مرکب شده‌اند. ترمز افت سرمایه دوباره شبیه‌سازی نشده، "
+            "پس ردیف‌های پرریسک اگر خطایی داشته باشند، خوش‌بینانه‌اند.</p>"
+            f"<div class='scroll'><table>{head}<tbody>{''.join(rows)}</tbody></table></div>")
 
 
 def _chronos(js: dict | None) -> str:
@@ -277,7 +314,8 @@ def lab_section(survey, hypotheses, chart_notes, sources) -> str:
     <p class="muted">میله‌های بزرگ ساعت ۲۱ تا ۲۳ UTC واقعی نیستند: داده فقط قیمت Bid دارد و در زمان رول‌اور ۵ عصر نیویورک
     اسپرد باز می‌شود (افت ساختگی و برگشت بعدی). معامله‌گر خرد در این ساعت‌ها همان اسپرد را می‌پردازد.</p></div>
   <details class="card"><summary>جدول کامل ۶۰ آزمون</summary>{_strategy_rows(rows)}</details>
-  <div class="card"><h3>اعتبارسنجی ۱۶ ساله استراتژی اصلی ربات</h3>{_long_history(_load('long_history_backtest.json'))}</div>
+  <div class="card"><h3>اعتبارسنجی ۱۶ ساله استراتژی اصلی ربات</h3>{_long_history(_load('long_history_backtest.json'))}
+    {_risk_scaling(_load('risk_scaling.json'))}</div>
   <div class="card"><h3>مدل‌های پایه پیش‌بینی سری زمانی (آمازون Chronos)</h3>
     <p class="muted">فقط روی داده‌های پس از انتشار هر مدل آزمون شد تا داده آموزشی به نتیجه نشت نکند. سیگنال: جهت میانه پیش‌بینی یک‌گام بعد.</p>
     {_chronos(_load('foundation_models.json'))}</div>

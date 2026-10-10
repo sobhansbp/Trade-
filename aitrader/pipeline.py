@@ -68,7 +68,7 @@ def prepare(symbol: str, cfg: StrategyConfig = DEFAULT_CONFIG, csv: str | None =
 
 
 def research(symbol: str, cfg: StrategyConfig = DEFAULT_CONFIG, csv: str | None = None,
-             bundle: Bundle | None = None) -> dict:
+             bundle: Bundle | None = None, meta: bool = True) -> dict:
     b = bundle or prepare(symbol, cfg, csv)
     f = b.f.copy()
     cols = ml_columns(f)
@@ -77,7 +77,10 @@ def research(symbol: str, cfg: StrategyConfig = DEFAULT_CONFIG, csv: str | None 
     ens = run_ensemble(f, symbol)
     mm = MetaModel(cols)
     meta_cfg = StrategyConfig(**{**cfg.__dict__, "wf_initial_frac": min(0.85, cfg.wf_initial_frac + 0.2)})
-    meta_p = mm.walk_forward(f, ens, b.labels, meta_cfg)
+    if meta:
+        meta_p = mm.walk_forward(f, ens, b.labels, meta_cfg)
+    else:   # the meta filter is off in production; skipping it saves most of the time on long histories
+        meta_p = pd.Series(np.nan, index=f.index, name="meta_p")
     b.f, b.ens, b.meta_p, b.dir_model, b.meta_model = f, ens, meta_p, dm, mm
 
     n = len(f)

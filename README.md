@@ -46,6 +46,7 @@ python -m aitrader analyze XAUUSD --csv XAUUSD=path/to/XAUUSD_H1.csv
 - `journal/STATUS.md` وضعیت حساب، پوزیشن‌ها، آخرین تحلیل و معاملات بسته‌شده
 - `journal/paper_trades.csv` و `journal/paper_equity.csv` تاریخچه
 - `journal/news_scores.csv` امتیاز اخبار برای سنجش رو به جلو
+- `journal/forward_tests.csv` آزمون رو به جلو فرضیه‌های دور سوم (فقط ثبت، بدون معامله؛ `aitrader/live/forward.py`)
 
 راه‌اندازی: در گیت‌هاب به Settings → Secrets and variables → Actions بروید و `GROQ_API_KEY` (و در صورت تمایل `TELEGRAM_BOT_TOKEN` و `TELEGRAM_CHAT_ID`) را اضافه کنید. برای اجرای دستی از تب Actions → paper-trading → Run workflow استفاده کنید.
 
@@ -102,8 +103,24 @@ aitrader/
   risk/montecarlo.py   رابطه ریسک و سود و احتمال نابودی
   report/              نمودار PNG/Plotly و داشبورد فارسی
   live/runner.py       حلقه زنده، ژورنال، معامله کاغذی، تلگرام، MT5
+  live/forward.py      آزمون رو به جلو از پیش ثبت‌شده برای فرضیه‌هایی که هنوز اثبات نشده‌اند
+  data/histdata.py     داده یک‌دقیقه‌ای رایگان ۲۰۱۰ به بعد (HistData، تبدیل ساعت به UTC)
+research/             آزمون‌های دور سوم: ۶۰ قاعده روی ۱۶ سال، Chronos، اعتبارسنجی بلندمدت، چارت چندزمانه
 tests/                 تست نبود نگاه به آینده، شبیه‌ساز، نرده‌ها
 ```
+
+## پژوهش دور سوم (بازتولید)
+
+```bash
+python -m aitrader.data.histdata EURUSD 2010 2026 && python -m aitrader.data.histdata XAUUSD 2010 2026
+PYTHONPATH=. python3 research/prep_data.py          # M5/H1 از داده یک‌دقیقه‌ای
+PYTHONPATH=. python3 research/round3_tests.py       # ۶۰ آزمون + کنترل آزمون چندگانه
+PYTHONPATH=. python3 research/round3_charts.py      # نمودارها و خروجی فشرده برای داشبورد
+PYTHONPATH=. python3 research/long_history_backtest.py EURUSD   # و XAUUSD، سپس combine
+PYTHONPATH=. python3 research/foundation_models.py  # Chronos-Bolt و Chronos-2 (نیاز به torch و chronos-forecasting)
+```
+
+خلاصه نتایج در `docs/RESEARCH.md` بخش ۷ و بخش «آزمایشگاه پژوهش» داشبورد است.
 
 ## تست
 

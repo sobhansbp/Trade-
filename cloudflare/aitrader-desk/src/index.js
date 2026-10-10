@@ -315,7 +315,7 @@ async function handleUpdate(env, update, origin) {
     "/eurusd": () => symbolText(d, "EURUSD"), "/euro": () => symbolText(d, "EURUSD"), "یورو": () => symbolText(d, "EURUSD"),
     "/gold": () => symbolText(d, "XAUUSD"), "/xauusd": () => symbolText(d, "XAUUSD"), "طلا": () => symbolText(d, "XAUUSD"),
     "/positions": () => positionsText(d), "/forward": () => forwardText(d), "/news": () => newsText(d),
-    "/dashboard": () => `داشبورد زنده: ${origin}/`,
+    "/dashboard": () => `داشبورد زنده: ${origin}/` + (env.DASHBOARD_URL ? `\nداشبورد کامل پژوهش: ${env.DASHBOARD_URL}` : ""),
   };
   const out = routes[cmd] ? routes[cmd]() : await askGroq(env, text, d, origin);
   await reply(env, chat, out);
@@ -469,7 +469,8 @@ ${trades.map((r) => `<tr><td class="num">${esc(String(r.closed).slice(0, 16))}</
 </tbody></table></div></section>` : ""}
 ${v ? `<section class="card"><h2>جمع‌بندی اخبار</h2><p>${esc(v.theme_fa || "")}</p><p class="muted small">${v.n_headlines} تیتر · ${esc(v.model || "")} · ${esc(String(d.news.scored_at).slice(0, 16).replace("T", " "))} UTC</p></section>` : ""}
 <section class="card"><h2>دسترسی</h2><p>ربات تلگرام: <a href="https://t.me/Tradeinfoirbot">@Tradeinfoirbot</a> (دستورهای /status، /gold، /eurusd، /forward و پرسش آزاد).
-کد و ژورنال کامل: <a href="${esc(env.REPO_URL)}">گیت‌هاب</a> · داده خام: <a href="${origin}/api/status">/api/status</a></p></section>
+کد و ژورنال کامل: <a href="${esc(env.REPO_URL)}">گیت‌هاب</a> · داده خام: <a href="${origin}/api/status">/api/status</a>
+${env.DASHBOARD_URL ? ` · داشبورد کامل پژوهش و تحلیل: <a href="${esc(env.DASHBOARD_URL)}">claude.ai</a>` : ""}</p></section>
 <footer>حساب کاغذی است و هیچ سفارشی به بروکر ارسال نمی‌شود. ربات هر ساعت روی GitHub Actions اجرا می‌شود و این صفحه روی Cloudflare از ژورنال آن خوانده می‌شود. تحلیل است، نه توصیه سرمایه‌گذاری.</footer>
 </div></body></html>`;
 }

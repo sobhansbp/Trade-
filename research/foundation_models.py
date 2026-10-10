@@ -5,6 +5,7 @@ Signal: sign(median one-step forecast - last close). Compared with the base rate
 (always predicting the majority direction) and a naive momentum rule.
 """
 import json
+import os
 import sys
 import time
 
@@ -16,7 +17,7 @@ from scipy import stats
 sys.path.insert(0, ".")
 from aitrader.config import CACHE_DIR  # noqa: E402
 
-torch.set_num_threads(4)
+torch.set_num_threads(int(os.environ.get("TORCH_THREADS", "4")))
 MODELS = {"amazon/chronos-bolt-small": "2025-01-01", "amazon/chronos-2": "2026-01-01"}
 COST_BP = {"EURUSD": 1.1, "XAUUSD": 1.5}     # retail round trip, bp, charged when the position flips
 MAX_HOURLY = {"amazon/chronos-2": 1000}     # the larger model is slow on CPU: last 1000 hours only

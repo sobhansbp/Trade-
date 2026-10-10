@@ -58,5 +58,29 @@
   "net_sharpe": -1.68,
   "t_net": -1.46,
   "flip_rate": 0.241
+ },
+ "amazon/chronos-2|EURUSD|hourly": {
+  "n": 1000,
+  "hit_rate": 0.494,
+  "base_rate": 0.52,
+  "naive_momentum_hit": 0.4742,
+  "p_hit_vs_50pct": 0.728,
+  "gross_ann": -0.0626,
+  "net_ann": -0.2054,
+  "net_sharpe": -4.88,
+  "t_net": -1.95,
+  "flip_rate": 0.208
+ },
+ "amazon/chronos-2|XAUUSD|daily": {
+  "n": 185,
+  "hit_rate": 0.4973,
+  "base_rate": 0.5189,
+  "naive_momentum_hit": 0.4757,
+  "p_hit_vs_50pct": 1.0,
+  "gross_ann": -0.22,
+  "net_ann": -0.2283,
+  "net_sharpe": -0.74,
+  "t_net": -0.63,
+  "flip_rate": 0.222
  }
 }

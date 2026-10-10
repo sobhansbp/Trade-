@@ -21,5 +21,6 @@ id = "d92a4a16702a4460901f5e7f33c57120"
 REPO_RAW = "https://raw.githubusercontent.com/sobhansbp/Trade-/ccr-131f7ec0-kdgwmt"
 REPO_URL = "https://github.com/sobhansbp/Trade-/tree/ccr-131f7ec0-kdgwmt"
 GROQ_MODEL = "openai/gpt-oss-120b"
+DASHBOARD_URL = "https://claude.ai/artifact/2o8uiB1HLs2eSpSwzjLe8U"   # full research dashboard (private to the owner)
 STALE_MINUTES = "150"
 QA_PER_HOUR = "20"

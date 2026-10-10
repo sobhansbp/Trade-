@@ -19,6 +19,7 @@ from aitrader.config import CACHE_DIR  # noqa: E402
 torch.set_num_threads(4)
 MODELS = {"amazon/chronos-bolt-small": "2025-01-01", "amazon/chronos-2": "2026-01-01"}
 COST_BP = {"EURUSD": 1.1, "XAUUSD": 1.5}     # retail round trip, bp, charged when the position flips
+MAX_HOURLY = {"amazon/chronos-2": 1000}     # the larger model is slow on CPU: last 1000 hours only
 
 
 def daily_closes(sym):
@@ -85,11 +86,15 @@ if __name__ == "__main__":
         pipe = BaseChronosPipeline.from_pretrained(model, device_map="cpu", torch_dtype=torch.float32)
         print(f"loaded {model} in {time.time() - t0:.0f}s", flush=True)
         for sym in ("EURUSD", "XAUUSD"):
-            d = evaluate(pipe, daily_closes(sym), start)
-            s = score(d, COST_BP[sym], 252)
-            out[f"{model}|{sym}|daily"] = s
-            print(f"  {sym} daily  from {start}: {s}", flush=True)
-            h = evaluate(pipe, hourly_closes(sym), start, max_n=3000)
+            if f"{model}|{sym}|daily" not in out:
+                d = evaluate(pipe, daily_closes(sym), start)
+                s = score(d, COST_BP[sym], 252)
+                out[f"{model}|{sym}|daily"] = s
+                print(f"  {sym} daily  from {start}: {s}", flush=True)
+                res_path.write_text(json.dumps(out, indent=1))
+            if f"{model}|{sym}|hourly" in out:
+                continue
+            h = evaluate(pipe, hourly_closes(sym), start, max_n=MAX_HOURLY.get(model, 3000))
             sh = score(h, COST_BP[sym], 24 * 260)
             out[f"{model}|{sym}|hourly"] = sh
             print(f"  {sym} hourly (last {len(h)} h): {sh}", flush=True)

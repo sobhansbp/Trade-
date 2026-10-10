@@ -1,0 +1,25 @@
+# aitrader-desk: live status page, owner-only Telegram commands and a watchdog for the
+# GitHub Actions bot. Trading logic stays in Python on GitHub Actions; this Worker only reads
+# the journal files the bot commits to the public repository.
+#
+#   cd cloudflare/aitrader-desk && npx wrangler@4.139.0 deploy
+#   secrets: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, GROQ_API_KEY, TG_WEBHOOK_SECRET
+#            (npx wrangler@4.139.0 secret put NAME)
+name = "aitrader-desk"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+[triggers]
+crons = ["37 * * * *"]    # watchdog: alert when the hourly bot stops updating its journal
+
+[[kv_namespaces]]
+binding = "KV"
+id = "d92a4a16702a4460901f5e7f33c57120"
+
+[vars]
+REPO_RAW = "https://raw.githubusercontent.com/sobhansbp/Trade-/ccr-131f7ec0-kdgwmt"
+REPO_URL = "https://github.com/sobhansbp/Trade-/tree/ccr-131f7ec0-kdgwmt"
+GROQ_MODEL = "openai/gpt-oss-120b"
+STALE_MINUTES = "150"
+QA_PER_HOUR = "20"

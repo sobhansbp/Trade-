@@ -6,6 +6,7 @@ few dollars). Load your own broker export with ``--csv`` for exact levels.
 """
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -13,6 +14,8 @@ ROOT = Path(__file__).resolve().parent.parent
 CACHE_DIR = ROOT / "data_cache"
 REPORT_DIR = ROOT / "reports"
 JOURNAL_DIR = ROOT / "journal"
+# live status page + Telegram commands served by the Cloudflare Worker in cloudflare/aitrader-desk
+DESK_URL = os.environ.get("AITRADER_DESK_URL", "https://aitrader-desk.sobhan13851121.workers.dev")
 MODEL_DIR = ROOT / "models"
 
 

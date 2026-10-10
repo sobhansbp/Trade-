@@ -50,6 +50,20 @@ python -m aitrader analyze XAUUSD --csv XAUUSD=path/to/XAUUSD_H1.csv
 
 راه‌اندازی: در گیت‌هاب به Settings → Secrets and variables → Actions بروید و `GROQ_API_KEY` (و در صورت تمایل `TELEGRAM_BOT_TOKEN` و `TELEGRAM_CHAT_ID`) را اضافه کنید. برای اجرای دستی از تب Actions → paper-trading → Run workflow استفاده کنید.
 
+### داشبورد زنده و ربات تلگرام روی Cloudflare
+یک Cloudflare Worker (`cloudflare/aitrader-desk`) ژورنال ربات را از همین مخزن می‌خواند و سه کار انجام می‌دهد. خود معامله و یادگیری ماشین همچنان روی GitHub Actions اجرا می‌شود، چون Workers پایتون و LightGBM را اجرا نمی‌کند.
+- **داشبورد زنده:** https://aitrader-desk.sobhan13851121.workers.dev (موجودی دو دفتر، تصمیم آخر هر نماد، سوگیری روزانه، پلن، منحنی سرمایه، آزمون رو به جلو و اخبار). داده خام JSON در `/api/status` است.
+- **ربات تلگرام (فقط برای صاحب حساب):** `/status`، `/eurusd`، `/gold`، `/positions`، `/forward`، `/news`، `/dashboard`. هر پیام دیگر به Groq فرستاده می‌شود و با داده لحظه‌ای ربات جواب می‌گیرد (سقف ۲۰ سؤال در ساعت).
+- **نگهبان:** هر ساعت (دقیقه ۳۷) بررسی می‌کند. اگر ربات در ساعات کاری بیش از ۱۵۰ دقیقه ژورنال را به‌روز نکرده باشد، در تلگرام هشدار می‌دهد و پس از برگشت هم خبر می‌دهد.
+
+استقرار دوباره:
+```bash
+cd cloudflare/aitrader-desk
+npx wrangler@4.139.0 deploy
+npx wrangler@4.139.0 secret put TELEGRAM_BOT_TOKEN   # و TELEGRAM_CHAT_ID، GROQ_API_KEY، TG_WEBHOOK_SECRET
+```
+وب‌هوک تلگرام با `setWebhook` و پارامتر `secret_token` (همان TG_WEBHOOK_SECRET) روی آدرس `/tg` تنظیم می‌شود. برای عوض کردن کلید Groq از همان دستور `secret put` یا داشبورد Cloudflare استفاده کنید (Workers → aitrader-desk → Settings → Variables and Secrets).
+
 ### روش ۲: متاتریدر ۵ روی ویندوز (سفارش واقعی روی حساب دمو)
 `scripts/run_live_windows.bat` را باز کنید، کلیدها را وارد کنید، در MT5 وارد یک **حساب دمو** شوید و فایل را اجرا کنید. با `--execute` سفارش‌ها با حد ضرر و تارگت به MT5 ارسال می‌شوند.
 
@@ -105,6 +119,7 @@ aitrader/
   live/runner.py       حلقه زنده، ژورنال، معامله کاغذی، تلگرام، MT5
   live/forward.py      آزمون رو به جلو از پیش ثبت‌شده برای فرضیه‌هایی که هنوز اثبات نشده‌اند
   data/histdata.py     داده یک‌دقیقه‌ای رایگان ۲۰۱۰ به بعد (HistData، تبدیل ساعت به UTC)
+cloudflare/aitrader-desk/  Worker: داشبورد زنده، دستورهای تلگرام، نگهبان (فقط خواندن ژورنال)
 research/             آزمون‌های دور سوم: ۶۰ قاعده روی ۱۶ سال، Chronos، اعتبارسنجی بلندمدت، چارت چندزمانه
 tests/                 تست نبود نگاه به آینده، شبیه‌ساز، نرده‌ها
 ```

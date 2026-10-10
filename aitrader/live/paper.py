@@ -227,5 +227,7 @@ def status_markdown(st: dict, lives: dict, news: dict | None, forward: list[dict
             lines.append(f"| {h['hypothesis']} | {h['symbol']} | {h['n']} | {h['mean_net_bp']:+.2f} | "
                          f"{h['sum_net_bp']:+.1f} | {h['hit']:.0%} | {t} |")
         lines.append("ثبت از ۲۰۲۶-۱۰-۱۲؛ قاعده‌ها پیش از دیدن این داده‌ها ثابت شده‌اند (`aitrader/live/forward.py`).")
-    lines += ["", "> حساب کاغذی است؛ هیچ سفارشی به بروکر ارسال نمی‌شود. نتایج گذشته تضمین آینده نیست."]
+    from ..config import DESK_URL
+    lines += ["", f"داشبورد زنده (Cloudflare): {DESK_URL} · ربات تلگرام: /status، /gold، /eurusd و پرسش آزاد",
+              "", "> حساب کاغذی است؛ هیچ سفارشی به بروکر ارسال نمی‌شود. نتایج گذشته تضمین آینده نیست."]
     return "\n".join(lines) + "\n"

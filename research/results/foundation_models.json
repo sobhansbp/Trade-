@@ -46,5 +46,17 @@
   "net_sharpe": -0.15,
   "t_net": -0.1,
   "flip_rate": 0.174
+ },
+ "amazon/chronos-2|EURUSD|daily": {
+  "n": 191,
+  "hit_rate": 0.4555,
+  "base_rate": 0.555,
+  "naive_momentum_hit": 0.4764,
+  "p_hit_vs_50pct": 0.2469,
+  "gross_ann": -0.0895,
+  "net_ann": -0.0962,
+  "net_sharpe": -1.68,
+  "t_net": -1.46,
+  "flip_rate": 0.241
  }
 }

@@ -7,3 +7,5 @@ data_cache/
 journal/*.png
 models/
 reports/dashboard_fragment.html
+.wrangler/
+node_modules/

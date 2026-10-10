@@ -15,7 +15,7 @@ from pathlib import Path
 
 import requests
 
-from ..config import JOURNAL_DIR
+from ..config import DESK_URL, JOURNAL_DIR
 
 JOURNAL_DIR.mkdir(parents=True, exist_ok=True)
 SIGNALS = JOURNAL_DIR / "signals.csv"
@@ -107,7 +107,7 @@ def summary_text(st: dict, lives: dict, news: dict | None) -> str:
                      + (f" | اخبار {nv:+.2f}" if nv is not None else ""))
     if news and news.get("theme_fa"):
         lines.append(f"📰 {news['theme_fa']}")
-    lines.append("جزئیات: github.com/sobhansbp/Trade-/blob/ccr-131f7ec0-kdgwmt/journal/STATUS.md")
+    lines.append(f"داشبورد زنده: {DESK_URL}  (دستورها: /status /gold /eurusd)")
     return "\n".join(lines)
 
 

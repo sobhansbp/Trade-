@@ -1,0 +1,67 @@
+{
+ "0.005": {
+  "cagr": -0.0262,
+  "mean_month": -0.0021,
+  "median_month": -0.003,
+  "positive_months": 0.425,
+  "best_month": 0.0421,
+  "worst_month": -0.0412,
+  "worst_12m": -0.1241,
+  "max_drawdown": -0.3124,
+  "final_equity": 7160.0,
+  "months_ge_10pct": 0,
+  "months": 153
+ },
+ "0.010": {
+  "cagr": -0.0546,
+  "mean_month": -0.0041,
+  "median_month": -0.0063,
+  "positive_months": 0.418,
+  "best_month": 0.0853,
+  "worst_month": -0.0813,
+  "worst_12m": -0.2363,
+  "max_drawdown": -0.542,
+  "final_equity": 4929.0,
+  "months_ge_10pct": 0,
+  "months": 153
+ },
+ "0.020": {
+  "cagr": -0.1173,
+  "mean_month": -0.0082,
+  "median_month": -0.0133,
+  "positive_months": 0.418,
+  "best_month": 0.1748,
+  "worst_month": -0.1584,
+  "worst_12m": -0.4276,
+  "max_drawdown": -0.8151,
+  "final_equity": 2077.0,
+  "months_ge_10pct": 8,
+  "months": 153
+ },
+ "0.030": {
+  "cagr": -0.186,
+  "mean_month": -0.0123,
+  "median_month": -0.0211,
+  "positive_months": 0.418,
+  "best_month": 0.2685,
+  "worst_month": -0.2313,
+  "worst_12m": -0.579,
+  "max_drawdown": -0.9342,
+  "final_equity": 749.0,
+  "months_ge_10pct": 18,
+  "months": 153
+ },
+ "0.050": {
+  "cagr": -0.3328,
+  "mean_month": -0.0205,
+  "median_month": -0.0388,
+  "positive_months": 0.399,
+  "best_month": 0.4685,
+  "worst_month": -0.3643,
+  "worst_12m": -0.7847,
+  "max_drawdown": -0.9945,
+  "final_equity": 61.0,
+  "months_ge_10pct": 34,
+  "months": 153
+ }
+}

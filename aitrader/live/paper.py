@@ -186,7 +186,7 @@ def status_markdown(st: dict, lives: dict, news: dict | None, forward: list[dict
     lines = ["# وضعیت حساب دمو (Paper Trading)", "",
              f"آخرین به‌روزرسانی: `{_now()}` · شروع: `{st['created'][:10]}` · سرمایه اولیه هر دفتر: ${init:,.0f}", "",
              "| دفتر | موجودی | بازده | افت از سقف |", "|---|---|---|---|",
-             f"| تاکتیکی ساعتی | ${t['equity']:,.2f} | {pct(t['equity'] / init - 1)} | {pct(t['equity'] / t['peak'] - 1)} |",
+             f"| تاکتیکی ساعتی (آزمایشی) | ${t['equity']:,.2f} | {pct(t['equity'] / init - 1)} | {pct(t['equity'] / t['peak'] - 1)} |",
              f"| سوئینگ روزانه | ${s['equity']:,.2f} | {pct(s['equity'] / init - 1)} | {pct(s['equity'] / s['peak'] - 1)} |",
              f"| **جمع** | **${t['equity'] + s['equity']:,.2f}** | **{pct((t['equity'] + s['equity']) / (2 * init) - 1)}** | |",
              "", "## پوزیشن‌های باز تاکتیکی", ""]

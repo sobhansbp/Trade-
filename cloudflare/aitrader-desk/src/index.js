@@ -174,7 +174,7 @@ function statusText(d, env) {
   const b = books(d);
   const lines = ["وضعیت حساب دمو"];
   if (b) {
-    lines.push(`تاکتیکی ساعتی: ${money(b.t.equity)} (${pct(b.tRet)})`,
+    lines.push(`تاکتیکی ساعتی (آزمایشی): ${money(b.t.equity)} (${pct(b.tRet)})`,
                `سوئینگ روزانه: ${money(b.s.equity)} (${pct(b.sRet)})`,
                `جمع: ${money(b.total)} (${pct(b.totRet)})`);
   }
@@ -277,7 +277,8 @@ async function askGroq(env, question, d, origin) {
     "فقط از داده‌های JSON زیر استفاده کن و هیچ قیمت، سطح یا عددی از خودت نساز. اگر داده‌ای نیست، صادقانه بگو.",
     "قوانین ربات: فقط در جهت سوگیری روزانه قوی (|bias| ≥ 0.5) و با تأیید میز ۱۲ تحلیلگر ساعتی (composite هم‌جهت > 0.05) معامله می‌کند؛",
     "ریسک هر معامله ۰٫۵٪، ۵۰٪ در +1R بسته و حد ضرر سر به سر، تارگت نهایی 2.5R یا ۷۲ ساعت؛ دفتر سوئینگ موقعیت را متناسب با سوگیری و هدف نوسان ۱۰٪ نگه می‌دارد.",
-    "هوش مصنوعی فقط حق وتو دارد. پژوهش ۱۶ ساله نشان داد قواعد ساعتی و درون‌روزی به‌تنهایی پس از هزینه لبه ندارند و روند روزانه و اختلاف نرخ بهره قوی‌ترین لایه است؛",
+    "هوش مصنوعی فقط حق وتو دارد. اعتبارسنجی ۱۶ ساله نشان داد بخش ساعتی (دفتر تاکتیکی) در ۲۰۱۴ تا ۲۰۲۶ پس از هزینه سود نداد (ضریب سود ۰٫۹۵ تا ۱٫۰۰) و آزمایشی است؛",
+    "دفتر سوئینگ روزانه تنها لایه با شواهد مثبت بلندمدت است (۲۰۰۴ تا ۲۰۲۶، نوسان ۱۰٪: بازده سالانه حدود ۷٪، افت حداکثر حدود ۲۰٪)؛",
     "سود ۱۰٪ ماهانه از نظر آماری واقع‌بینانه نیست. در پایان یک جمله کوتاه بگو که این تحلیل است، نه توصیه سرمایه‌گذاری.",
     "داده‌ها:", JSON.stringify(ctx),
   ].join("\n");
@@ -453,7 +454,7 @@ a{color:var(--brass)}footer{font-size:.8rem;color:var(--muted);border-top:1px so
 <div class="status"><span class="badge ${alive ? "on" : "off"}">ربات ${alive ? "فعال" : "متوقف"}</span>
 <span class="badge ${marketOpen() ? "on" : ""}">بازار ${marketOpen() ? "باز" : "بسته"}</span></div></div>
 <div class="muted small">آخرین اجرای ربات: <span class="num">${utc(d.updated)}</span><br>بازخوانی خودکار هر ۵ دقیقه</div></header>
-${b ? `<div class="kpis">${kpi("جمع دو دفتر", b.total, b.totRet)}${kpi("دفتر تاکتیکی ساعتی", b.t.equity, b.tRet, b.tDD)}${kpi("دفتر سوئینگ روزانه", b.s.equity, b.sRet, b.sDD)}</div>` : ""}
+${b ? `<div class="kpis">${kpi("جمع دو دفتر", b.total, b.totRet)}${kpi("دفتر تاکتیکی ساعتی (آزمایشی)", b.t.equity, b.tRet, b.tDD)}${kpi("دفتر سوئینگ روزانه", b.s.equity, b.sRet, b.sDD)}</div>` : ""}
 <div class="grid">${SYMBOLS.map((s) => symbolCard(d, s)).join("")}</div>
 <section class="card"><h2>منحنی سرمایه (بازده درصدی)</h2>${equitySvg(d.equity, d.state?.initial || 10000)}</section>
 <div class="grid">

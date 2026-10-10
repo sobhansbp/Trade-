@@ -182,7 +182,8 @@ def _long_history(js: dict | None) -> str:
     for k, fa, f in keys:
         cells = []
         for c in cols:
-            st = js[c].get("stats") if c == "portfolio" else js[c].get("runs", {}).get("production_oos", {})
+            runs = js[c].get("runs", {})
+            st = js[c].get("stats") if c == "portfolio" else runs.get("production_nohalt", runs.get("production_oos", {}))
             v = (st or {}).get(k)
             cells.append(f"<td class='num'>{f.format(v) if isinstance(v, (int, float)) else '–'}</td>")
         stats_rows.append(f"<tr><td>{fa}</td>{''.join(cells)}</tr>")
@@ -195,8 +196,8 @@ def _long_history(js: dict | None) -> str:
                  f"بهترین <b class='num'>{v.max() * 100:+.1f}%</b> و بدترین <b class='num'>{v.min() * 100:+.1f}%</b>.</p>")
     oos = js.get(syms[0], {}).get("ml_oos_start", "")[:10] if syms else ""
     head = "<thead><tr><th></th>" + "".join(f"<th>{label[c]}</th>" for c in cols) + "</tr></thead>"
-    runs_fa = (("production_oos", "استراتژی ربات"), ("daily_bias_only", "فقط سوگیری روزانه"),
-               ("desk_only_v1", "فقط میز ساعتی"), ("random_entries", "ورود تصادفی"))
+    runs_fa = (("production_nohalt", "استراتژی ربات"), ("daily_bias_only_nohalt", "ورود ساعتی فقط با سوگیری روزانه"),
+               ("random_entries_nohalt", "ورود تصادفی با همان مدیریت معامله"))
     cmp_rows = []
     for sym in syms:
         for k, fa in runs_fa:
@@ -212,7 +213,9 @@ def _long_history(js: dict | None) -> str:
                 "<th>بازده سالانه</th><th>افت حداکثر</th></tr></thead>")
     return (f"<p class='muted'>کد همان کد ربات است، فقط داده ساعتی به‌جای ۲ سال یاهو، ۱۶ سال HistData است. "
             f"یادگیری ماشین walk-forward است و دوره خارج از نمونه از <span class='num'>{_e(oos)}</span> شروع می‌شود. "
-            f"ریسک هر معامله ۰٫۵٪ است و هزینه‌ها کسر شده‌اند. فیلتر متا که در حالت عادی هم خاموش است، اجرا نشد.</p>{month}"
+            f"ریسک هر معامله ۰٫۵٪ است و هزینه‌ها کسر شده‌اند. ترمز افت ۱۲٪ در بک‌تست دائمی است (یورو در ۲۰۱۶ و طلا در ۲۰۱۹ "
+            f"به آن خوردند و دیگر معامله نکردند)، پس اعداد زیر بدون توقف دائمی‌اند؛ نصف شدن ریسک در افت ۶٪ فعال است.</p>"
+            f"<p class='bad'>نتیجه: بخش ساعتی ربات در این ۱۲٫۷ سال سود نداد. از ورود تصادفی بهتر بود، ولی نه به اندازه هزینه معامله.</p>{month}"
             f"<div class='grid2'><div class='scroll'><table>{head}<tbody>{''.join(stats_rows)}</tbody></table></div>"
             f"<div class='scroll'><table>{head}<tbody>{''.join(body)}</tbody></table></div></div>"
             f"<h3 style='margin-top:14px'>در برابر نسخه‌های ساده‌تر</h3>"
@@ -237,6 +240,30 @@ def _risk_scaling(js: dict | None) -> str:
             "<p class='muted'>همان معاملات ۱۶ ساله با ریسک بزرگ‌تر دوباره مرکب شده‌اند. ترمز افت سرمایه دوباره شبیه‌سازی نشده، "
             "پس ردیف‌های پرریسک اگر خطایی داشته باشند، خوش‌بینانه‌اند.</p>"
             f"<div class='scroll'><table>{head}<tbody>{''.join(rows)}</tbody></table></div>")
+
+
+def _swing_leverage(js: dict | None) -> str:
+    if not js:
+        return ""
+    rows = []
+    for tv, d in js["targets"].items():
+        a = d["all"]
+        cls = "bad" if a["max_drawdown"] < -0.35 else ""
+        rows.append(
+            f"<tr class='{cls}'><td class='num'>{float(tv) * 100:.0f}%</td><td class='num good'>{a['cagr']:+.1%}</td>"
+            f"<td class='num'>{a['sharpe']:.2f}</td><td class='num'>{a['max_drawdown']:+.1%}</td>"
+            f"<td class='num'>{a['median_month']:+.2%}</td><td class='num'>{a['worst_month']:+.1%}</td>"
+            f"<td class='num'>{a['worst_12m']:+.1%}</td><td class='num'>{a['months_ge_10pct']} از {a['months']}</td></tr>")
+    head = ("<thead><tr><th>هدف نوسان سالانه</th><th>بازده سالانه</th><th>شارپ</th><th>افت حداکثر</th><th>میانه ماه</th>"
+            "<th>بدترین ماه</th><th>بدترین ۱۲ ماه</th><th>ماه‌های ۱۰٪+</th></tr></thead>")
+    p0, p1 = js["period"]
+    return (f"<p>دفتر سوئینگ (سوگیری روزانه × اهرم هدف‌نوسان، یورو و طلا با سرمایه برابر) از <span class='num'>{p0[:4]}</span> تا "
+            f"<span class='num'>{p1[:4]}</span> مثبت بود: شارپ یورو <span class='num'>{js['books_sharpe']['EURUSD']}</span>، طلا "
+            f"<span class='num'>{js['books_sharpe']['XAUUSD']}</span> و همبستگی دو دفتر <span class='num'>{js['corr']}</span>. "
+            "اجزای این لایه روی ۲۰۰۵ تا ۲۰۲۳ انتخاب شده‌اند، پس فقط ۲۰۲۴ به بعد کاملاً برون‌نمونه است.</p>"
+            f"<div class='scroll'><table>{head}<tbody>{''.join(rows)}</tbody></table></div>"
+            "<p class='muted'>مسیر واقع‌بینانه سود بیشتر، اهرم بیشتر روی همین لایه است، با پذیرفتن افت بزرگ‌تر. حتی با نوسان ۲۰٪ "
+            "میانگین حدود ۱٪ در ماه است.</p>")
 
 
 def _chronos(js: dict | None) -> str:
@@ -316,6 +343,7 @@ def lab_section(survey, hypotheses, chart_notes, sources) -> str:
   <details class="card"><summary>جدول کامل ۶۰ آزمون</summary>{_strategy_rows(rows)}</details>
   <div class="card"><h3>اعتبارسنجی ۱۶ ساله استراتژی اصلی ربات</h3>{_long_history(_load('long_history_backtest.json'))}
     {_risk_scaling(_load('risk_scaling.json'))}</div>
+  <div class="card"><h3>تنها لایه با شواهد بلندمدت: دفتر سوئینگ روزانه</h3>{_swing_leverage(_load('swing_leverage.json'))}</div>
   <div class="card"><h3>مدل‌های پایه پیش‌بینی سری زمانی (آمازون Chronos)</h3>
     <p class="muted">فقط روی داده‌های پس از انتشار هر مدل آزمون شد تا داده آموزشی به نتیجه نشت نکند. سیگنال: جهت میانه پیش‌بینی یک‌گام بعد.</p>
     {_chronos(_load('foundation_models.json'))}</div>

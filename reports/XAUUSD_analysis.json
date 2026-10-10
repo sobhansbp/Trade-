@@ -1,18 +1,18 @@
 {
  "live": {
   "symbol": "XAUUSD",
-  "time_utc": "2026-10-09 18:00:00+00:00",
-  "price": 4224.9,
+  "time_utc": "2026-10-09 20:00:00+00:00",
+  "price": 4216.3,
   "data_source": "GC=F",
   "decision": "WAIT",
   "bias": "BEARISH",
-  "composite": 0.123,
-  "threshold": 0.168,
-  "agreement": 0.657,
-  "confidence": 0.24,
-  "meta_p_win": 0.792,
-  "ml_p_long": 0.6,
-  "ml_p_short": 0.307,
+  "composite": 0.086,
+  "threshold": 0.173,
+  "agreement": 0.77,
+  "confidence": 0.192,
+  "meta_p_win": 0.747,
+  "ml_p_long": 0.506,
+  "ml_p_short": 0.387,
   "strategic": {
    "bias": -0.25,
    "components": {
@@ -47,7 +47,7 @@
    "2024_now": {
     "sharpe": 1.35,
     "ann_return": 0.1035,
-    "max_drawdown": -0.0873,
+    "max_drawdown": -0.0872,
     "years": 2.8
    },
    "2005_2011": {
@@ -69,28 +69,28 @@
     "years": 6.0
    }
   },
-  "holdout_start": "2026-03-09 09:00:00+00:00",
-  "buy_and_hold_holdout": -0.1739,
-  "regime": "trending",
-  "trend_strength": 0.551,
+  "holdout_start": "2026-03-09 10:00:00+00:00",
+  "buy_and_hold_holdout": -0.1724,
+  "regime": "transition",
+  "trend_strength": 0.513,
   "vol_state": "low-vol",
-  "atr": 12.88,
+  "atr": 12.45,
   "why_not": [
    "daily strategic bias -0.25 is not strong enough (needs |bias| >= 0.5)"
   ],
   "plan": {
    "side": "SHORT",
-   "entry_ref": 4224.9,
-   "stop": 4236.28,
-   "tp1_partial": 4213.52,
-   "tp2_final": 4196.46,
+   "entry_ref": 4216.3,
+   "stop": 4230.29,
+   "tp1_partial": 4202.31,
+   "tp2_final": 4181.33,
    "risk_reward_final": 2.5,
-   "stop_distance": 11.38,
-   "stop_distance_pips": 113.8,
+   "stop_distance": 13.99,
+   "stop_distance_pips": 139.9,
    "liquidity_targets": [
     [
      "sup",
-     4220.1
+     4212.4
     ],
     [
      "last_sl",
@@ -115,38 +115,36 @@
    {
     "name": "trend",
     "title_fa": "روند چندزمانی",
-    "score": 0.22602511819587778,
+    "score": 0.2235616817965806,
     "reasons": [
      "H1 EMA stack flat, Supertrend bullish, Ichimoku above cloud",
      "H4 structure bullish, D1 structure bearish",
-     "ADX 39.3 (+DI-−DI +16.2)"
+     "ADX 40.2 (+DI-−DI +14.5)"
     ]
    },
    {
     "name": "momentum",
     "title_fa": "مومنتوم",
-    "score": 0.2996350537369846,
+    "score": 0.2128853044159466,
     "reasons": [
-     "RSI14 67.4, MACD hist -0.02 ATR, Stoch 67/60",
-     "time-series momentum 5d +0.28σ, 20d -0.55σ"
+     "RSI14 60.8, MACD hist -0.08 ATR, Stoch 74/72",
+     "time-series momentum 5d +0.37σ, 20d -0.55σ"
     ]
    },
    {
     "name": "mean_reversion",
     "title_fa": "بازگشت به میانگین",
-    "score": -0.23705673067615318,
+    "score": -0.04620817295117264,
     "reasons": [
-     "Bollinger z +1.22, RSI3 83, distance to VWAP +1.22 ATR, Hurst 0.38"
+     "Bollinger z +0.59, RSI3 40, distance to VWAP +0.46 ATR, Hurst 0.38"
     ]
    },
    {
     "name": "smc",
     "title_fa": "اسمارت‌مانی / ساختار",
-    "score": -0.037818744791813075,
+    "score": 0.3222602942297578,
     "reasons": [
-     "H1 market structure bullish (HH/HL); dealing-range position 78% (premium)",
-     "recent bullish BOS (continuation)",
-     "in the OTE zone (retracement 78% of last leg)"
+     "H1 market structure bullish (HH/HL); dealing-range position 57% (premium)"
     ]
    },
    {
@@ -158,9 +156,8 @@
    {
     "name": "patterns",
     "title_fa": "الگوها (کندل/کلاسیک/هارمونیک/الیوت)",
-    "score": 0.4046659905851444,
+    "score": 0.18892082611247274,
     "reasons": [
-     "candle: three white soldiers",
      "Elliott count: bullish implication"
     ]
    },
@@ -173,28 +170,28 @@
    {
     "name": "levels",
     "title_fa": "سطوح حمایت/مقاومت و پروفایل",
-    "score": -0.24371284327193496,
+    "score": -0.4416888973600264,
     "reasons": [
-     "nearest support 4220.1 (0.37 ATR away, strength 5.4)",
-     "nearest resistance 4226.8 (0.15 ATR away, strength 1.8)",
+     "nearest support 4212.4 (0.31 ATR away, strength 1.9)",
+     "nearest resistance 4220.1 (0.31 ATR away, strength 5.4)",
      "price above prior-day value area"
     ]
    },
    {
     "name": "macro",
     "title_fa": "بین‌بازاری / کلان",
-    "score": -0.46620610826312314,
+    "score": -0.4039037231276951,
     "reasons": [
-     "10y real yield 20d change +2.40σ (rising real yields weigh on gold)",
+     "10y real yield 20d change +2.06σ (rising real yields weigh on gold)",
      "DXY 20d +2.13σ, silver 5d -0.29σ, VIX z -0.80"
     ]
    },
    {
     "name": "seasonality",
     "title_fa": "فصلی‌بودن ساعتی/روزانه",
-    "score": 0.25121664031438445,
+    "score": 0.41982259944716077,
     "reasons": [
-     "next-6h hour-of-day drift t-stat +0.82, day-of-week t +0.30"
+     "next-6h hour-of-day drift t-stat +1.57, day-of-week t +0.30"
     ]
    },
    {
@@ -208,33 +205,25 @@
    {
     "name": "ml",
     "title_fa": "یادگیری ماشین (LightGBM)",
-    "score": 0.7318478060125406,
+    "score": 0.298292780356318,
     "reasons": [
-     "walk-forward ML: P(long wins) 60%, P(short wins) 31%"
+     "walk-forward ML: P(long wins) 51%, P(short wins) 39%"
     ]
    },
    {
     "name": "news",
     "title_fa": "اخبار (هوش مصنوعی)",
-    "score": -0.335,
+    "score": 0.168,
     "reasons": [
-     "11 relevant headlines, headline score -0.27, model view -0.40, EVENT RISK"
+     "9 relevant headlines, headline score +0.02, model view +0.32, EVENT RISK"
     ]
    }
   ],
   "levels": {
    "support_resistance": [
     [
-     4226.8,
-     1.8
-    ],
-    [
      4220.1,
-     5.4
-    ],
-    [
-     4233.7,
-     2.0
+     5.3
     ],
     [
      4212.4,
@@ -245,16 +234,24 @@
      3.6
     ],
     [
-     4251.1,
+     4226.8,
      1.8
+    ],
+    [
+     4233.7,
+     2.0
     ],
     [
      4196.47,
      5.6
     ],
     [
-     4259.0,
+     4251.1,
      1.8
+    ],
+    [
+     4178.06,
+     9.0
     ]
    ],
    "zones": [
@@ -464,108 +461,108 @@
   "htf": {
    "h4_trend": 1.0,
    "d1_trend": -1.0,
-   "h4_rsi": 59.9,
+   "h4_rsi": 61.3,
    "d1_rsi": 40.1
   },
   "news": [],
   "news_blackout": false,
   "backtest": {
    "production_oos": {
-    "trades": 308,
+    "trades": 313,
     "years": 1.43,
-    "trades_per_month": 17.9,
-    "win_rate": 0.516,
-    "avg_r": 0.032,
-    "median_r": 0.463,
+    "trades_per_month": 18.2,
+    "win_rate": 0.511,
+    "avg_r": 0.035,
+    "median_r": 0.4,
     "profit_factor": 1.07,
-    "total_return": 0.055,
-    "cagr": 0.0381,
-    "sharpe": 0.43,
-    "sortino": 0.48,
+    "total_return": 0.0651,
+    "cagr": 0.0451,
+    "sharpe": 0.49,
+    "sortino": 0.57,
     "max_drawdown": -0.0765,
-    "calmar": 0.5,
-    "psr": 0.696,
+    "calmar": 0.59,
+    "psr": 0.71,
     "max_losing_streak": 10,
-    "long_trades": 308,
+    "long_trades": 313,
     "short_trades": 0,
     "exit_reasons": {
-     "stop": 149,
-     "breakeven": 94,
-     "target": 62,
+     "stop": 153,
+     "breakeven": 92,
+     "target": 65,
      "time": 3
     }
    },
    "production_dev": {
-    "trades": 256,
+    "trades": 258,
     "years": 1.43,
-    "trades_per_month": 14.9,
+    "trades_per_month": 15.0,
     "win_rate": 0.535,
-    "avg_r": 0.096,
+    "avg_r": 0.101,
     "median_r": 0.501,
-    "profit_factor": 1.21,
-    "total_return": 0.1264,
-    "cagr": 0.0868,
-    "sharpe": 1.21,
-    "sortino": 1.82,
+    "profit_factor": 1.22,
+    "total_return": 0.1348,
+    "cagr": 0.0924,
+    "sharpe": 1.27,
+    "sortino": 1.94,
     "max_drawdown": -0.0563,
-    "calmar": 1.54,
-    "psr": 0.916,
+    "calmar": 1.64,
+    "psr": 0.926,
     "max_losing_streak": 7,
-    "long_trades": 256,
+    "long_trades": 258,
     "short_trades": 0,
     "exit_reasons": {
-     "stop": 119,
+     "stop": 120,
      "breakeven": 76,
-     "target": 58,
+     "target": 59,
      "time": 3
     }
    },
    "production_holdout": {
-    "trades": 52,
+    "trades": 55,
     "years": 0.59,
-    "trades_per_month": 7.4,
-    "win_rate": 0.423,
-    "avg_r": -0.283,
+    "trades_per_month": 7.8,
+    "win_rate": 0.4,
+    "avg_r": -0.277,
     "median_r": -1.002,
-    "profit_factor": 0.52,
-    "total_return": -0.0681,
-    "cagr": -0.1132,
-    "sharpe": -2.51,
-    "sortino": -1.17,
-    "max_drawdown": -0.0731,
-    "calmar": -1.55,
-    "psr": 0.026,
+    "profit_factor": 0.55,
+    "total_return": -0.0693,
+    "cagr": -0.1152,
+    "sharpe": -2.5,
+    "sortino": -1.23,
+    "max_drawdown": -0.0732,
+    "calmar": -1.57,
+    "psr": 0.033,
     "max_losing_streak": 10,
-    "long_trades": 52,
+    "long_trades": 55,
     "short_trades": 0,
     "exit_reasons": {
-     "stop": 30,
-     "breakeven": 18,
-     "target": 4
+     "stop": 33,
+     "breakeven": 16,
+     "target": 6
     }
    },
    "with_meta_filter": {
-    "trades": 97,
+    "trades": 101,
     "years": 0.96,
-    "trades_per_month": 8.4,
-    "win_rate": 0.485,
-    "avg_r": -0.043,
-    "median_r": -1.001,
-    "profit_factor": 0.92,
-    "total_return": -0.0086,
-    "cagr": -0.0089,
-    "sharpe": -0.09,
-    "sortino": -0.08,
-    "max_drawdown": -0.0807,
-    "calmar": -0.11,
-    "psr": 0.352,
-    "max_losing_streak": 6,
-    "long_trades": 97,
+    "trades_per_month": 8.7,
+    "win_rate": 0.505,
+    "avg_r": 0.015,
+    "median_r": 0.4,
+    "profit_factor": 1.03,
+    "total_return": 0.0202,
+    "cagr": 0.021,
+    "sharpe": 0.28,
+    "sortino": 0.26,
+    "max_drawdown": -0.0703,
+    "calmar": 0.3,
+    "psr": 0.554,
+    "max_losing_streak": 8,
+    "long_trades": 101,
     "short_trades": 0,
     "exit_reasons": {
      "stop": 50,
-     "breakeven": 27,
-     "target": 17,
+     "breakeven": 28,
+     "target": 20,
      "time": 3
     }
    },
@@ -595,45 +592,45 @@
     }
    },
    "desk_only_v1": {
-    "trades": 256,
+    "trades": 259,
     "years": 1.43,
-    "trades_per_month": 14.9,
-    "win_rate": 0.48,
-    "avg_r": -0.026,
-    "median_r": -1.002,
-    "profit_factor": 0.95,
-    "total_return": -0.0412,
-    "cagr": -0.029,
-    "sharpe": -0.31,
-    "sortino": -0.42,
-    "max_drawdown": -0.077,
-    "calmar": -0.38,
-    "psr": 0.358,
+    "trades_per_month": 15.1,
+    "win_rate": 0.498,
+    "avg_r": -0.017,
+    "median_r": -1.001,
+    "profit_factor": 0.97,
+    "total_return": -0.0287,
+    "cagr": -0.0201,
+    "sharpe": -0.19,
+    "sortino": -0.26,
+    "max_drawdown": -0.081,
+    "calmar": -0.25,
+    "psr": 0.401,
     "max_losing_streak": 5,
-    "long_trades": 211,
+    "long_trades": 214,
     "short_trades": 45,
     "exit_reasons": {
-     "stop": 132,
-     "breakeven": 69,
-     "target": 52,
-     "time": 3
+     "stop": 130,
+     "breakeven": 78,
+     "target": 49,
+     "time": 2
     }
    },
    "random_entries": {
     "trades": 217,
     "years": 1.43,
     "trades_per_month": 12.6,
-    "win_rate": 0.502,
-    "avg_r": 0.034,
-    "median_r": 0.381,
-    "profit_factor": 1.07,
-    "total_return": 0.0177,
-    "cagr": 0.0124,
-    "sharpe": 0.19,
-    "sortino": 0.29,
+    "win_rate": 0.498,
+    "avg_r": 0.031,
+    "median_r": -0.021,
+    "profit_factor": 1.06,
+    "total_return": 0.0145,
+    "cagr": 0.0101,
+    "sharpe": 0.16,
+    "sortino": 0.24,
     "max_drawdown": -0.0752,
-    "calmar": 0.16,
-    "psr": 0.67,
+    "calmar": 0.13,
+    "psr": 0.656,
     "max_losing_streak": 6,
     "long_trades": 107,
     "short_trades": 110,
@@ -645,215 +642,204 @@
     }
    }
   },
-  "buy_and_hold_return": 0.2736,
+  "buy_and_hold_return": 0.2692,
   "ml_reports": {
    "direction": {
     "long": {
      "folds": 11,
-     "mean_auc": 0.5458659939629814,
-     "min_auc": 0.46899191712204,
-     "mean_brier": 0.27086449271014756
+     "mean_auc": 0.5495391266170391,
+     "min_auc": 0.4688631916029176,
+     "mean_brier": 0.2701251902313226
     },
     "short": {
      "folds": 11,
-     "mean_auc": 0.5270698774946951,
-     "min_auc": 0.44737011339845234,
-     "mean_brier": 0.2777339033145839
+     "mean_auc": 0.5296030968511624,
+     "min_auc": 0.4476182306856522,
+     "mean_brier": 0.2779026722765617
     }
    },
    "meta": {
     "folds": 8,
-    "mean_auc": 0.5357311717227702,
-    "min_auc": 0.4413507531948312,
-    "mean_brier": 0.26614278684351905
+    "mean_auc": 0.5181419398150715,
+    "min_auc": 0.42867867867867876,
+    "mean_brier": 0.2680135629247251
    }
   },
   "feature_importance": [
    [
     "dist_bull_ob",
-    240.0
-   ],
-   [
-    "res_str",
-    221.0
+    244.0
    ],
    [
     "mac_us2y_chg5",
-    212.0
+    225.0
+   ],
+   [
+    "res_str",
+    222.0
    ],
    [
     "peer_corr",
-    201.0
-   ],
-   [
-    "d1_macd_hist",
-    195.0
-   ],
-   [
-    "dist_bull_fvg",
-    185.0
-   ],
-   [
-    "h4_adx",
-    172.0
-   ],
-   [
-    "adx",
-    166.0
-   ],
-   [
-    "mac_us2y_chg20",
-    164.0
-   ],
-   [
-    "d1_range_pos",
-    164.0
+    217.0
    ],
    [
     "hurst",
-    148.0
+    186.0
    ],
    [
-    "dist_bear_ob",
-    146.0
+    "dist_bull_fvg",
+    180.0
    ],
    [
-    "mac_gold_ret20",
-    144.0
+    "h4_adx",
+    177.0
+   ],
+   [
+    "d1_macd_hist",
+    170.0
+   ],
+   [
+    "mac_real10y_chg5",
+    156.0
+   ],
+   [
+    "d1_range_pos",
+    153.0
+   ],
+   [
+    "adx",
+    153.0
+   ],
+   [
+    "mac_vix_chg5",
+    152.0
+   ],
+   [
+    "mac_us2y_chg20",
+    149.0
    ],
    [
     "d_week_open",
-    142.0
+    148.0
    ],
    [
-    "mac_spx_ret20",
-    142.0
+    "mac_gold_ret20",
+    145.0
    ]
   ],
   "news_view": {
-   "score": -0.335,
-   "headline_score": -0.269,
-   "model_score": -0.4,
+   "score": 0.168,
+   "headline_score": 0.017,
+   "model_score": 0.32,
    "event_risk": true,
-   "rationale_fa": "تقویت دلار ناشی از نگرانی‌های تورمی و فشارهای سیاسی بر فدرال رزرو، همراه با افزایش بازده واقعی واقعی، فشار نزولی بر طلا ایجاد می‌کند. اگرچه برخی اخبار مثبت طلا وجود دارد، اما وزن منفی عوامل فوق بر قیمت طلا غالب است.",
-   "n": 11
+   "rationale_fa": "قیمت طلا تحت تأثیر اخبار دوگانه است: افزایش نرخ بهرهٔ آمریکا (۷، ۱۶، ۳۴، ۳۷) فشار نزولی بر طلا دارد، اما خبرهای مثبت برای طلا مانند شکست دلار (۹)، خریدهای مرکزی (۴۳) و نگرانی‌های ریسک‑آف (۴۰) باعث تقویت طلا می‌شود. مجموع این عوامل نشان می‌دهد طلا در ۲۴ ساعت آینده تمایل به رشد دارد، اگرچه نوسان بالایی نیز محتمل است.",
+   "n": 9
   },
   "news_headlines": [
    {
-    "title": "Japanese Yen struggles as wide US-Japan yield gap weighs | FXStreet",
-    "source": "شبكة تواصل الإخبارية",
-    "time": "2026-10-09T18:10:50+00:00",
-    "impact": -1,
+    "title": "10-year Treasury yield hits 5.34% — a 24-year high now driving mortgage rates, car loans and your portfolio",
+    "source": "Yahoo Finance",
+    "time": "2026-10-10T11:45:00+00:00",
+    "impact": -2,
     "confidence": 80
    },
    {
-    "title": "Gold reclaims $4,200 as weak US sentiment revives bullion demand",
-    "source": "FXStreet",
-    "time": "2026-10-09T18:04:49+00:00",
-    "impact": 1,
-    "confidence": 85
-   },
-   {
-    "title": "September CPI is just the tip of the inflation iceberg",
-    "source": "RBC",
-    "time": "2026-10-09T18:00:04+00:00",
-    "impact": -1,
+    "title": "Gold breaks out as dollar rally cracks and Treasury futures find buyers",
+    "source": "StoneX",
+    "time": "2026-10-10T11:35:33+00:00",
+    "impact": 2,
     "confidence": 75
    },
    {
-    "title": "Gold (XAUUSD), Silver, Platinum – Gold Tests $4200 Amid Broad Rally In Precious Metals Markets",
-    "source": "FXEmpire",
-    "time": "2026-10-09T17:54:37+00:00",
-    "impact": 1,
-    "confidence": 80
+    "title": "Peter Schiff says bond yields could surpass 8% as risk of government default rises: 'No one is talking about ... the real story'",
+    "source": "AOL.com",
+    "time": "2026-10-10T11:00:00+00:00",
+    "impact": -2,
+    "confidence": 70
    },
    {
-    "title": "Japanese Yen struggles as wide US-Japan yield gap weighs",
-    "source": "FXStreet",
-    "time": "2026-10-09T17:52:08+00:00",
-    "impact": -1,
-    "confidence": 80
-   },
-   {
-    "title": "Gold prices hit one-week high, investors eye Fed rate trajectory",
-    "source": "Investing.com commodities",
-    "time": "2026-10-09T17:51:41+00:00",
-    "impact": 1,
-    "confidence": 85
-   },
-   {
-    "title": "U.S. Dollar Strengthens As Fed Rate Hike Fears Grow",
-    "source": "Seeking Alpha",
-    "time": "2026-10-09T17:50:00+00:00",
-    "impact": -1,
-    "confidence": 80
-   },
-   {
-    "title": "Gold Technical Outlook: XAU/USD Selloff Tests Critical Support",
-    "source": "StoneX",
-    "time": "2026-10-09T16:48:57+00:00",
+    "title": "U.S., European Bond Yields Rise",
+    "source": "WSJ",
+    "time": "2026-10-10T09:33:18+00:00",
     "impact": -1,
     "confidence": 70
    },
    {
-    "title": "U.S. Dollar Gains Ground As Bond Sell-Off Resumes: Analysis For EUR/USD, GBP/USD, USD/CAD, USD/JPY",
-    "source": "FXEmpire",
-    "time": "2026-10-09T16:47:21+00:00",
+    "title": "U.S. Treasury yields remain above 5%, bond vola...",
+    "source": "Pluang",
+    "time": "2026-10-10T09:24:50+00:00",
     "impact": -1,
-    "confidence": 80
+    "confidence": 70
    },
    {
-    "title": "Trump sets up committee to investigate Fed Governor Lisa Cook over fraud claims",
-    "source": "The Financial Express",
-    "time": "2026-10-09T16:41:09+00:00",
-    "impact": -1,
-    "confidence": 75
+    "title": "Has the Dollar Rally Stalled, or Is It Already Waiting for the Midterms?",
+    "source": "Action Forex",
+    "time": "2026-10-10T09:12:21+00:00",
+    "impact": 1,
+    "confidence": 65
    },
    {
-    "title": "Trump orders White House inquiry into Fed Governor Cook, renewing push to force her out",
-    "source": "TRT World",
-    "time": "2026-10-09T16:36:02+00:00",
-    "impact": -1,
-    "confidence": 75
+    "title": "Trump appoints committee to revive quest to remove Lisa Cook from Fed board",
+    "source": "Perryville Republic Monitor",
+    "time": "2026-10-10T09:01:03+00:00",
+    "impact": 1,
+    "confidence": 60
+   },
+   {
+    "title": "Trump Forms Committee to Investigate Fed Governor Lisa Cook",
+    "source": "SuaraGarut.ID",
+    "time": "2026-10-10T08:50:49+00:00",
+    "impact": 1,
+    "confidence": 60
+   },
+   {
+    "title": "XAU/USD Forecast: Central Bank Gold Buying Spree Sets Stage for $4,500 Breakout",
+    "source": "FXLeaders",
+    "time": "2026-10-10T08:49:58+00:00",
+    "impact": 2,
+    "confidence": 70
    }
   ],
-  "news_theme_fa": "تقویت دلار و فشار بر طلا به دلیل نگرانی‌های تورمی و مداخلات سیاسی در فدرال رزرو"
+  "news_theme_fa": "تضاد بین فشارهای تورمی/نرخ بهرهٔ آمریکا و نگرانی‌های ریسک‑آف بر دلار و طلا"
  },
  "ai": {
   "mode": "llm",
   "provider": "groq",
   "model": "openai/gpt-oss-120b",
-  "bull_case": "**Why a 1‑3‑day long on XAUUSD is justified (price = 4 224.9)**  \n\n1. **Machine‑learning edge** – The walk‑forward ML model gives a 60 % win probability for longs versus only 31 % for shorts ( ml_p_long = 0.60 ). In the out‑of‑sample production‑dev set the strategy delivers a Sharpe of 1.21 and a profit‑factor of 1.21, showing that the daily bias + desk‑agreement rule (the only tested rule) adds real edge.  \n\n2. **Momentum & macro support** – The momentum analyst scores +0.30, with RSI14 = 67.4, MACD histogram still negative but narrowing, and Stoch = 67/60, indicating the market is still in the upper‑mid range of an up‑trend. Real‑yield pressure is rising (10‑yr real‑yield +2.40 σ), but the news model flags a **negative event‑risk bias** that has already been priced in; the recent headlines (e.g., “Gold reclaims $4,200 as weak US sentiment revives bullion demand”, “Gold prices hit one‑week high, investors eye Fed rate trajectory”) are all **positive** for gold with confidence ≥ 80 %.  \n\n3. **Key support & risk‑reward** – The nearest strong support is at **4 220.1** (0.37 ATR, strength 5.4). Below that lies the “last SL” zone at 4 193.2 and the Asian low at 4 166.4, providing a clear stop‑loss ladder. The plan’s TP1 at 4 213.5 (≈ 1 R) and TP2 at 4 196.5 (≈ 2.5 R) give a **risk‑reward of 2.5** with a stop only 11.4 points away (≈ 0.09 ATR).  \n\n4. **Structural long bias** – The strategic component “structural_long” scores +1.0, reflecting continued central‑bank buying pressure on gold. Even though the daily strategic bias is only –0.25, the **overall composite score (0.123) and agreement (0.657)** indicate the desk leans toward a modest bullish stance.  \n\n5. **Seasonality & intraday drift** – The seasonality analyst gives a modest +0.25 edge, and the hour‑of‑day drift for the next 6 h is +0.82 t‑stat, suggesting a short‑term upward bias.  \n\n**Trade plan** – Enter at the current 4 224.9, set stop at 4 236.3 (just above the nearest resistance 4 226.8), target 4 213.5 (partial) and 4 196.5 (final). Position size = 0.02 lots (≈ 0.25 % of equity).  \n\n**Single condition that would invalidate the case** – If the DXY spikes **> 100 pips** within the next 24 h (i.e., a sudden, sustained USD rally), the macro‑driven downside pressure would likely break the 4 220.1 support and render the long untenable.",
-  "bear_case": "**Short‑term case for a 1‑3 day XAUUSD short (current price 4 224.9)**  \n\n1. **Strategic bias & confidence** – The daily strategic bias is **‑0.25 (BEARISH)** with a low‑confidence flag (0.24). Although the bias does not meet the ‑0.5 strength threshold, the desk’s composite agreement (0.657) still leans bearish, and the model’s **ML short probability (30.7 %)** is more than twice the long probability (60 %).  \n\n2. **Macro pressure** – The macro analyst scores the strongest negative driver (‑0.466). Real‑yield spreads have surged **+2.40 σ** over 20 days, and the DXY is +2.13 σ, both historically pulling gold lower. The news view is also negative (score ‑0.335) with **event‑risk flagged** (Fed‑related political turmoil, CPI surprise).  \n\n3. **Technical edge** –  \n   * **HTF trend conflict:** H4 trend is bullish (+1) but D1 trend is bearish (‑1); the daily trend dominates the tested rule.  \n   * **Key resistance** at **4 226.8** (0.15 ATR, strength 1.8) sits just above the market; a break above it would invalidate the short.  \n   * **Support cluster**: 4 220.1 (0.37 ATR, strength 5.4) and the **liquidity target “last_sl” 4 193.2** provide a clear stop‑loss path. The plan sets a stop at **4 236.28** (≈ 1 ATR) and TP1 at **4 213.52** (≈ 0.8 ATR), TP2 at **4 196.46** (≈ 2.5 R).  \n\n4. **Pattern & sentiment** – The H1 pattern list shows a **rising wedge (bearish reversal risk)** and a **three‑white‑soldiers candle** that, on a low‑vol day (ATR 12.88, vol_state low‑vol), often precedes a pull‑back.  \n\n5. **Risk‑adjusted evidence** – Out‑of‑sample swing‑mode back‑test (20 y) yields a **Sharpe 0.55** and **annual return 3.7 %**, confirming that the daily bias + desk agreement rule adds edge, even when hourly signals are weak.  \n\n**Execution** – Enter short at the market (4 224.9), stop 4 236.28, target 4 213.5 (partial) and 4 196.5 (final). Manage 50 % at TP1, move stop to breakeven, hold the remainder up to 72 h.\n\n**Falsifying condition** – A decisive close **above the nearest resistance 4 226.8** with a candle closing > 4 228.0 would invalidate the bearish case.",
+  "bull_case": "**Long case (1‑3 days)**  \n\n- **News‑driven upside pressure** – The news model flags a net positive “gold‑boost” view (headline score +0.02, model view +0.32) and explicitly notes that “central‑bank buying, dollar weakness and risk‑off sentiment push gold higher”. The most bullish headline (FXLeaders, 08:49 UTC) projects a $4 500 breakout, and the StoneX story (11:35 UTC) reports a breakout as the dollar rally cracks. Event‑risk is flagged, but the direction of the news bias is upward.  \n\n- **Macro tilt** – Although the 10‑yr real yield is rising (‑0.404 macro score), the DXY is already overstretched (+2.13 σ) and the “risk‑off” narrative (Trump‑related political uncertainty) is supportive of gold. The seasonality score (+0.42) shows a modest hour‑of‑day drift (+1.57 t‑stat) that historically favours a short‑term rally in this window.  \n\n- **Machine‑learning edge** – The walk‑forward ML layer gives a 51 % win probability for longs versus 39 % for shorts (ml_p_long 0.506, ml_p_short 0.387). While the hourly edge is near zero, the daily bias‑plus‑desk‑agreement rule (the only statistically‑significant signal) still leans bearish, but the ML probability nudges the odds toward a long entry when combined with the bullish news flow.  \n\n- **Technical entry & targets** – The H1 chart shows a rising‑wedge formation (listed under “geometry”) that often precedes a breakout to the upside. The nearest resistance is at **4 220.1** (0.31 ATR, strength 5.4). A break above this level would validate the long and open a path to the first Fibonacci‑extension target **4 225.0** (≈ 0.786 fib) and then the “last‑sl” zone at **4 193.2**. The stop can be placed just above the wedge top at **4 230.0** (≈ 1 ATR), giving a risk‑reward of roughly 1.5 R on the first target.  \n\n- **Risk management** – With a 0.25 % equity risk (0.0025 fraction) on a $10 k account, the position size is modest (≈ 0.02 lots). If the price breaches 4 220.1, move the stop to breakeven and let the trade run to the 4 225.0 zone or the 72‑hour time stop.  \n\n**Key condition that would invalidate the long:** a decisive break below the nearest support at **4 212.4** (the 0.31 ATR support with strength 1.9) accompanied by a sharp rise in 10‑yr real yields (e.g., +0.5 σ in the next 6 hours). This would confirm the bearish regime and render the bullish news bias ineffective.",
+  "bear_case": "**Short case for XAU/USD (4216.3 USD) – next 1‑3 days**\n\n*Strategic bias & agreement* – The desk’s 20‑year‑backtested rule flags a **bearish daily bias** (‑0.25) with a **0.77 agreement** among the twelve specialist scores. Although the bias magnitude is below the 0.5 “action” threshold, the composite score (0.086) and the transition‑regime flag indicate the market is moving toward a down‑trend.\n\n*Trend & momentum* – The daily EMA‑50/200 cross is **‑1** (bearish) and the 10‑yr real‑yield signal is also **‑1** (rising real yields pressure gold). The H1‑level trend analyst gives a modest **+0.224** but notes a bullish H4 structure versus a bearish D1 structure, confirming a higher‑time‑frame pull‑back. RSI on D1 is **40.1** (near‑oversold but still below 50), while H4 RSI sits at **61.3**, suggesting the short‑term rally is losing steam.\n\n*Liquidity & levels* – The nearest **support** is at **4212.4 USD** (0.31 ATR, strength 1.9) and the next strong resistance is **4220.1 USD** (strength 5.4). The plan sets a **stop** at **4230.29 USD** (≈14 USD ≈ 140 pips above entry) and a **first‑target** at **4202.31 USD** (≈1 R) with a **final target** at **4181.33 USD** (≈2.5 R). The “liquidity targets” list a clear sell‑zone at **4193.2 USD** and a deeper Asian low at **4166.4 USD**, matching the TP ladder.\n\n*News & event risk* – The news module flags **event risk** (U.S. Treasury yields hovering above 5 % and a mixed headline set). While a few headlines (StoneX, FXLeaders) are bullish, the dominant macro factor is the **10‑yr Treasury yield at 5.34 %**, a 24‑year high that historically depresses gold. The news analyst’s net view still leans toward a **short‑term rise**, but the “risk halved” note forces a tighter stop and a defensive stance.\n\n*Out‑of‑sample performance* – In production‑dev data the daily‑bias + desk‑agreement rule delivers a **Sharpe 1.27**, **profit factor 1.22** and **win‑rate 53.5 %**. By contrast, hourly signals alone are flat, so the short is justified only as a **timing overlay** to the broader bearish bias.\n\n**Conclusion:** With price already above the key support (4212.4), a modest stop at 4230.29, and clear downside liquidity zones, a short position aligns with the strongest validated signals.\n\n**Single condition that would prove the case wrong:** If XAU/USD **breaks and holds above 4220.1 USD** (the nearest resistance) with a sustained D1 RSI > 55 and the 10‑yr real yield falls below 5 %, the bearish bias collapses and the short should be exited.",
   "decision": {
    "decision": "WAIT",
-   "conviction": 35,
+   "conviction": 45,
    "agrees_with_quant": true,
-   "entry_zone_low": 4220.1,
-   "entry_zone_high": 4226.8,
-   "stop": 4236.28,
+   "entry_zone_low": 4212.4,
+   "entry_zone_high": 4220.1,
+   "stop": 4230.29,
    "targets": [
-    4213.52,
-    4196.46
+    4202.31,
+    4181.33
    ],
-   "invalidation": "A close above 4226.8 (nearest resistance) invalidates the short bias scenario.",
-   "primary_scenario": "Short bias based on the bearish strategic bias, macro pressure from rising real yields and DXY, and the plan’s risk‑reward (stop 4236.28, TP1 4213.52, TP2 4196.46). Enter short if price stays below 4226.8 and shows rejection at that level.",
-   "alternative_scenario": "Long bias if price breaks above 4226.8 and holds above it, allowing a long entry near 4224.9 with stop at 4236.28 and targets aligned with the ML long edge.",
+   "invalidation": "If price breaks and holds above 4220.1 with D1 RSI >55 and 10‑yr real yield falls below 5 %, the bearish bias is invalidated.",
+   "primary_scenario": "Bearish short targeting 4202.31 and 4181.33 based on strategic bias and desk agreement.",
+   "alternative_scenario": "Bullish long if price breaches 4220.1 and confirms upward breakout, targeting 4225.0 and 4240.0.",
    "levels_to_watch": [
-    "4226.8 (nearest resistance)",
-    "4220.1 (nearest support)",
-    "4236.28 (stop level)",
-    "4213.52 (TP1)",
-    "4196.46 (TP2)"
+    "4220.1 resistance",
+    "4212.4 support",
+    "4230.29 stop",
+    "4202.31 TP1",
+    "4181.33 TP2",
+    "4193.2 liquidity zone",
+    "4166.4 Asian low"
    ],
    "key_risks": [
-    "Event‑risk news could trigger a sharp USD rally and push gold lower",
-    "A sudden DXY spike >100 pips may break support at 4220.1",
-    "Low‑volatility environment may cause choppy price action",
-    "Stop could be hit if price spikes above resistance"
+    "Event‑risk from upcoming macro news",
+    "Low‑vol regime may limit price moves",
+    "Strategic bias magnitude below action threshold",
+    "Hourly technical signals have near‑zero edge",
+    "Potential upside breakout from rising‑wedge pattern"
    ],
-   "summary_en": "The desk’s quantitative model signals a WAIT stance as the daily strategic bias (-0.25) is below the strength threshold. While the ML model shows a 60% long win probability, the overall composite and agreement favor a modest bearish outlook, and the short plan offers a 2.5 R reward with a tight stop. We will watch the 4226.8 resistance; a clear rejection keeps the short scenario alive, whereas a close above it invalidates the trade. Until a decisive move occurs, we remain on the sidelines, ready to act on the defined entry zone between 4220.1 and 4226.8.",
-   "summary_fa": "دستگاه کمی تصمیم WAIT را می‌دهد چون بایاس روزانه فقط -0.25 است و زیر آستانه قدرت قرار دارد. اگرچه مدل ML احتمال 60٪ موفقیت برای خرید را نشان می‌دهد، ترکیب کلی و توافق‌های دیگر تمایل خفیف نزولی دارند و برنامه کوتاه‌مدت با نسبت ریسک‑پاداش 2.5R و استاپ نزدیک جذاب است. ما سطح مقاومت 4226.8 را زیر نظر داریم؛ اگر قیمت رد این سطح شود، سناریوی فروش فعال می‌شود، در غیر این صورت بسته شدن بالای این سطح سناریو را خنثی می‌کند. تا زمان بروز حرکت واضح، در حالت انتظار می‌مانیم و آماده ورود در بازه 4220.1 تا 4226.8 هستیم.",
+   "summary_en": "The desk’s 20‑year back‑test flags a bearish daily bias but its magnitude (-0.25) is below the action threshold, so the quant model advises WAIT. A short trade aligns with the strategic bias, targeting 4202.31 (1R) and 4181.33 (2.5R) with a stop at 4230.29. Key levels to watch are 4220.1 resistance and 4212.4 support; a break above 4220.1 would invalidate the short and open a long scenario. News flow is mixed with event risk, and hourly signals provide no edge, reinforcing a cautious stance. Trade would be entered only if price retests the 4212.4‑4220.1 zone and shows bearish momentum.",
+   "summary_fa": "دسک 20 ساله یک بایاس روزانه نزولی (-0.25) نشان می‌دهد اما به دلیل کم بودن مقدار بایاس، مدل کوانت تصمیم WAIT می‌گیرد. یک موقعیت فروش می‌تواند در محدوده 4212.4‑4220.1 با هدف 4202.31 (1R) و 4181.33 (2.5R) و استاپ 4230.29 باز شود. سطوح کلیدی 4220.1 (مقاومت) و 4212.4 (حمایت) هستند؛ اگر قیمت بالای 4220.1 تثبیت شود، بایاس نزولی منسوخ می‌شود و سناریوی خرید فعال می‌شود. اخبار ترکیبی با ریسک رویداد و سیگنال‌های ساعتی بدون برتری، باعث می‌شود تا فقط در صورت تأیید فشار فروش وارد شویم.",
    "final_decision": "WAIT",
    "guardrail_notes": []
   }

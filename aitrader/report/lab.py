@@ -233,7 +233,7 @@ def _risk_scaling(js: dict | None) -> str:
             f"<td class='num'>{st['median_month']:+.2%}</td><td class='num'>{st['mean_month']:+.2%}</td>"
             f"<td class='num'>{st['positive_months']:.0%}</td><td class='num'>{st['best_month']:+.1%}</td>"
             f"<td class='num'>{st['worst_month']:+.1%}</td><td class='num'>{st['worst_12m']:+.1%}</td>"
-            f"<td class='num'>{st['max_drawdown']:+.1%}</td><td class='num'>{st['months_ge_10pct']} از {st['months']}</td></tr>")
+            f"<td class='num'>{st['max_drawdown']:+.1%}</td><td class='num'>{st['months_ge_10pct']}/{st['months']}</td></tr>")
     head = ("<thead><tr><th>ریسک هر معامله</th><th>بازده سالانه</th><th>میانه ماه</th><th>میانگین ماه</th><th>ماه مثبت</th>"
             "<th>بهترین ماه</th><th>بدترین ماه</th><th>بدترین ۱۲ ماه</th><th>افت حداکثر</th><th>ماه‌های ۱۰٪+</th></tr></thead>")
     return ("<h3 style='margin-top:14px'>اگر ریسک هر معامله بیشتر بود</h3>"
@@ -253,7 +253,7 @@ def _swing_leverage(js: dict | None) -> str:
             f"<tr class='{cls}'><td class='num'>{float(tv) * 100:.0f}%</td><td class='num good'>{a['cagr']:+.1%}</td>"
             f"<td class='num'>{a['sharpe']:.2f}</td><td class='num'>{a['max_drawdown']:+.1%}</td>"
             f"<td class='num'>{a['median_month']:+.2%}</td><td class='num'>{a['worst_month']:+.1%}</td>"
-            f"<td class='num'>{a['worst_12m']:+.1%}</td><td class='num'>{a['months_ge_10pct']} از {a['months']}</td></tr>")
+            f"<td class='num'>{a['worst_12m']:+.1%}</td><td class='num'>{a['months_ge_10pct']}/{a['months']}</td></tr>")
     head = ("<thead><tr><th>هدف نوسان سالانه</th><th>بازده سالانه</th><th>شارپ</th><th>افت حداکثر</th><th>میانه ماه</th>"
             "<th>بدترین ماه</th><th>بدترین ۱۲ ماه</th><th>ماه‌های ۱۰٪+</th></tr></thead>")
     p0, p1 = js["period"]

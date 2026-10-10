@@ -308,6 +308,7 @@ def _account_section(acc: dict | None) -> str:
     return f"""
 <section class="desk" id="account"><header><h2>حساب ترکیبی و هدف ۱۰٪ ماهانه</h2>
 <span class="muted num">{_e(acc['window'][0])} → {_e(acc['window'][1])}</span></header>
+<div class="card"><p><b class="bad">هشدار:</b> این بخش بر پایه بک‌تست ۲۰ ماه اخیر (یاهو) است. اعتبارسنجی ۱۶ ساله نشان داد بخش ساعتی ربات در ۲۰۱۴ تا ۲۰۲۶ پس از هزینه سود نداد (ضریب سود ۰٫۹۵ تا ۱٫۰۰) و فقط دفتر سوئینگ روزانه شواهد مثبت بلندمدت دارد (شارپ حدود ۰٫۶۷). پس اعداد زیر خوش‌بینانه‌اند؛ جدول واقع‌بینانه در بخش <a href="#lab">آزمایشگاه پژوهش</a> است.</p></div>
 <div class="grid2">
  <div class="card"><h3>دو استراتژی با هم</h3>
   <div class="scroll"><table><thead><tr><th>بخش</th><th>شارپ</th><th>بازده سالانه</th><th>نوسان</th><th>افت حداکثر</th></tr></thead><tbody>

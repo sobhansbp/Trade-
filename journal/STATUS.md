@@ -1,6 +1,6 @@
 # وضعیت حساب دمو (Paper Trading)
 
-آخرین به‌روزرسانی: `2026-10-11T18:03:38+00:00` · شروع: `2026-10-09` · سرمایه اولیه هر دفتر: $10,000
+آخرین به‌روزرسانی: `2026-10-11T21:53:38+00:00` · شروع: `2026-10-09` · سرمایه اولیه هر دفتر: $10,000
 
 | دفتر | موجودی | بازده | افت از سقف |
 |---|---|---|---|
@@ -23,10 +23,10 @@
 
 | نماد | قیمت | تصمیم | سوگیری روزانه | میز ساعتی | اخبار | دلیل |
 |---|---|---|---|---|---|---|
-| EURUSD | 1.12057 | WAIT | -1.00 | -0.009 | -0.54 | H1 desk composite -0.009 does not confirm the daily bias -1.00؛ rollover/thin-liquidity hour |
-| XAUUSD | 4216.3 | WAIT | -0.25 | +0.062 | +0.31 | daily strategic bias -0.25 is not strong enough (needs \|bias\| >= 0.5) |
+| EURUSD | 1.12057 | WAIT | -1.00 | -0.009 | -0.51 | H1 desk composite -0.009 does not confirm the daily bias -1.00؛ rollover/thin-liquidity hour |
+| XAUUSD | 4216.3 | WAIT | -0.25 | +0.062 | -0.14 | daily strategic bias -0.25 is not strong enough (needs \|bias\| >= 0.5) |
 
-**جمع‌بندی اخبار (openai/gpt-oss-120b):** تأثیر ترکیبی تورم آمریکا، تنش‌های ژئوپولیتیکی و تقاضای سرمایه‌گذاران برای طلا بر ارز دلار و طلا
+**جمع‌بندی اخبار (openai/gpt-oss-120b):** تأثیر داده‌های تورمی آمریکا و تنش‌های ژئوپولیتیکی بر دلار و طلا
 
 داشبورد زنده (Cloudflare): https://aitrader-desk.sobhan13851121.workers.dev · ربات تلگرام: /status، /gold، /eurusd و پرسش آزاد
 

@@ -4,22 +4,43 @@
  "tactical": {
   "equity": 10000.0,
   "peak": 10000.0,
-  "positions": {},
-  "last_signal_bar": {}
+  "positions": {
+   "EURUSD": {
+    "side": "SHORT",
+    "opened": "2026-10-12 18:00:00+00:00",
+    "entry": 1.11589,
+    "stop": 1.11716,
+    "stop0": 1.11716,
+    "tp1": 1.11462,
+    "tp2": 1.11271,
+    "units": 19685.03937007874,
+    "units_open": 19685.03937007874,
+    "lots": 0.2,
+    "risk_usd": 25.0,
+    "risk_frac": 0.0025,
+    "partial": false,
+    "realized": 0.0,
+    "bars_held": 0,
+    "last_bar": "2026-10-12 18:00:00+00:00"
+   }
+  },
+  "last_signal_bar": {
+   "EURUSD": "2026-10-12 18:00:00+00:00"
+  }
  },
  "swing": {
-  "equity": 10012.389921265423,
-  "peak": 10012.389921265423,
+  "equity": 10047.192410259204,
+  "peak": 10047.192410259204,
   "positions": {
    "EURUSD": {
     "notional": -10850.0,
-    "price": 1.119444727897644,
+    "price": 1.115946888923645,
     "frac": -1.085,
     "updated": "2026-10-09T18:50:59+00:00"
    },
    "XAUUSD": {
     "notional": -599.9767593010873,
-    "price": 4198.0,
+    "price": 4191.7001953125,
     "frac": -0.06,
     "updated": "2026-10-09T18:50:59+00:00"
    }

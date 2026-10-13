@@ -1,0 +1,2 @@
+symbol,side,opened,closed,entry,exit,stop0,tp2,units,risk_usd,pnl_usd,r_multiple,reason,equity_after
+EURUSD,SHORT,2026-10-12 18:00:00+00:00,2026-10-13 01:00:00+00:00,1.11589,1.11718,1.11716,1.11271,19685.04,25.0,-25.39,-1.02,stop,9974.61

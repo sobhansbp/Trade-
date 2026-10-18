@@ -1,6 +1,6 @@
 # وضعیت حساب دمو (Paper Trading)
 
-آخرین به‌روزرسانی: `2026-10-18T17:27:37+00:00` · شروع: `2026-10-09` · سرمایه اولیه هر دفتر: $10,000
+آخرین به‌روزرسانی: `2026-10-18T20:43:54+00:00` · شروع: `2026-10-09` · سرمایه اولیه هر دفتر: $10,000
 
 | دفتر | موجودی | بازده | افت از سقف |
 |---|---|---|---|
@@ -23,8 +23,8 @@
 
 | نماد | قیمت | تصمیم | سوگیری روزانه | میز ساعتی | اخبار | دلیل |
 |---|---|---|---|---|---|---|
-| EURUSD | 1.12435 | WAIT | -1.00 | +0.010 | +0.00 | H1 desk composite +0.010 does not confirm the daily bias -1.00؛ rollover/thin-liquidity hour |
-| XAUUSD | 4181.1 | WAIT | -0.38 | +0.003 | +0.00 | daily strategic bias -0.38 is not strong enough (needs \|bias\| >= 0.5) |
+| EURUSD | 1.12435 | WAIT | -1.00 | -0.001 | +0.00 | H1 desk composite -0.001 does not confirm the daily bias -1.00؛ rollover/thin-liquidity hour |
+| XAUUSD | 4181.1 | WAIT | -0.38 | +0.105 | +0.00 | daily strategic bias -0.38 is not strong enough (needs \|bias\| >= 0.5) |
 
 ## معاملات بسته‌شده: 4 · برد 25% · میانگین -0.63R · جمع $-63.04
 

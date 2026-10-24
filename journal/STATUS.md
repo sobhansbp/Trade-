@@ -1,6 +1,6 @@
 # وضعیت حساب دمو (Paper Trading)
 
-آخرین به‌روزرسانی: `2026-10-23T23:07:04+00:00` · شروع: `2026-10-09` · سرمایه اولیه هر دفتر: $10,000
+آخرین به‌روزرسانی: `2026-10-24T01:35:31+00:00` · شروع: `2026-10-09` · سرمایه اولیه هر دفتر: $10,000
 
 | دفتر | موجودی | بازده | افت از سقف |
 |---|---|---|---|
@@ -25,8 +25,8 @@
 
 | نماد | قیمت | تصمیم | سوگیری روزانه | میز ساعتی | اخبار | دلیل |
 |---|---|---|---|---|---|---|
-| EURUSD | 1.12045 | WAIT | -1.00 | -0.003 | -0.23 | H1 desk composite -0.003 does not confirm the daily bias -1.00؛ rollover/thin-liquidity hour |
-| XAUUSD | 4010.0 | WAIT | -0.12 | -0.062 | -0.28 | daily strategic bias -0.12 is not strong enough (needs \|bias\| >= 0.5) |
+| EURUSD | 1.12045 | WAIT | -1.00 | +0.003 | -0.23 | H1 desk composite +0.003 does not confirm the daily bias -1.00؛ rollover/thin-liquidity hour |
+| XAUUSD | 4010.0 | WAIT | -0.12 | -0.078 | -0.28 | daily strategic bias -0.12 is not strong enough (needs \|bias\| >= 0.5) |
 
 **جمع‌بندی اخبار (openai/gpt-oss-120b):** تأثیر ترکیبی فشارهای ژئوپولیتیکی و داده‌های تورمی بر دلار و طلا
 

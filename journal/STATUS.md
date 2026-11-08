@@ -1,6 +1,6 @@
 # وضعیت حساب دمو (Paper Trading)
 
-آخرین به‌روزرسانی: `2026-11-08T18:50:26+00:00` · شروع: `2026-10-09` · سرمایه اولیه هر دفتر: $10,000
+آخرین به‌روزرسانی: `2026-11-08T22:50:40+00:00` · شروع: `2026-10-09` · سرمایه اولیه هر دفتر: $10,000
 
 | دفتر | موجودی | بازده | افت از سقف |
 |---|---|---|---|
@@ -23,10 +23,10 @@
 
 | نماد | قیمت | تصمیم | سوگیری روزانه | میز ساعتی | اخبار | دلیل |
 |---|---|---|---|---|---|---|
-| EURUSD | 1.11433 | WAIT | -0.38 | -0.106 | -0.15 | daily strategic bias -0.38 is not strong enough (needs \|bias\| >= 0.5)؛ rollover/thin-liquidity hour |
-| XAUUSD | 4074.9 | WAIT | +0.12 | +0.161 | -0.00 | daily strategic bias +0.12 is not strong enough (needs \|bias\| >= 0.5)؛ rollover/thin-liquidity hour |
+| EURUSD | 1.11433 | WAIT | -0.38 | -0.106 | -0.17 | daily strategic bias -0.38 is not strong enough (needs \|bias\| >= 0.5)؛ rollover/thin-liquidity hour |
+| XAUUSD | 4074.9 | WAIT | +0.12 | +0.161 | +0.44 | daily strategic bias +0.12 is not strong enough (needs \|bias\| >= 0.5)؛ rollover/thin-liquidity hour |
 
-**جمع‌بندی اخبار (openai/gpt-oss-120b):** توازن بین فشارهای تورمی آمریکا و حمایت‌های بانک‌های مرکزی بر روی دلار و طلا
+**جمع‌بندی اخبار (openai/gpt-oss-120b):** تأثیر ترکیبی داده‌های قوی اقتصادی آمریکا و حمایت‌های تقاضای طلا بر ارز و فلزات گرانبها
 
 ## معاملات بسته‌شده: 12 · برد 50% · میانگین -0.10R · جمع $-29.46
 

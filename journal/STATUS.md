@@ -1,6 +1,6 @@
 # وضعیت حساب دمو (Paper Trading)
 
-آخرین به‌روزرسانی: `2026-11-08T05:55:05+00:00` · شروع: `2026-10-09` · سرمایه اولیه هر دفتر: $10,000
+آخرین به‌روزرسانی: `2026-11-08T13:17:15+00:00` · شروع: `2026-10-09` · سرمایه اولیه هر دفتر: $10,000
 
 | دفتر | موجودی | بازده | افت از سقف |
 |---|---|---|---|
@@ -23,10 +23,10 @@
 
 | نماد | قیمت | تصمیم | سوگیری روزانه | میز ساعتی | اخبار | دلیل |
 |---|---|---|---|---|---|---|
-| EURUSD | 1.11433 | WAIT | -0.38 | -0.106 | -0.47 | daily strategic bias -0.38 is not strong enough (needs \|bias\| >= 0.5)؛ rollover/thin-liquidity hour |
-| XAUUSD | 4074.9 | WAIT | +0.12 | +0.161 | +0.34 | daily strategic bias +0.12 is not strong enough (needs \|bias\| >= 0.5)؛ rollover/thin-liquidity hour |
+| EURUSD | 1.11433 | WAIT | -0.38 | -0.106 | +0.58 | daily strategic bias -0.38 is not strong enough (needs \|bias\| >= 0.5)؛ rollover/thin-liquidity hour |
+| XAUUSD | 4074.9 | WAIT | +0.12 | +0.161 | -0.27 | daily strategic bias +0.12 is not strong enough (needs \|bias\| >= 0.5)؛ rollover/thin-liquidity hour |
 
-**جمع‌بندی اخبار (openai/gpt-oss-120b):** تأثیر ترکیبی سیاست پولی اروپا، فشارهای کوتاه‌مدت دلار و ریسک ژئوپولیتیک بر EUR/USD و XAU/USD
+**جمع‌بندی اخبار (openai/gpt-oss-120b):** تأثیر داده‌های تورمی آمریکا و انتظارات سیاست پولی بر دلار و طلا
 
 ## معاملات بسته‌شده: 12 · برد 50% · میانگین -0.10R · جمع $-29.46
 
